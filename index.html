@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al Ahmed Fishing Boat</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --deep: #0d1f3c;
+    --ocean: #1a3a5c;
+    --teal: #1e6b8a;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --foam: #e8f4f8;
+    --white: #f5f0e8;
+    --text: #d4c9b0;
+    --muted: #8a9ab5;
+    --danger: #c0392b;
+    --success: #1a7a4a;
+    --card: rgba(26, 58, 92, 0.5);
+    --border: rgba(201, 168, 76, 0.3);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Crimson Text', serif;
+    min-height: 100vh;
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, rgba(30, 107, 138, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--deep) 0%, var(--ocean) 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-icon {
+    font-size: 32px;
+  }
+
+  .header-title {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(201,168,76,0.4);
+  }
+
+  .header-sub {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* NAV */
+  .nav {
+    display: flex;
+    gap: 0;
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex: 1;
+    min-width: 130px;
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--muted);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .nav-btn:hover { color: var(--gold-light); background: rgba(201,168,76,0.05); }
+  .nav-btn.active { color: var(--gold); border-bottom-color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  /* PAGES */
+  .page { display: none; padding: 24px; max-width: 1200px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+  }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* FORMS */
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+  label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+  }
+
+  input[type="date"], input[type="number"], input[type="text"], select, textarea {
+    background: rgba(10, 22, 40, 0.8);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--white);
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.7) sepia(1) saturate(2) hue-rotate(5deg);
+  }
+
+  /* BUTTONS */
+  .btn {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--navy);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(201,168,76,0.3);
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,76,0.4); }
+
+  .btn-danger {
+    background: rgba(192, 57, 43, 0.2);
+    color: #e74c3c;
+    border: 1px solid rgba(192, 57, 43, 0.4);
+  }
+
+  .btn-danger:hover { background: rgba(192, 57, 43, 0.3); }
+
+  .btn-sm { padding: 6px 14px; font-size: 10px; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; border-radius: 8px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th {
+    background: rgba(201, 168, 76, 0.1);
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+    color: var(--text);
+    vertical-align: middle;
+  }
+
+  tr:hover td { background: rgba(201,168,76,0.04); }
+
+  /* STATS GRID */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    color: var(--gold);
+  }
+
+  .stat-value.green { color: #2ecc71; }
+  .stat-value.red { color: #e74c3c; }
+
+  /* CHECKBOX GRID */
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10,22,40,0.6);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .checkbox-item:hover { border-color: var(--gold); }
+  .checkbox-item.checked { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+
+  .checkbox-item input { display: none; }
+
+  .check-box {
+    width: 16px; height: 16px;
+    border: 2px solid var(--muted);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .checkbox-item.checked .check-box {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+    font-size: 10px;
+  }
+
+  .checkbox-item span { font-size: 13px; color: var(--text); }
+  .checkbox-item.checked span { color: var(--white); }
+
+  /* SHARE RESULTS TABLE */
+  .result-positive { color: #2ecc71; font-weight: 600; }
+  .result-negative { color: #e74c3c; }
+
+  /* ALERT */
+  .alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  .alert-info { background: rgba(30,107,138,0.2); border: 1px solid rgba(30,107,138,0.4); color: #7ecfed; }
+  .alert-success { background: rgba(26,122,74,0.2); border: 1px solid rgba(26,122,74,0.4); color: #52d48a; }
+  .alert-warning { background: rgba(201,168,76,0.15); border: 1px solid var(--border); color: var(--gold-light); }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .badge-green { background: rgba(26,122,74,0.3); color: #52d48a; }
+  .badge-red { background: rgba(192,57,43,0.3); color: #e74c3c; }
+  .badge-gold { background: rgba(201,168,76,0.2); color: var(--gold-light); }
+
+  /* PAGE TITLE */
+  .page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* WAVE DIVIDER */
+  .wave-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 24px 0;
+    opacity: 0.4;
+  }
+
+  /* PAGINATION */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* SUMMARY ROW */
+  .summary-row td {
+    font-weight: 600;
+    color: var(--gold-light);
+    border-top: 2px solid var(--border);
+  }
+
+  /* ADVANCE TABLE STYLES */
+  .adv-paid { color: #2ecc71; }
+  .adv-pending { color: #e74c3c; }
+
+  /* PRINT STYLE */
+  @media print {
+    .nav, .btn { display: none !important; }
+    body { background: white; color: black; }
+    .card { border: 1px solid #ccc; }
+  }
+
+  @media (max-width: 600px) {
+    .header-title { font-size: 16px; }
+    .page { padding: 16px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5,12,25,0.88);
+    backdrop-filter: blur(6px);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--deep);
+    border: 1px solid var(--gold);
+    border-radius: 14px;
+    padding: 28px;
+    width: 92%;
+    max-width: 480px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(201,168,76,0.15);
+    animation: modalIn 0.22s ease;
+  }
+  @keyframes modalIn {
+    from { transform: scale(0.92) translateY(20px); opacity: 0; }
+    to   { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  .modal-title {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; flex-wrap: wrap; }
+  .btn-secondary { background: rgba(138,154,181,0.15); color: var(--muted); border: 1px solid rgba(138,154,181,0.3); }
+  .btn-secondary:hover { background: rgba(138,154,181,0.25); }
+  .btn-edit { background: rgba(30,107,138,0.25); color: #7ecfed; border: 1px solid rgba(30,107,138,0.5); }
+  .btn-edit:hover { background: rgba(30,107,138,0.4); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-icon">⚓</div>
+  <div>
+    <div class="header-title">Al Ahmed Fishing Boat</div>
+    <div class="header-sub">Fleet Management & Share Distribution System</div>
+  </div>
+</div>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="showPage(1)">⚓ Daily Records</button>
+  <button class="nav-btn" onclick="showPage(2)">👥 Shareholder Attendance</button>
+  <button class="nav-btn" onclick="showPage(3)">📊 Share Calculation</button>
+  <button class="nav-btn" onclick="showPage(4)">💰 Advances & Payments</button>
+</nav>
+
+<!-- SYNC BAR -->
+<div id="sync-bar" style="background:rgba(10,22,40,0.9);border-bottom:1px solid rgba(201,168,76,0.2);padding:8px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;">
+    📱 SYNC DATA &nbsp;·&nbsp; <span id="sync-last-saved" style="color:var(--gold);">—</span>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#52d48a;border:1px solid rgba(26,122,74,0.5)" onclick="exportData()">⬇ EXPORT BACKUP</button>
+    <label class="btn btn-sm" style="background:rgba(30,107,138,0.25);color:#7ecfed;border:1px solid rgba(30,107,138,0.5);cursor:pointer;margin:0;">
+      ⬆ IMPORT BACKUP
+      <input type="file" accept=".json" id="import-file-input" style="display:none" onchange="importData(event)">
+    </label>
+  </div>
+</div>
+
+<!-- ===== PAGE 1: DAILY RECORDS ===== -->
+<div class="page active" id="page1">
+  <div class="page-title">⚓ Daily Sales & Expenses</div>
+
+  <div class="card">
+    <div class="card-title">Add New Daily Entry</div>
+    <div class="form-row" style="margin-bottom:20px;">
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="p1-date">
+      </div>
+    </div>
+
+    <!-- SALES SECTION -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <span style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:1.5px;color:#2ecc71;">SALES ITEMS</span>
+        <button class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#2ecc71;border:1px solid rgba(26,122,74,0.5)" onclick="addSaleRow()">+ ADD SALE</button>
+      </div>
+      <div id="sales-rows"></div>
+      <div style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#2ecc71;margin-top:8px;">
+        Total Sales: <strong id="sale-total-preview">₹0</strong>
+      </div>
+    </div>
+
+    <!-- EXPENSES SECTION -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <span style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:1.5px;color:#e74c3c;">EXPENSE ITEMS</span>
+        <button class="btn btn-sm" style="background:rgba(192,57,43,0.25);color:#e74c3c;border:1px solid rgba(192,57,43,0.5)" onclick="addExpenseRow()">+ ADD EXPENSE</button>
+      </div>
+      <div id="expense-rows"></div>
+      <div style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#e74c3c;margin-top:8px;">
+        Total Expenses: <strong id="expense-total-preview">₹0</strong>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="addDailyRecord()">✓ SAVE DAILY RECORD</button>
+  </div>
+
+  <div class="stats-grid" id="p1-stats">
+    <div class="stat-card"><div class="stat-label">Total Sales</div><div class="stat-value" id="s1-sales">₹0</div></div>
+    <div class="stat-card"><div class="stat-label">Total Expenses</div><div class="stat-value red" id="s1-exp">₹0</div></div>
+    <div class="stat-card"><div class="stat-label">Net Profit</div><div class="stat-value green" id="s1-profit">₹0</div></div>
+    <div class="stat-card"><div class="stat-label">Total Records</div><div class="stat-value" id="s1-records">0</div></div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">
+      <div class="card-title" style="margin-bottom:0">Records Log</div>
+      <input type="month" id="p1-filter-month" onchange="renderP1Table()" style="width:180px; padding:8px 12px; font-size:14px;">
+    </div>
+    <div id="p1-records-container"></div>
+  </div>
+</div>
+
+<!-- ===== PAGE 2: SHAREHOLDER ATTENDANCE ===== -->
+<div class="page" id="page2">
+  <div class="page-title">👥 Shareholder Attendance</div>
+
+  <div class="card">
+    <div class="card-title">Record Attendance</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="p2-date">
+      </div>
+    </div>
+    <div class="card-title">Select Present Shareholders</div>
+    <div class="checkbox-grid" id="shareholder-checks"></div>
+    <br>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
+      <button class="btn btn-primary" onclick="saveAttendance()">✓ SAVE ATTENDANCE</button>
+      <button class="btn" style="background:rgba(30,107,138,0.3);color:#7ecfed;border:1px solid rgba(30,107,138,0.5)" onclick="selectAll()">SELECT ALL</button>
+      <button class="btn btn-danger" onclick="clearAll()">CLEAR ALL</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">
+      <div class="card-title" style="margin-bottom:0">Attendance Log</div>
+      <input type="month" id="p2-filter-month" onchange="renderP2Table()" style="width:180px; padding:8px 12px; font-size:14px;">
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Present Members</th>
+            <th>Count</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="p2-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 3: SHARE CALCULATION ===== -->
+<div class="page" id="page3">
+  <div class="page-title">📊 Share Calculation</div>
+
+  <div class="card">
+    <div class="card-title">Calculation Period</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Start Date</label>
+        <input type="date" id="p3-start">
+      </div>
+      <div class="form-group">
+        <label>End Date</label>
+        <input type="date" id="p3-end">
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="calculateShares()">⚡ CALCULATE SHARES</button>
+  </div>
+
+  <!-- Saved Periods Panel -->
+  <div class="card" id="p3-saved-periods-panel" style="border-color:rgba(201,168,76,0.2);">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+      <div class="card-title" style="margin-bottom:0">↩ Saved Period Settlements <span id="saved-period-count" style="font-size:11px;color:var(--muted);">(0 periods saved)</span></div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-sm" style="background:rgba(30,107,138,0.25);color:#7ecfed;border:1px solid rgba(30,107,138,0.5)" onclick="toggleSavedPeriods()">▼ SHOW / HIDE</button>
+        <button class="btn btn-danger btn-sm" onclick="clearSavedPeriods()">✕ CLEAR ALL</button>
+      </div>
+    </div>
+    <div id="saved-periods-list" style="display:none;margin-top:14px;">
+      <p style="color:var(--muted);font-size:13px;font-style:italic;">No saved periods yet. Calculate a period to save it.</p>
+    </div>
+  </div>
+
+  <div id="p3-results" style="display:none">
+    <div class="stats-grid" id="p3-stats"></div>
+
+    <div class="card">
+      <div class="card-title">Daily Breakdown</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Sales (₹)</th>
+              <th>Expense Ratio</th>
+              <th>Alloc. Expense (₹)</th>
+              <th>Profit (₹)</th>
+              <th>Shareholders</th>
+              <th>Share/Person (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="p3-daily-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Shareholder Distribution</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Shareholder</th>
+              <th>Days Present</th>
+              <th>Total Share (₹)</th>
+              <th>Advance Paid (₹)</th>
+              <th>Net Payable (₹)</th>
+              <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody id="p3-share-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- INDIVIDUAL SHAREHOLDER DETAIL PANEL -->
+    <div class="card" id="p3-individual-panel" style="display:none; border-color: var(--gold); box-shadow: 0 0 30px rgba(201,168,76,0.15);">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+        <div>
+          <div style="font-family:'Cinzel',serif; font-size:18px; color:var(--gold); letter-spacing:2px;" id="ind-name"></div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;" id="ind-period"></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-primary btn-sm" onclick="exportToPDF()">⬇ EXPORT PDF</button>
+          <button class="btn btn-danger btn-sm" onclick="closeIndividual()">✕ CLOSE</button>
+        </div>
+      </div>
+
+      <!-- Individual Summary Stats -->
+      <div class="stats-grid" id="ind-stats" style="margin-bottom:20px;"></div>
+
+      <!-- Per Date Share Table -->
+      <div class="card-title">Share Earned — Date by Date</div>
+      <div class="table-wrap" style="margin-bottom:24px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Share Earned (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="ind-daily-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- Advances During Period -->
+      <div class="card-title">Advances & Payments During This Period</div>
+      <div class="table-wrap" style="margin-bottom:24px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Amount (₹)</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="ind-adv-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- Final Settlement Box -->
+      <div id="ind-settlement" style="background: rgba(10,22,40,0.8); border: 1px solid var(--border); border-radius: 12px; padding: 24px;">
+        <div style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:2px; color:var(--gold); margin-bottom:16px;">FINAL SETTLEMENT</div>
+        <div id="ind-settlement-rows"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 4: ADVANCES & PAYMENTS ===== -->
+<div class="page" id="page4">
+  <div class="page-title">💰 Advances & Payments</div>
+
+  <div class="card">
+    <div class="card-title">Record Payment / Advance</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Shareholder</label>
+        <select id="p4-member">
+          <option value="">— Select Member —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="p4-date">
+      </div>
+      <div class="form-group">
+        <label>Type</label>
+        <select id="p4-type">
+          <option value="advance">Advance Payment</option>
+          <option value="salary">Salary Payment</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Amount (₹)</label>
+        <input type="number" id="p4-amount" placeholder="0.00" min="0">
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <input type="text" id="p4-notes" placeholder="Reason...">
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="addPayment()">+ ADD PAYMENT</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Payment Summary by Member</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Shareholder</th>
+            <th>Total Advances (₹)</th>
+            <th>Total Salary (₹)</th>
+            <th>Total Paid (₹)</th>
+          </tr>
+        </thead>
+        <tbody id="p4-summary-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">
+      <div class="card-title" style="margin-bottom:0">All Transactions</div>
+      <select id="p4-filter-member" onchange="renderP4Table()" style="width:200px;padding:8px 12px;font-size:14px;">
+        <option value="">All Members</option>
+      </select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Shareholder</th>
+            <th>Type</th>
+            <th>Amount (₹)</th>
+            <th>Notes</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="p4-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- EDIT MODAL: Daily Record (multi-item) -->
+<div class="modal-overlay" id="modal-daily">
+  <div class="modal" style="max-width:600px;max-height:90vh;overflow-y:auto;">
+    <div class="modal-title">✎ EDIT DAILY RECORD</div>
+    <input type="hidden" id="edit-daily-id">
+    <div class="form-group" style="margin-bottom:16px">
+      <label>Date</label>
+      <input type="date" id="edit-daily-date">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <span style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:1.5px;color:#2ecc71;">SALES ITEMS</span>
+        <button class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#2ecc71;border:1px solid rgba(26,122,74,0.5)" onclick="addEditSaleRow()">+ ADD</button>
+      </div>
+      <div id="edit-sales-rows"></div>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <span style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:1.5px;color:#e74c3c;">EXPENSE ITEMS</span>
+        <button class="btn btn-sm" style="background:rgba(192,57,43,0.25);color:#e74c3c;border:1px solid rgba(192,57,43,0.5)" onclick="addEditExpenseRow()">+ ADD</button>
+      </div>
+      <div id="edit-expense-rows"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('modal-daily')">CANCEL</button>
+      <button class="btn btn-primary" onclick="saveEditDaily()">✓ SAVE CHANGES</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL: Payment -->
+<div class="modal-overlay" id="modal-payment">
+  <div class="modal">
+    <div class="modal-title">✎ EDIT PAYMENT RECORD</div>
+    <input type="hidden" id="edit-pay-id">
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Shareholder</label>
+      <select id="edit-pay-member"></select>
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Date</label>
+      <input type="date" id="edit-pay-date">
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Type</label>
+      <select id="edit-pay-type">
+        <option value="advance">Advance Payment</option>
+        <option value="salary">Salary Payment</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Amount (₹)</label>
+      <input type="number" id="edit-pay-amount" min="0">
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Notes</label>
+      <input type="text" id="edit-pay-notes" placeholder="Reason...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('modal-payment')">CANCEL</button>
+      <button class="btn btn-primary" onclick="saveEditPayment()">✓ SAVE CHANGES</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const SHAREHOLDERS = [
+  'Azim','Taasir','Maqsood','Ittifaque','Zubair','Sufiyan',
+  'IrfanW','IrfanS','Shafi','Riyaz','Salim','Maqbool','Maazin',
+  'Sagir','Parvez','Tandel 1','Tandel 2','Owner',
+  'Al Muhammad Boat','Al Muhammad Boat Engine',
+  'Al Bahar Boat','Al Bahar Boat Engine',
+  'Maryam Boat','Maryam Boat Engine',
+  'Safiya Boat','Safiya Boat Engine',
+  'Net A 1','Net A 2','Net R 1','Net R 2',
+  'Dhanda 1','Dhanda 2'
+];
+
+// Storage keys
+const KEY_DAILY = 'aafb_daily';
+const KEY_ATTEND = 'aafb_attend';
+const KEY_PAYMENT = 'aafb_payment';
+const KEY_PERIODS = 'aafb_periods'; // saved period settlements
+
+function load(key) {
+  try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; }
+}
+function save(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
+
+let dailyRecords = load(KEY_DAILY);
+let attendanceRecords = load(KEY_ATTEND);
+let paymentRecords = load(KEY_PAYMENT);
+let savedPeriods = load(KEY_PERIODS); // [{periodId, startDate, endDate, settlements:{name: netBalance}}]
+
+// ===== UTILITIES =====
+function fmt(n) {
+  if (n === undefined || n === null || isNaN(n)) return '₹0';
+  return '₹' + Number(n).toLocaleString('en-IN', {maximumFractionDigits: 2});
+}
+
+function today() {
+  return new Date().toISOString().split('T')[0];
+}
+
+function showPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page' + n).classList.add('active');
+  document.querySelectorAll('.nav-btn')[n-1].classList.add('active');
+  if (n === 1) renderP1Table();
+  if (n === 2) renderP2Table();
+  if (n === 3) renderSavedPeriods();
+  if (n === 4) { renderP4Table(); renderP4Summary(); }
+}
+
+// ===== PAGE 1 =====
+document.getElementById('p1-date').value = today();
+
+// ---- Dynamic row builders ----
+function makeItemRow(containerId, type) {
+  const container = document.getElementById(containerId);
+  const rowId = Date.now() + Math.random();
+  const color = type === 'sale' ? '#2ecc71' : '#e74c3c';
+  const div = document.createElement('div');
+  div.dataset.rowid = rowId;
+  div.style.cssText = 'display:grid;grid-template-columns:1fr 140px auto;gap:8px;margin-bottom:8px;align-items:center;';
+  div.innerHTML = `
+    <input type="text" placeholder="${type === 'sale' ? 'Sale description...' : 'Expense description...'}"
+      style="background:rgba(10,22,40,0.8);border:1px solid ${type==='sale'?'rgba(26,122,74,0.4)':'rgba(192,57,43,0.4)'};border-radius:6px;padding:8px 12px;color:var(--white);font-size:15px;width:100%"
+      oninput="updatePreview()">
+    <input type="number" placeholder="₹ Amount" min="0"
+      style="background:rgba(10,22,40,0.8);border:1px solid ${type==='sale'?'rgba(26,122,74,0.4)':'rgba(192,57,43,0.4)'};border-radius:6px;padding:8px 12px;color:${color};font-size:15px;width:100%"
+      oninput="updatePreview()">
+    <button onclick="this.closest('[data-rowid]').remove();updatePreview();"
+      style="background:rgba(192,57,43,0.2);color:#e74c3c;border:1px solid rgba(192,57,43,0.4);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:13px;white-space:nowrap">✕</button>
+  `;
+  container.appendChild(div);
+  updatePreview();
+}
+
+function makeEditItemRow(containerId, notes, amount, type) {
+  const container = document.getElementById(containerId);
+  const rowId = Date.now() + Math.random();
+  const color = type === 'sale' ? '#2ecc71' : '#e74c3c';
+  const div = document.createElement('div');
+  div.dataset.rowid = rowId;
+  div.style.cssText = 'display:grid;grid-template-columns:1fr 140px auto;gap:8px;margin-bottom:8px;align-items:center;';
+  div.innerHTML = `
+    <input type="text" value="${notes || ''}" placeholder="${type === 'sale' ? 'Sale description...' : 'Expense description...'}"
+      style="background:rgba(10,22,40,0.8);border:1px solid ${type==='sale'?'rgba(26,122,74,0.4)':'rgba(192,57,43,0.4)'};border-radius:6px;padding:8px 12px;color:var(--white);font-size:15px;width:100%">
+    <input type="number" value="${amount || ''}" placeholder="₹ Amount" min="0"
+      style="background:rgba(10,22,40,0.8);border:1px solid ${type==='sale'?'rgba(26,122,74,0.4)':'rgba(192,57,43,0.4)'};border-radius:6px;padding:8px 12px;color:${color};font-size:15px;width:100%">
+    <button onclick="this.closest('[data-rowid]').remove();"
+      style="background:rgba(192,57,43,0.2);color:#e74c3c;border:1px solid rgba(192,57,43,0.4);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:13px;white-space:nowrap">✕</button>
+  `;
+  container.appendChild(div);
+}
+
+function addSaleRow()    { makeItemRow('sales-rows', 'sale'); }
+function addExpenseRow() { makeItemRow('expense-rows', 'expense'); }
+function addEditSaleRow()    { makeEditItemRow('edit-sales-rows', '', '', 'sale'); }
+function addEditExpenseRow() { makeEditItemRow('edit-expense-rows', '', '', 'expense'); }
+
+function updatePreview() {
+  let sTotal = 0, eTotal = 0;
+  document.querySelectorAll('#sales-rows [data-rowid]').forEach(row => {
+    sTotal += parseFloat(row.querySelectorAll('input')[1].value) || 0;
+  });
+  document.querySelectorAll('#expense-rows [data-rowid]').forEach(row => {
+    eTotal += parseFloat(row.querySelectorAll('input')[1].value) || 0;
+  });
+  document.getElementById('sale-total-preview').textContent = fmt(sTotal);
+  document.getElementById('expense-total-preview').textContent = fmt(eTotal);
+}
+
+function getItemsFromRows(containerId) {
+  const items = [];
+  document.querySelectorAll(`#${containerId} [data-rowid]`).forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const notes = inputs[0].value.trim();
+    const amount = parseFloat(inputs[1].value) || 0;
+    if (amount > 0 || notes) items.push({ notes, amount });
+  });
+  return items;
+}
+
+function addDailyRecord() {
+  const date = document.getElementById('p1-date').value;
+  if (!date) { alert('Please select a date.'); return; }
+
+  const saleItems    = getItemsFromRows('sales-rows');
+  const expenseItems = getItemsFromRows('expense-rows');
+
+  if (saleItems.length === 0 && expenseItems.length === 0) {
+    alert('Please add at least one sale or expense item.'); return;
+  }
+
+  const totalSales   = saleItems.reduce((s, i) => s + i.amount, 0);
+  const totalExpense = expenseItems.reduce((s, i) => s + i.amount, 0);
+
+  const existing = dailyRecords.findIndex(r => r.date === date);
+  if (existing >= 0) {
+    if (!confirm('Record for this date exists. Replace?')) return;
+    dailyRecords.splice(existing, 1);
+  }
+
+  dailyRecords.push({ id: Date.now(), date, sales: totalSales, expense: totalExpense, saleItems, expenseItems });
+  dailyRecords.sort((a,b) => a.date.localeCompare(b.date));
+  save(KEY_DAILY, dailyRecords);
+
+  document.getElementById('sales-rows').innerHTML = '';
+  document.getElementById('expense-rows').innerHTML = '';
+  updatePreview();
+  renderP1Table();
+}
+
+function deleteDailyRecord(id) {
+  if (!confirm('Delete this record?')) return;
+  dailyRecords = dailyRecords.filter(r => r.id !== id);
+  save(KEY_DAILY, dailyRecords);
+  renderP1Table();
+}
+
+function renderP1Table() {
+  const filter = document.getElementById('p1-filter-month').value;
+  let data = dailyRecords;
+  if (filter) data = data.filter(r => r.date.startsWith(filter));
+
+  const container = document.getElementById('p1-records-container');
+  container.innerHTML = '';
+
+  let grandSales = 0, grandExp = 0;
+
+  data.forEach(r => {
+    const totalSales   = r.sales || 0;
+    const totalExpense = r.expense || 0;
+    const profit       = totalSales - totalExpense;
+    grandSales += totalSales;
+    grandExp   += totalExpense;
+
+    const saleItems    = r.saleItems    || (totalSales   > 0 ? [{ notes: r.notes || '—', amount: totalSales }]   : []);
+    const expenseItems = r.expenseItems || (totalExpense > 0 ? [{ notes: r.notes || '—', amount: totalExpense }] : []);
+
+    const saleRows = saleItems.map(i => `
+      <tr>
+        <td style="padding:6px 12px;border-bottom:1px dashed rgba(201,168,76,0.06);color:var(--muted);font-size:13px;">${i.notes || '—'}</td>
+        <td style="padding:6px 12px;border-bottom:1px dashed rgba(201,168,76,0.06);color:#2ecc71;font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:right">${fmt(i.amount)}</td>
+      </tr>`).join('');
+
+    const expRows = expenseItems.map(i => `
+      <tr>
+        <td style="padding:6px 12px;border-bottom:1px dashed rgba(201,168,76,0.06);color:var(--muted);font-size:13px;">${i.notes || '—'}</td>
+        <td style="padding:6px 12px;border-bottom:1px dashed rgba(201,168,76,0.06);color:#e74c3c;font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:right">${fmt(i.amount)}</td>
+      </tr>`).join('');
+
+    const card = document.createElement('div');
+    card.style.cssText = 'background:rgba(10,22,40,0.5);border:1px solid rgba(201,168,76,0.2);border-radius:10px;margin-bottom:14px;overflow:hidden;';
+    card.innerHTML = `
+      <!-- Record Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(201,168,76,0.08);border-bottom:1px solid rgba(201,168,76,0.15);flex-wrap:wrap;gap:8px;">
+        <span style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:1px;">⚓ ${r.date}</span>
+        <div style="display:flex;gap:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;">
+          <span style="color:#2ecc71">Sales: ${fmt(totalSales)}</span>
+          <span style="color:#e74c3c">Exp: ${fmt(totalExpense)}</span>
+          <span style="color:${profit>=0?'#2ecc71':'#e74c3c'}">Profit: ${profit<0?'-':''}${fmt(Math.abs(profit))}</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-edit btn-sm" onclick="editDailyRecord(${r.id})">✎ EDIT</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteDailyRecord(${r.id})">✕ DEL</button>
+        </div>
+      </div>
+      <!-- Detail Tables -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+        <div style="border-right:1px solid rgba(201,168,76,0.1);">
+          <div style="padding:8px 12px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:#2ecc71;background:rgba(26,122,74,0.08);">SALES</div>
+          <table style="width:100%;border-collapse:collapse;">${saleRows}
+            <tr><td colspan="2" style="padding:6px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#2ecc71;text-align:right;font-weight:600;border-top:1px solid rgba(26,122,74,0.2);">Total: ${fmt(totalSales)}</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="padding:8px 12px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:#e74c3c;background:rgba(192,57,43,0.08);">EXPENSES</div>
+          <table style="width:100%;border-collapse:collapse;">${expRows}
+            <tr><td colspan="2" style="padding:6px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#e74c3c;text-align:right;font-weight:600;border-top:1px solid rgba(192,57,43,0.2);">Total: ${fmt(totalExpense)}</td></tr>
+          </table>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Grand total bar
+  if (data.length > 0) {
+    const netProfit = grandSales - grandExp;
+    const bar = document.createElement('div');
+    bar.style.cssText = 'background:rgba(201,168,76,0.1);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:"IBM Plex Mono",monospace;font-size:13px;';
+    bar.innerHTML = `
+      <span style="color:var(--gold);font-family:'Cinzel',serif;letter-spacing:1.5px;font-size:12px;">PERIOD TOTAL</span>
+      <span style="color:#2ecc71">Sales: ${fmt(grandSales)}</span>
+      <span style="color:#e74c3c">Expenses: ${fmt(grandExp)}</span>
+      <span style="color:${netProfit>=0?'#2ecc71':'#e74c3c'}">Net Profit: ${netProfit<0?'-':''}${fmt(Math.abs(netProfit))}</span>
+    `;
+    container.appendChild(bar);
+  }
+
+  // Update stats cards (all records)
+  const allSales = dailyRecords.reduce((s, r) => s + (r.sales||0), 0);
+  const allExp   = dailyRecords.reduce((s, r) => s + (r.expense||0), 0);
+  document.getElementById('s1-sales').textContent  = fmt(allSales);
+  document.getElementById('s1-exp').textContent    = fmt(allExp);
+  document.getElementById('s1-profit').textContent = fmt(allSales - allExp);
+  document.getElementById('s1-records').textContent = dailyRecords.length;
+}
+
+// ===== PAGE 2 =====
+document.getElementById('p2-date').value = today();
+
+// Build checkboxes
+const grid = document.getElementById('shareholder-checks');
+SHAREHOLDERS.forEach(sh => {
+  const div = document.createElement('div');
+  div.className = 'checkbox-item';
+  div.dataset.name = sh;
+  div.innerHTML = `<input type="checkbox"><div class="check-box"></div><span>${sh}</span>`;
+  div.onclick = () => toggleCheck(div);
+  grid.appendChild(div);
+});
+
+function toggleCheck(div) {
+  div.classList.toggle('checked');
+  const cb = div.querySelector('.check-box');
+  cb.textContent = div.classList.contains('checked') ? '✓' : '';
+}
+
+function selectAll() {
+  document.querySelectorAll('.checkbox-item').forEach(d => {
+    d.classList.add('checked');
+    d.querySelector('.check-box').textContent = '✓';
+  });
+}
+
+function clearAll() {
+  document.querySelectorAll('.checkbox-item').forEach(d => {
+    d.classList.remove('checked');
+    d.querySelector('.check-box').textContent = '';
+  });
+}
+
+function saveAttendance() {
+  const date = document.getElementById('p2-date').value;
+  if (!date) { alert('Please select a date.'); return; }
+
+  const present = Array.from(document.querySelectorAll('.checkbox-item.checked')).map(d => d.dataset.name);
+  if (present.length === 0) { alert('Please select at least one shareholder.'); return; }
+
+  const existing = attendanceRecords.findIndex(r => r.date === date);
+  if (existing >= 0) {
+    if (!confirm('Attendance for this date exists. Replace?')) return;
+    attendanceRecords.splice(existing, 1);
+  }
+
+  attendanceRecords.push({ date, present });
+  attendanceRecords.sort((a,b) => a.date.localeCompare(b.date));
+  save(KEY_ATTEND, attendanceRecords);
+
+  clearAll();
+  renderP2Table();
+  alert('Attendance saved for ' + date);
+}
+
+function deleteAttendance(date) {
+  if (!confirm('Delete attendance for ' + date + '?')) return;
+  attendanceRecords = attendanceRecords.filter(r => r.date !== date);
+  save(KEY_ATTEND, attendanceRecords);
+  renderP2Table();
+}
+
+function loadAttendanceForEdit(date) {
+  const rec = attendanceRecords.find(r => r.date === date);
+  if (!rec) return;
+  document.getElementById('p2-date').value = date;
+  clearAll();
+  rec.present.forEach(name => {
+    const div = document.querySelector(`.checkbox-item[data-name="${name}"]`);
+    if (div) { div.classList.add('checked'); div.querySelector('.check-box').textContent = '✓'; }
+  });
+  window.scrollTo(0, 0);
+}
+
+function renderP2Table() {
+  const filter = document.getElementById('p2-filter-month').value;
+  let data = attendanceRecords;
+  if (filter) data = data.filter(r => r.date.startsWith(filter));
+
+  const tbody = document.getElementById('p2-tbody');
+  tbody.innerHTML = '';
+  data.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge badge-gold">${r.date}</span></td>
+      <td style="font-size:13px;color:var(--muted)">${r.present.join(', ')}</td>
+      <td><span class="badge badge-green">${r.present.length}</span></td>
+      <td style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-sm" style="background:rgba(30,107,138,0.3);color:#7ecfed;border:1px solid rgba(30,107,138,0.5)" onclick="loadAttendanceForEdit('${r.date}')">✎ EDIT</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteAttendance('${r.date}')">✕ DEL</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ===== PAGE 3 =====
+let _p3DailyBreakdown = [];
+let _p3StartDate = '';
+let _p3EndDate = '';
+
+// Get the carry-forward balance for a member from all SAVED periods before startDate
+// Returns: positive = member owes us (excess advance), negative = we owe member (unpaid share)
+function getCarryForward(memberName, startDate) {
+  // Sum raw period balances (shareEarned - periodAdvance) from ALL periods ending before startDate
+  // Each period's balance is stored raw (without its own carry), so chaining works correctly:
+  //   Week1 raw = +500 (we owe them ₹500)
+  //   Week2 carry = +500 → added as credit
+  //   Week2 raw = -200 (they owe us ₹200, excess advance)
+  //   Week3 carry = +500 + (-200) = +300
+  let carryBalance = 0;
+  savedPeriods.forEach(period => {
+    if (period.endDate < startDate) {
+      const bal = period.settlements ? period.settlements[memberName] : undefined;
+      if (bal !== undefined && bal !== null) {
+        carryBalance += bal;
+      }
+    }
+  });
+  // positive = net credit (we owe them from past), negative = net debt (they owe us from past)
+  return carryBalance;
+}
+
+function savePeriodSettlement(startDate, endDate, settlements) {
+  // Remove any existing saved period with same start+end, then push new one
+  savedPeriods = savedPeriods.filter(p => !(p.startDate === startDate && p.endDate === endDate));
+  savedPeriods.push({ periodId: Date.now(), startDate, endDate, settlements });
+  save(KEY_PERIODS, savedPeriods);
+  // Also reload from storage to keep in-memory copy in sync
+  savedPeriods = load(KEY_PERIODS);
+}
+
+function renderSavedPeriods() {
+  const count = savedPeriods.length;
+  const countEl = document.getElementById('saved-period-count');
+  const listEl  = document.getElementById('saved-periods-list');
+  if (countEl) countEl.textContent = '(' + count + ' period' + (count !== 1 ? 's' : '') + ' saved)';
+  if (!listEl) return;
+
+  if (count === 0) {
+    listEl.innerHTML = '<p style="color:var(--muted);font-size:13px;font-style:italic;">No saved periods yet. Calculate a period to save it.</p>';
+    return;
+  }
+
+  let html = '<div class="table-wrap"><table><thead><tr>' +
+    '<th>Period</th><th>Shareholders</th><th>Balances (Payable / Excess)</th>' +
+    '</tr></thead><tbody>';
+
+  savedPeriods.forEach(function(period) {
+    const members = Object.keys(period.settlements || {});
+    const positives = members.filter(m => period.settlements[m] > 0).length;
+    const negatives = members.filter(m => period.settlements[m] < 0).length;
+    html += '<tr>' +
+      '<td><span class="badge badge-gold">' + period.startDate + ' → ' + period.endDate + '</span></td>' +
+      '<td><span class="badge badge-green">' + members.length + ' members</span></td>' +
+      '<td style="font-size:13px;">' +
+        '<span style="color:#2ecc71;margin-right:12px;">✓ ' + positives + ' payable</span>' +
+        '<span style="color:#e74c3c;">✗ ' + negatives + ' excess</span>' +
+      '</td>' +
+      '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+  listEl.innerHTML = html;
+}
+
+function toggleSavedPeriods() {
+  const el = document.getElementById('saved-periods-list');
+  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+function clearSavedPeriods() {
+  if (!confirm('Clear ALL saved period settlements? Carry-forward will be reset to zero for all shareholders.')) return;
+  savedPeriods = [];
+  save(KEY_PERIODS, savedPeriods);
+  renderSavedPeriods();
+  alert('All saved periods cleared.');
+}
+
+function calculateShares() {
+  const startDate = document.getElementById('p3-start').value;
+  const endDate = document.getElementById('p3-end').value;
+  if (!startDate || !endDate) { alert('Please select both dates.'); return; }
+  if (startDate > endDate) { alert('Start date must be before end date.'); return; }
+
+  _p3StartDate = startDate;
+  _p3EndDate = endDate;
+
+  // Filter records
+  const salesData = dailyRecords.filter(r => r.date >= startDate && r.date <= endDate);
+  const attendData = attendanceRecords.filter(r => r.date >= startDate && r.date <= endDate);
+
+  if (salesData.length === 0) { alert('No sales records found in selected range.'); return; }
+
+  const totalSales = salesData.reduce((s, r) => s + r.sales, 0);
+  const totalExpense = salesData.reduce((s, r) => s + r.expense, 0);
+  const ratio = totalSales > 0 ? totalExpense / totalSales : 0;
+
+  // Per-day calculation
+  const dailyBreakdown = [];
+  salesData.forEach(dayRec => {
+    const allocExpense = dayRec.sales * ratio;
+    const profit = dayRec.sales - allocExpense;
+    const attend = attendData.find(a => a.date === dayRec.date);
+    const numPresent = attend ? attend.present.length : 0;
+    const sharePerPerson = numPresent > 0 ? profit / numPresent : 0;
+    dailyBreakdown.push({
+      date: dayRec.date,
+      sales: dayRec.sales,
+      ratio,
+      allocExpense,
+      profit,
+      numPresent,
+      sharePerPerson,
+      present: attend ? attend.present : []
+    });
+  });
+
+  _p3DailyBreakdown = dailyBreakdown;
+
+  // Per-shareholder totals
+  const shareMap = {};
+  SHAREHOLDERS.forEach(sh => { shareMap[sh] = { days: 0, total: 0 }; });
+  dailyBreakdown.forEach(d => {
+    d.present.forEach(sh => {
+      if (!shareMap[sh]) shareMap[sh] = { days: 0, total: 0 };
+      shareMap[sh].days++;
+      shareMap[sh].total += d.sharePerPerson;
+    });
+  });
+
+  const totalProfit = dailyBreakdown.reduce((s, d) => s + d.profit, 0);
+
+  // Render stats
+  document.getElementById('p3-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total Sales</div><div class="stat-value">${fmt(totalSales)}</div></div>
+    <div class="stat-card"><div class="stat-label">Total Expense</div><div class="stat-value red">${fmt(totalExpense)}</div></div>
+    <div class="stat-card"><div class="stat-label">Expense Ratio</div><div class="stat-value">${(ratio * 100).toFixed(2)}%</div></div>
+    <div class="stat-card"><div class="stat-label">Net Profit</div><div class="stat-value green">${fmt(totalProfit)}</div></div>
+    <div class="stat-card"><div class="stat-label">Days</div><div class="stat-value">${salesData.length}</div></div>
+  `;
+
+  // Render daily table
+  const dtbody = document.getElementById('p3-daily-tbody');
+  dtbody.innerHTML = '';
+  dailyBreakdown.forEach(d => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge badge-gold">${d.date}</span></td>
+      <td>${fmt(d.sales)}</td>
+      <td><span class="badge badge-red">${(d.ratio * 100).toFixed(2)}%</span></td>
+      <td class="result-negative">${fmt(d.allocExpense)}</td>
+      <td class="result-positive">${fmt(d.profit)}</td>
+      <td><span class="badge badge-green">${d.numPresent}</span></td>
+      <td class="result-positive">${fmt(d.sharePerPerson)}</td>
+    `;
+    dtbody.appendChild(tr);
+  });
+
+  // Render shareholder summary table
+  const stbody = document.getElementById('p3-share-tbody');
+  stbody.innerHTML = '';
+
+  // Build settlements map for saving
+  const periodSettlements = {};
+
+  SHAREHOLDERS.forEach(sh => {
+    const s = shareMap[sh];
+    if (s.days === 0) return;
+
+    // Advances taken within this period only
+    const periodAdvance = paymentRecords
+      .filter(p => p.member === sh && p.date >= startDate && p.date <= endDate)
+      .reduce((sum, p) => sum + p.amount, 0);
+
+    // Carry-forward from previously saved periods before this start date
+    const carryCredit = getCarryForward(sh, startDate);
+    // carryCredit > 0 = we still owe them from prev period (credit, reduces what we pay now... no, it ADDS to what we owe)
+    // carryCredit < 0 = they owe us from prev period (extra deduction)
+
+    // Net payable = share earned + carry credit (positive credit adds, negative adds deduction) - period advance
+    const netPayable = s.total + carryCredit - periodAdvance;
+
+    // Save ONLY this period's raw result (share earned - advances this period)
+    // Do NOT include carryCredit here — getCarryForward() will chain them properly
+    periodSettlements[sh] = s.total - periodAdvance;
+
+    const carryLabel = carryCredit !== 0
+      ? `<span class="badge" style="background:rgba(201,168,76,0.15);color:var(--gold-light);font-size:10px;margin-left:4px;" title="Carry forward from previous period">${carryCredit >= 0 ? '+' : ''}${fmt(carryCredit)} CF</span>`
+      : '';
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${sh}</strong>${carryLabel}</td>
+      <td><span class="badge badge-gold">${s.days}</span></td>
+      <td class="result-positive">${fmt(s.total)}</td>
+      <td class="adv-paid">${fmt(periodAdvance)}</td>
+      <td class="${netPayable >= 0 ? 'result-positive' : 'adv-pending'}">${netPayable < 0 ? '-' : ''}${fmt(Math.abs(netPayable))}</td>
+      <td><button class="btn btn-sm" style="background:rgba(201,168,76,0.15);color:var(--gold-light);border:1px solid var(--border)" onclick="showIndividual('${sh}')">🔍 VIEW DETAIL</button></td>
+    `;
+    stbody.appendChild(tr);
+  });
+
+  // Auto-save period settlements so future periods can use carry-forward
+  savePeriodSettlement(startDate, endDate, periodSettlements);
+  renderSavedPeriods();
+
+  document.getElementById('p3-results').style.display = 'block';
+  document.getElementById('p3-individual-panel').style.display = 'none';
+}
+
+function showIndividual(name) {
+  const startDate = _p3StartDate;
+  const endDate = _p3EndDate;
+  const panel = document.getElementById('p3-individual-panel');
+  panel.style.display = 'block';
+
+  document.getElementById('ind-name').textContent = '⚓ ' + name;
+  document.getElementById('ind-period').textContent = 'Period: ' + startDate + ' → ' + endDate;
+
+  // Build per-date table
+  let totalShareEarned = 0;
+  let daysPresent = 0;
+  let running = 0;
+  const dtbody = document.getElementById('ind-daily-tbody');
+  dtbody.innerHTML = '';
+
+  _p3DailyBreakdown.forEach(d => {
+    const present = d.present.includes(name);
+    const earned = present ? d.sharePerPerson : 0;
+    if (present) { daysPresent++; totalShareEarned += earned; }
+    running += earned;
+    if (!present) return;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge badge-gold">${d.date}</span></td>
+      <td class="result-positive">${fmt(earned)}</td>
+    `;
+    dtbody.appendChild(tr);
+  });
+
+  // Summary row
+  const sumTr = document.createElement('tr');
+  sumTr.className = 'summary-row';
+  sumTr.innerHTML = `
+    <td>TOTAL (${daysPresent} days)</td>
+    <td class="result-positive">${fmt(totalShareEarned)}</td>
+  `;
+  dtbody.appendChild(sumTr);
+
+  // Carry-forward from saved previous periods
+  const carryCredit = getCarryForward(name, startDate);
+  // carryCredit > 0 = we owe them from prev period (adds to their total)
+  // carryCredit < 0 = they owed us from prev period (deduction from this period)
+
+  // Advances taken within this period
+  const advances = paymentRecords.filter(p => p.member === name && p.date >= startDate && p.date <= endDate);
+  const periodAdvTotal = advances.reduce((s, p) => s + p.amount, 0);
+
+  // Final pending = share earned this period + carry credit - advances this period
+  const pending = totalShareEarned + carryCredit - periodAdvTotal;
+
+  // Build which previous periods contributed to carry
+  const prevPeriods = savedPeriods.filter(p => p.endDate < startDate && p.settlements[name] !== undefined);
+
+  const advTbody = document.getElementById('ind-adv-tbody');
+  advTbody.innerHTML = '';
+
+  // Show carry-forward rows from each previous period
+  if (prevPeriods.length > 0) {
+    prevPeriods.forEach(period => {
+      const bal = period.settlements[name];
+      if (bal === 0) return;
+      const cfTr = document.createElement('tr');
+      cfTr.style.background = 'rgba(201,168,76,0.05)';
+      cfTr.innerHTML = `
+        <td><span class="badge badge-gold">${period.startDate} → ${period.endDate}</span></td>
+        <td><span class="badge" style="background:rgba(201,168,76,0.2);color:var(--gold-light)">↩ Carry Fwd</span></td>
+        <td class="${bal >= 0 ? 'result-positive' : 'adv-pending'}" style="font-family:'IBM Plex Mono',monospace;">
+          ${bal >= 0 ? '+' : '-'}${fmt(Math.abs(bal))}
+          <span style="font-size:11px;color:var(--muted);display:block">${bal >= 0 ? 'Unpaid balance from prev. period' : 'Excess advance from prev. period'}</span>
+        </td>
+        <td style="color:var(--muted);font-size:12px;font-style:italic">Period balance carried forward</td>
+      `;
+      advTbody.appendChild(cfTr);
+    });
+  }
+
+  if (advances.length === 0 && prevPeriods.length === 0) {
+    advTbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px;font-style:italic">No payments or carry-forward for this period</td></tr>';
+  } else {
+    advances.forEach(p => {
+      const typeLabel = p.type === 'advance' ? '<span class="badge badge-red">Advance</span>'
+                      : p.type === 'salary' ? '<span class="badge badge-green">Salary</span>'
+                      : '<span class="badge badge-gold">Other</span>';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="badge badge-gold">${p.date}</span></td>
+        <td>${typeLabel}</td>
+        <td class="adv-pending">${fmt(p.amount)}</td>
+        <td style="color:var(--muted);font-style:italic">${p.notes || '—'}</td>
+      `;
+      advTbody.appendChild(tr);
+    });
+  }
+
+  // Individual summary stats
+  const totalDeductions = periodAdvTotal - carryCredit; // total net deducted (advance minus any credit)
+  document.getElementById('ind-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Days Present</div><div class="stat-value">${daysPresent}</div></div>
+    <div class="stat-card"><div class="stat-label">Share This Period</div><div class="stat-value green">${fmt(totalShareEarned)}</div></div>
+    <div class="stat-card"><div class="stat-label">Carry Forward</div><div class="stat-value ${carryCredit >= 0 ? 'green' : 'red'}">${carryCredit >= 0 ? '+' : '-'}${fmt(Math.abs(carryCredit))}</div></div>
+    <div class="stat-card"><div class="stat-label">Advance This Period</div><div class="stat-value red">${fmt(periodAdvTotal)}</div></div>
+    <div class="stat-card"><div class="stat-label">Net ${pending >= 0 ? 'Payable' : 'Excess'}</div><div class="stat-value ${pending >= 0 ? 'green' : 'red'}">${pending < 0 ? '-' : ''}${fmt(Math.abs(pending))}</div></div>
+  `;
+
+  // Settlement box
+  const settlRows = document.getElementById('ind-settlement-rows');
+
+  // Build carry-forward lines
+  const cfLines = prevPeriods.map(period => {
+    const bal = period.settlements[name];
+    if (!bal) return '';
+    return `
+    <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed rgba(201,168,76,0.1);">
+      <span style="${bal >= 0 ? 'color:#2ecc71' : 'color:#e74c3c'}; font-family:'IBM Plex Mono',monospace; font-size:12px;">
+        ${bal >= 0 ? '+' : '−'} CARRY FWD · ${period.startDate} → ${period.endDate}
+        <span style="color:var(--muted);display:block;font-size:10px;">${bal >= 0 ? 'Unpaid balance from previous period' : 'Excess advance from previous period'}</span>
+      </span>
+      <span style="${bal >= 0 ? 'color:#2ecc71' : 'color:#e74c3c'}; font-family:'IBM Plex Mono',monospace;">${bal >= 0 ? '+' : '-'}${fmt(Math.abs(bal))}</span>
+    </div>`;
+  }).join('');
+
+  settlRows.innerHTML = `
+    <div style="display:grid; gap:10px;">
+      <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border);">
+        <span style="color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:1px;">SHARE EARNED THIS PERIOD</span>
+        <span class="result-positive" style="font-family:'Cinzel',serif; font-size:16px;">${fmt(totalShareEarned)}</span>
+      </div>
+      ${cfLines}
+      ${advances.map(p => `
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed rgba(201,168,76,0.1);">
+          <span style="color:#e74c3c; font-family:'IBM Plex Mono',monospace; font-size:12px;">− ${p.type.toUpperCase()} (${p.date})${p.notes ? ' · ' + p.notes : ''}</span>
+          <span style="color:#e74c3c; font-family:'IBM Plex Mono',monospace;">${fmt(p.amount)}</span>
+        </div>
+      `).join('')}
+      ${(advances.length + prevPeriods.filter(p=>p.settlements[name]).length) > 1 ? `
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border);">
+          <span style="color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:12px;">NET AFTER CARRY & ADVANCES</span>
+          <span style="color:${pending>=0?'#2ecc71':'#e74c3c'}; font-family:'IBM Plex Mono',monospace;">${pending<0?'-':'+'}${fmt(Math.abs(pending))}</span>
+        </div>
+      ` : ''}
+      <div style="display:flex; justify-content:space-between; padding:14px 16px; background:${pending >= 0 ? 'rgba(26,122,74,0.2)' : 'rgba(192,57,43,0.2)'}; border-radius:8px; border:1px solid ${pending >= 0 ? 'rgba(26,122,74,0.4)' : 'rgba(192,57,43,0.4)'}; margin-top:4px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:2px; color:${pending >= 0 ? '#2ecc71' : '#e74c3c'};">${pending >= 0 ? 'AMOUNT PAYABLE TO ' + name.toUpperCase() : 'EXCESS ADVANCE BY ' + name.toUpperCase()}</span>
+        <span style="font-family:'Cinzel',serif; font-size:20px; color:${pending >= 0 ? '#2ecc71' : '#e74c3c'};">${pending < 0 ? '-' : ''}${fmt(Math.abs(pending))}</span>
+      </div>
+    </div>
+  `;
+
+  // Store data for PDF export
+  window._indData = {
+    name, startDate, endDate, daysPresent,
+    totalShareEarned, carryCredit, periodAdvTotal, pending,
+    prevPeriods,
+    dailyRows: (() => {
+      let rows = [], run = 0;
+      _p3DailyBreakdown.forEach(d => {
+        if (!d.present.includes(name)) return;
+        run += d.sharePerPerson;
+        rows.push({ date: d.date, earned: d.sharePerPerson, running: run });
+      });
+      return rows;
+    })(),
+    advances
+  };
+
+  // Scroll to panel
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeIndividual() {
+  document.getElementById('p3-individual-panel').style.display = 'none';
+}
+
+function exportToPDF() {
+  const d = window._indData;
+  if (!d) { alert('Please open a shareholder detail first.'); return; }
+
+  function fmtNum(n) {
+    if (!n && n !== 0) return '0.00';
+    return Number(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+
+  // Daily share rows
+  let shareRows = '';
+  (d.dailyRows || []).forEach(function(r) {
+    shareRows += '<tr><td>' + r.date + '</td>' +
+      '<td style="text-align:right;color:#1a7a4a;font-family:monospace;">&#8377;' + fmtNum(r.earned) + '</td></tr>';
+  });
+
+  // Carry-forward rows
+  let cfRows = '';
+  if (d.prevPeriods && d.prevPeriods.length > 0) {
+    d.prevPeriods.forEach(function(period) {
+      var bal = period.settlements ? period.settlements[d.name] : undefined;
+      if (bal === undefined || bal === 0) return;
+      cfRows += '<tr style="background:#fff9ee;">' +
+        '<td>' + period.startDate + ' to ' + period.endDate + '</td>' +
+        '<td>Carry Forward</td>' +
+        '<td style="text-align:right;color:' + (bal>=0?'#1a7a4a':'#c0392b') + ';font-family:monospace;">' + (bal>=0?'+':'-') + '&#8377;' + fmtNum(Math.abs(bal)) + '</td>' +
+        '<td style="color:#888;font-style:italic;">' + (bal>=0?'Unpaid balance from previous period':'Excess advance from previous period') + '</td>' +
+        '</tr>';
+    });
+  }
+
+  // Advance rows
+  let advRows = cfRows;
+  if (!d.advances || d.advances.length === 0) {
+    if (!cfRows) advRows = '<tr><td colspan="4" style="text-align:center;color:#888;font-style:italic;padding:12px;">No payments during this period</td></tr>';
+  } else {
+    d.advances.forEach(function(p) {
+      advRows += '<tr>' +
+        '<td>' + p.date + '</td>' +
+        '<td>' + (p.type.charAt(0).toUpperCase() + p.type.slice(1)) + '</td>' +
+        '<td style="text-align:right;color:#c0392b;font-family:monospace;">&#8377;' + fmtNum(p.amount) + '</td>' +
+        '<td>' + (p.notes || '—') + '</td>' +
+        '</tr>';
+    });
+  }
+
+  // Settlement calculation rows
+  var totalEarned = d.totalShareEarned || 0;
+  var carryCredit = d.carryCredit || 0;
+  var periodAdv   = d.periodAdvTotal || 0;
+  var pending     = d.pending !== undefined ? d.pending : (totalEarned + carryCredit - periodAdv);
+  var pendingColor = pending >= 0 ? '#1a7a4a' : '#c0392b';
+  var pendingLabel = pending >= 0 ? 'AMOUNT PAYABLE TO ' + d.name.toUpperCase() : 'EXCESS ADVANCE BY ' + d.name.toUpperCase();
+
+  let settlRows = '';
+  settlRows += '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #ede8dc;">' +
+    '<span style="font-family:monospace;font-size:12px;color:#555;letter-spacing:1px;">SHARE EARNED THIS PERIOD</span>' +
+    '<span style="font-family:monospace;font-size:14px;font-weight:700;color:#1a7a4a;">&#8377;' + fmtNum(totalEarned) + '</span></div>';
+
+  if (d.prevPeriods) {
+    d.prevPeriods.forEach(function(period) {
+      var bal = period.settlements ? period.settlements[d.name] : undefined;
+      if (bal === undefined || bal === 0) return;
+      settlRows += '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #ede8dc;background:#fff9ee;">' +
+        '<span style="font-family:monospace;font-size:11px;color:' + (bal>=0?'#1a7a4a':'#c0392b') + ';">' + (bal>=0?'+ CARRY FORWARD CREDIT':'− CARRY FORWARD DEDUCTION') + ' (' + period.startDate + ' to ' + period.endDate + ')</span>' +
+        '<span style="font-family:monospace;font-size:13px;font-weight:700;color:' + (bal>=0?'#1a7a4a':'#c0392b') + ';">' + (bal>=0?'+':'-') + '&#8377;' + fmtNum(Math.abs(bal)) + '</span></div>';
+    });
+  }
+
+  if (d.advances && d.advances.length > 0) {
+    d.advances.forEach(function(p) {
+      settlRows += '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px dashed #f0e8d8;">' +
+        '<span style="font-family:monospace;font-size:11px;color:#c0392b;">&#8722; ' + p.type.toUpperCase() + ' (' + p.date + ')' + (p.notes ? ' · ' + p.notes : '') + '</span>' +
+        '<span style="font-family:monospace;font-size:13px;font-weight:700;color:#c0392b;">&#8377;' + fmtNum(p.amount) + '</span></div>';
+    });
+  }
+
+  settlRows += '<div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:' + pendingColor + ';">' +
+    '<span style="font-family:Georgia,serif;font-size:13px;letter-spacing:2px;color:#fff;">' + pendingLabel + '</span>' +
+    '<span style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#fff;">' + (pending<0?'-':'') + '&#8377;' + fmtNum(Math.abs(pending)) + '</span></div>';
+
+  var genDate = new Date().toLocaleDateString('en-IN', {year:'numeric',month:'long',day:'numeric'});
+
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
+    '<title>Share Summary - ' + d.name + '</title>' +
+    '<style>' +
+    '* { box-sizing:border-box; margin:0; padding:0; }' +
+    'body { font-family: Georgia, serif; color: #1a1a2e; background: #fff; padding: 32px; font-size: 14px; }' +
+    '.letterhead { text-align:center; border-bottom:3px double #c9a84c; padding-bottom:20px; margin-bottom:24px; }' +
+    '.company { font-size:22px; font-weight:700; color:#0a1628; letter-spacing:3px; }' +
+    '.tagline { font-size:11px; color:#888; letter-spacing:2px; margin-top:4px; }' +
+    '.doc-badge { display:inline-block; background:#0a1628; color:#c9a84c; font-size:11px; letter-spacing:2px; padding:5px 18px; border-radius:4px; margin-top:10px; }' +
+    '.meta { display:flex; justify-content:space-between; background:#f7f3eb; border:1px solid #e0d5b8; border-radius:8px; padding:14px 20px; margin-bottom:24px; flex-wrap:wrap; gap:12px; }' +
+    '.meta-item { display:flex; flex-direction:column; gap:3px; }' +
+    '.meta-lbl { font-size:9px; letter-spacing:1.5px; color:#888; text-transform:uppercase; font-family:monospace; }' +
+    '.meta-val { font-size:14px; color:#0a1628; font-weight:700; }' +
+    '.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:24px; }' +
+    '.stat { border:1px solid #e0d5b8; border-radius:8px; padding:12px; text-align:center; background:#faf7f0; }' +
+    '.stat-lbl { font-size:9px; letter-spacing:1px; color:#888; text-transform:uppercase; font-family:monospace; margin-bottom:6px; }' +
+    '.stat-val { font-size:16px; color:#0a1628; font-weight:700; }' +
+    '.green { color:#1a7a4a; } .red { color:#c0392b; }' +
+    '.sec-title { display:inline-block; background:#0a1628; color:#c9a84c; font-size:11px; letter-spacing:2px; padding:7px 14px; border-radius:4px; margin-bottom:10px; }' +
+    'table { width:100%; border-collapse:collapse; margin-bottom:24px; font-size:13px; }' +
+    'th { background:#0a1628; color:#c9a84c; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; padding:9px 12px; text-align:left; font-family:monospace; }' +
+    'td { padding:9px 12px; border-bottom:1px solid #ede8dc; color:#2a2a3e; }' +
+    'tr:nth-child(even) td { background:#faf7f0; }' +
+    '.tot-row td { background:#0a1628 !important; color:#c9a84c; font-size:12px; letter-spacing:1px; border:none; }' +
+    '.settlement { border:2px solid #0a1628; border-radius:10px; overflow:hidden; margin-bottom:24px; }' +
+    '.settle-head { background:#0a1628; color:#c9a84c; font-size:12px; letter-spacing:2px; padding:10px 16px; }' +
+    '.sig-area { display:flex; justify-content:space-between; margin-top:40px; padding:0 20px; }' +
+    '.sig-box { text-align:center; width:160px; }' +
+    '.sig-line { border-top:1px solid #555; padding-top:6px; font-size:11px; color:#555; letter-spacing:1px; font-family:monospace; }' +
+    '.footer { text-align:center; margin-top:32px; padding-top:16px; border-top:1px solid #e0d5b8; font-size:11px; color:#aaa; font-family:monospace; letter-spacing:1px; }' +
+    '@media print { body { padding:20px; } @page { margin:15mm; size:A4; } }' +
+    '</style></head><body>' +
+
+    '<div class="letterhead">' +
+    '<div style="font-size:36px;margin-bottom:6px;">&#9875;</div>' +
+    '<div class="company">Al Ahmed Fishing Boat</div>' +
+    '<div class="tagline">FLEET MANAGEMENT &amp; SHARE DISTRIBUTION SYSTEM</div>' +
+    '<div class="doc-badge">SHARE SETTLEMENT STATEMENT</div>' +
+    '</div>' +
+
+    '<div class="meta">' +
+    '<div class="meta-item"><span class="meta-lbl">Shareholder</span><span class="meta-val">' + d.name + '</span></div>' +
+    '<div class="meta-item"><span class="meta-lbl">Period From</span><span class="meta-val">' + d.startDate + '</span></div>' +
+    '<div class="meta-item"><span class="meta-lbl">Period To</span><span class="meta-val">' + d.endDate + '</span></div>' +
+    '<div class="meta-item"><span class="meta-lbl">Generated On</span><span class="meta-val">' + genDate + '</span></div>' +
+    '</div>' +
+
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;">' +
+    '<div class="stat"><div class="stat-lbl">Days Present</div><div class="stat-val">' + d.daysPresent + '</div></div>' +
+    '<div class="stat"><div class="stat-lbl">Share Earned</div><div class="stat-val green">&#8377;' + fmtNum(totalEarned) + '</div></div>' +
+    '<div class="stat"><div class="stat-lbl">Carry Forward</div><div class="stat-val ' + (carryCredit>=0?'green':'red') + '">' + (carryCredit>=0?'+':'-') + '&#8377;' + fmtNum(Math.abs(carryCredit)) + '</div></div>' +
+    '<div class="stat"><div class="stat-lbl">Advance Taken</div><div class="stat-val red">&#8377;' + fmtNum(periodAdv) + '</div></div>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:24px;">' +
+    '<div class="stat" style="background:' + (pending>=0?'#eaf7f0':'#fdf0ee') + ';border-color:' + (pending>=0?'#a8dcc2':'#f0b8b0') + ';">' +
+    '<div class="stat-lbl">Net ' + (pending>=0?'Payable to '+d.name:'Excess by '+d.name) + '</div>' +
+    '<div class="stat-val ' + (pending>=0?'green':'red') + '" style="font-size:24px;">' + (pending<0?'-':'') + '&#8377;' + fmtNum(Math.abs(pending)) + '</div></div>' +
+    '</div>' +
+
+    '<div class="sec-title">DAILY SHARE EARNED</div>' +
+    '<table><thead><tr><th>Date</th><th style="text-align:right">Share Earned (&#8377;)</th></tr></thead>' +
+    '<tbody>' + shareRows +
+    '<tr class="tot-row"><td>TOTAL &mdash; ' + d.daysPresent + ' Days Present</td>' +
+    '<td style="text-align:right">&#8377;' + fmtNum(totalEarned) + '</td></tr>' +
+    '</tbody></table>' +
+
+    '<div class="sec-title">ADVANCES, CARRY FORWARD &amp; PAYMENTS</div>' +
+    '<table><thead><tr><th>Period / Date</th><th>Type</th><th style="text-align:right">Amount (&#8377;)</th><th>Notes</th></tr></thead>' +
+    '<tbody>' + advRows + '</tbody></table>' +
+
+    '<div class="settlement">' +
+    '<div class="settle-head">FINAL SETTLEMENT CALCULATION</div>' +
+    '<div>' + settlRows + '</div>' +
+    '</div>' +
+
+    '<div class="sig-area">' +
+    '<div class="sig-box"><div style="height:40px;"></div><div class="sig-line">AUTHORISED SIGNATORY</div></div>' +
+    '<div class="sig-box"><div style="height:40px;"></div><div class="sig-line">SHAREHOLDER SIGNATURE</div></div>' +
+    '</div>' +
+
+    '<div class="footer">Al Ahmed Fishing Boat &nbsp;&middot;&nbsp; Generated ' + genDate + ' &nbsp;&middot;&nbsp; Computer-generated document.</div>' +
+
+    '<script>window.onload=function(){window.print();}<\/script>' +
+    '</body></html>';
+
+  var win = window.open('', '_blank');
+  if (!win) { alert('Please allow popups for this page to export PDF.'); return; }
+  win.document.write(html);
+  win.document.close();
+}
+
+// ===== PAGE 4 =====
+// Populate select
+const p4Select = document.getElementById('p4-member');
+const p4Filter = document.getElementById('p4-filter-member');
+const editPayMember = document.getElementById('edit-pay-member');
+SHAREHOLDERS.forEach(sh => {
+  const o1 = document.createElement('option');
+  o1.value = sh; o1.textContent = sh;
+  p4Select.appendChild(o1);
+  const o2 = document.createElement('option');
+  o2.value = sh; o2.textContent = sh;
+  p4Filter.appendChild(o2);
+  const o3 = document.createElement('option');
+  o3.value = sh; o3.textContent = sh;
+  editPayMember.appendChild(o3);
+});
+
+document.getElementById('p4-date').value = today();
+
+function addPayment() {
+  const member = document.getElementById('p4-member').value;
+  const date = document.getElementById('p4-date').value;
+  const type = document.getElementById('p4-type').value;
+  const amount = parseFloat(document.getElementById('p4-amount').value) || 0;
+  const notes = document.getElementById('p4-notes').value;
+
+  if (!member) { alert('Please select a shareholder.'); return; }
+  if (!date) { alert('Please select a date.'); return; }
+  if (amount <= 0) { alert('Please enter a valid amount.'); return; }
+
+  paymentRecords.push({ id: Date.now(), member, date, type, amount, notes });
+  paymentRecords.sort((a,b) => a.date.localeCompare(b.date));
+  save(KEY_PAYMENT, paymentRecords);
+
+  document.getElementById('p4-amount').value = '';
+  document.getElementById('p4-notes').value = '';
+
+  renderP4Table();
+  renderP4Summary();
+}
+
+function deletePayment(id) {
+  if (!confirm('Delete this payment?')) return;
+  paymentRecords = paymentRecords.filter(p => p.id !== id);
+  save(KEY_PAYMENT, paymentRecords);
+  renderP4Table();
+  renderP4Summary();
+}
+
+function renderP4Table() {
+  const filter = document.getElementById('p4-filter-member').value;
+  let data = paymentRecords;
+  if (filter) data = data.filter(p => p.member === filter);
+
+  const tbody = document.getElementById('p4-tbody');
+  tbody.innerHTML = '';
+  data.forEach(p => {
+    const typeLabel = p.type === 'advance' ? '<span class="badge badge-red">Advance</span>' :
+                      p.type === 'salary' ? '<span class="badge badge-green">Salary</span>' :
+                      '<span class="badge badge-gold">Other</span>';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge badge-gold">${p.date}</span></td>
+      <td><strong>${p.member}</strong></td>
+      <td>${typeLabel}</td>
+      <td class="adv-paid">${fmt(p.amount)}</td>
+      <td style="color:var(--muted);font-style:italic">${p.notes || '—'}</td>
+      <td style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-edit btn-sm" onclick="editPayment(${p.id})">✎ EDIT</button>
+        <button class="btn btn-danger btn-sm" onclick="deletePayment(${p.id})">✕ DEL</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderP4Summary() {
+  const tbody = document.getElementById('p4-summary-tbody');
+  tbody.innerHTML = '';
+
+  SHAREHOLDERS.forEach(sh => {
+    const payments = paymentRecords.filter(p => p.member === sh);
+    if (payments.length === 0) return;
+    const totalAdv = payments.filter(p => p.type === 'advance').reduce((s, p) => s + p.amount, 0);
+    const totalSal = payments.filter(p => p.type === 'salary').reduce((s, p) => s + p.amount, 0);
+    const totalOther = payments.filter(p => p.type === 'other').reduce((s, p) => s + p.amount, 0);
+    const totalPaid = totalAdv + totalSal + totalOther;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${sh}</strong></td>
+      <td class="adv-pending">${fmt(totalAdv)}</td>
+      <td class="adv-paid">${fmt(totalSal)}</td>
+      <td class="result-positive">${fmt(totalPaid)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  if (tbody.innerHTML === '') {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:24px">No payment records yet</td></tr>';
+  }
+}
+
+
+// ===== MODAL HELPERS =====
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+// Close modal when clicking overlay background
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+});
+
+// ===== PAGE 1 EDIT =====
+function editDailyRecord(id) {
+  const rec = dailyRecords.find(r => r.id === id);
+  if (!rec) return;
+  document.getElementById('edit-daily-id').value = id;
+  document.getElementById('edit-daily-date').value = rec.date;
+
+  // Populate sale rows
+  const salesContainer = document.getElementById('edit-sales-rows');
+  salesContainer.innerHTML = '';
+  const saleItems = rec.saleItems || (rec.sales > 0 ? [{ notes: rec.notes || '', amount: rec.sales }] : []);
+  saleItems.forEach(i => makeEditItemRow('edit-sales-rows', i.notes, i.amount, 'sale'));
+  if (saleItems.length === 0) makeEditItemRow('edit-sales-rows', '', '', 'sale');
+
+  // Populate expense rows
+  const expContainer = document.getElementById('edit-expense-rows');
+  expContainer.innerHTML = '';
+  const expenseItems = rec.expenseItems || (rec.expense > 0 ? [{ notes: rec.notes || '', amount: rec.expense }] : []);
+  expenseItems.forEach(i => makeEditItemRow('edit-expense-rows', i.notes, i.amount, 'expense'));
+  if (expenseItems.length === 0) makeEditItemRow('edit-expense-rows', '', '', 'expense');
+
+  document.getElementById('modal-daily').classList.add('open');
+}
+
+function saveEditDaily() {
+  const id = parseInt(document.getElementById('edit-daily-id').value);
+  const date = document.getElementById('edit-daily-date').value;
+  if (!date) { alert('Please select a date.'); return; }
+
+  const saleItems    = [];
+  document.querySelectorAll('#edit-sales-rows [data-rowid]').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const notes = inputs[0].value.trim();
+    const amount = parseFloat(inputs[1].value) || 0;
+    if (amount > 0 || notes) saleItems.push({ notes, amount });
+  });
+
+  const expenseItems = [];
+  document.querySelectorAll('#edit-expense-rows [data-rowid]').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const notes = inputs[0].value.trim();
+    const amount = parseFloat(inputs[1].value) || 0;
+    if (amount > 0 || notes) expenseItems.push({ notes, amount });
+  });
+
+  if (saleItems.length === 0 && expenseItems.length === 0) {
+    alert('Please add at least one sale or expense item.'); return;
+  }
+
+  const totalSales   = saleItems.reduce((s, i) => s + i.amount, 0);
+  const totalExpense = expenseItems.reduce((s, i) => s + i.amount, 0);
+
+  const conflict = dailyRecords.findIndex(r => r.date === date && r.id !== id);
+  if (conflict >= 0) {
+    if (!confirm('Another record exists for this date. Replace it?')) return;
+    dailyRecords.splice(conflict, 1);
+  }
+
+  const idx = dailyRecords.findIndex(r => r.id === id);
+  if (idx < 0) return;
+  dailyRecords[idx] = { id, date, sales: totalSales, expense: totalExpense, saleItems, expenseItems };
+  dailyRecords.sort((a, b) => a.date.localeCompare(b.date));
+  save(KEY_DAILY, dailyRecords);
+  closeModal('modal-daily');
+  renderP1Table();
+}
+
+// ===== PAGE 4 EDIT =====
+function editPayment(id) {
+  const rec = paymentRecords.find(p => p.id === id);
+  if (!rec) return;
+  document.getElementById('edit-pay-id').value = id;
+  document.getElementById('edit-pay-member').value = rec.member;
+  document.getElementById('edit-pay-date').value = rec.date;
+  document.getElementById('edit-pay-type').value = rec.type;
+  document.getElementById('edit-pay-amount').value = rec.amount;
+  document.getElementById('edit-pay-notes').value = rec.notes || '';
+  document.getElementById('modal-payment').classList.add('open');
+}
+
+function saveEditPayment() {
+  const id = parseInt(document.getElementById('edit-pay-id').value);
+  const member = document.getElementById('edit-pay-member').value;
+  const date = document.getElementById('edit-pay-date').value;
+  const type = document.getElementById('edit-pay-type').value;
+  const amount = parseFloat(document.getElementById('edit-pay-amount').value) || 0;
+  const notes = document.getElementById('edit-pay-notes').value;
+
+  if (!member) { alert('Please select a shareholder.'); return; }
+  if (!date) { alert('Please select a date.'); return; }
+  if (amount <= 0) { alert('Please enter a valid amount.'); return; }
+
+  const idx = paymentRecords.findIndex(p => p.id === id);
+  if (idx < 0) return;
+  paymentRecords[idx] = { id, member, date, type, amount, notes };
+  paymentRecords.sort((a, b) => a.date.localeCompare(b.date));
+  save(KEY_PAYMENT, paymentRecords);
+  closeModal('modal-payment');
+  renderP4Table();
+  renderP4Summary();
+}
+
+// ===== SYNC: EXPORT & IMPORT =====
+function updateSyncLabel() {
+  const ts = localStorage.getItem('aafb_last_export');
+  const el = document.getElementById('sync-last-saved');
+  if (el) el.textContent = ts ? 'Last export: ' + ts : 'Not exported yet';
+}
+
+function exportData() {
+  const data = {
+    version: 2,
+    exportedAt: new Date().toISOString(),
+    exportedAtReadable: new Date().toLocaleString('en-IN'),
+    dailyRecords,
+    attendanceRecords,
+    paymentRecords,
+    savedPeriods
+  };
+
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0,10);
+  a.href     = url;
+  a.download = 'AlAhmed-Backup-' + dateStr + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  const ts = new Date().toLocaleString('en-IN');
+  localStorage.setItem('aafb_last_export', ts);
+  updateSyncLabel();
+  alert('Backup exported! Send this file via WhatsApp to sync with another device. On the other device tap Import Backup and select this file.');
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+
+      if (!data.version || (!data.dailyRecords && !data.attendanceRecords)) {
+        alert('Invalid backup file. Please use a file exported from Al Ahmed Fishing Boat app.');
+        event.target.value = '';
+        return;
+      }
+
+      const exportDate = data.exportedAtReadable || data.exportedAt || 'Unknown';
+      const dr  = (data.dailyRecords      || []).length;
+      const ar  = (data.attendanceRecords || []).length;
+      const pr  = (data.paymentRecords    || []).length;
+      const spr = (data.savedPeriods      || []).length;
+      const counts = dr + ' daily, ' + ar + ' attendance, ' + pr + ' payments, ' + spr + ' periods';
+
+      if (!confirm('Import backup from: ' + exportDate + ' | Contains: ' + counts + ' | This will REPLACE all current data. Continue?')) {
+        event.target.value = '';
+        return;
+      }
+
+      dailyRecords      = data.dailyRecords      || [];
+      attendanceRecords = data.attendanceRecords || [];
+      paymentRecords    = data.paymentRecords    || [];
+      savedPeriods      = data.savedPeriods      || [];
+
+      save(KEY_DAILY,   dailyRecords);
+      save(KEY_ATTEND,  attendanceRecords);
+      save(KEY_PAYMENT, paymentRecords);
+      save(KEY_PERIODS, savedPeriods);
+
+      renderP1Table();
+      renderP2Table();
+      renderP4Table();
+      renderP4Summary();
+      renderSavedPeriods();
+      updateSyncLabel();
+
+      event.target.value = '';
+      alert('Import successful! ' + counts + ' records synced.');
+    } catch(err) {
+      alert('Failed to import. File may be corrupted. Error: ' + err.message);
+      event.target.value = '';
+    }
+  };
+  reader.readAsText(file);
+}
+
+
+// ===== INIT =====
+renderP1Table();
+renderP2Table();
+renderSavedPeriods();
+updateSyncLabel();
+</script>
+</body>
+</html>
