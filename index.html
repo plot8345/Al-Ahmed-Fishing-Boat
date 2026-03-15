@@ -1,0 +1,3874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al Ahmed Fishing Boat</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --deep: #0d1f3c;
+    --ocean: #1a3a5c;
+    --teal: #1e6b8a;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --foam: #e8f4f8;
+    --white: #f5f0e8;
+    --text: #d4c9b0;
+    --muted: #8a9ab5;
+    --danger: #c0392b;
+    --success: #1a7a4a;
+    --card: rgba(26, 58, 92, 0.5);
+    --border: rgba(201, 168, 76, 0.3);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Crimson Text', serif;
+    min-height: 100vh;
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, rgba(30, 107, 138, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--deep) 0%, var(--ocean) 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-icon {
+    font-size: 32px;
+  }
+
+  .header-title {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(201,168,76,0.4);
+  }
+
+  .header-sub {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* NAV */
+  .nav {
+    display: flex;
+    gap: 0;
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex: 1;
+    min-width: 130px;
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--muted);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .nav-btn:hover { color: var(--gold-light); background: rgba(201,168,76,0.05); }
+  .nav-btn.active { color: var(--gold); border-bottom-color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  /* PAGES */
+  .page { display: none; padding: 24px; max-width: 1200px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+  }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* FORMS */
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+  label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+  }
+
+  input[type="date"], input[type="number"], input[type="text"], select, textarea {
+    background: rgba(10, 22, 40, 0.8);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--white);
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.7) sepia(1) saturate(2) hue-rotate(5deg);
+  }
+
+  /* BUTTONS */
+  .btn {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--navy);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(201,168,76,0.3);
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,76,0.4); }
+
+  .btn-danger {
+    background: rgba(192, 57, 43, 0.2);
+    color: #e74c3c;
+    border: 1px solid rgba(192, 57, 43, 0.4);
+  }
+
+  .btn-danger:hover { background: rgba(192, 57, 43, 0.3); }
+
+  .btn-sm { padding: 6px 14px; font-size: 10px; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; border-radius: 8px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th {
+    background: rgba(201, 168, 76, 0.1);
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+    color: var(--text);
+    vertical-align: middle;
+  }
+
+  tr:hover td { background: rgba(201,168,76,0.04); }
+
+  /* STATS GRID */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    color: var(--gold);
+  }
+
+  .stat-value.green { color: #2ecc71; }
+  .stat-value.red { color: #e74c3c; }
+
+  /* CHECKBOX GRID */
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10,22,40,0.6);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .checkbox-item:hover { border-color: var(--gold); }
+  .checkbox-item.checked { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+
+  .checkbox-item input { display: none; }
+
+  .check-box {
+    width: 16px; height: 16px;
+    border: 2px solid var(--muted);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .checkbox-item.checked .check-box {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+    font-size: 10px;
+  }
+
+  .checkbox-item span { font-size: 13px; color: var(--text); }
+  .checkbox-item.checked span { color: var(--white); }
+
+  /* SHARE RESULTS TABLE */
+  .result-positive { color: #2ecc71; font-weight: 600; }
+  .result-negative { color: #e74c3c; }
+
+  /* ALERT */
+  .alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  .alert-info { background: rgba(30,107,138,0.2); border: 1px solid rgba(30,107,138,0.4); color: #7ecfed; }
+  .alert-success { background: rgba(26,122,74,0.2); border: 1px solid rgba(26,122,74,0.4); color: #52d48a; }
+  .alert-warning { background: rgba(201,168,76,0.15); border: 1px solid var(--border); color: var(--gold-light); }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .badge-green { background: rgba(26,122,74,0.3); color: #52d48a; }
+  .badge-red { background: rgba(192,57,43,0.3); color: #e74c3c; }
+  .badge-gold { background: rgba(201,168,76,0.2); color: var(--gold-light); }
+
+  /* PAGE TITLE */
+  .page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* WAVE DIVIDER */
+  .wave-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 24px 0;
+    opacity: 0.4;
+  }
+
+  /* PAGINATION */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* SUMMARY ROW */
+  .summary-row td {
+    font-weight: 600;
+    color: var(--gold-light);
+    border-top: 2px solid var(--border);
+  }
+
+  /* ADVANCE TABLE STYLES */
+  .adv-paid { color: #2ecc71; }
+  .adv-pending { color: #e74c3c; }
+
+  /* PRINT STYLE */
+  @media print {
+    .nav, .btn { display: none !important; }
+    body { background: white; color: black; }
+    .card { border: 1px solid #ccc; }
+  }
+
+  @media (max-width: 600px) {
+    .header-title { font-size: 16px; }
+    .page { padding: 16px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5,12,25,0.88);
+    backdrop-filter: blur(6px);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--deep);
+    border: 1px solid var(--gold);
+    border-radius: 14px;
+    padding: 28px;
+    width: 92%;
+    max-width: 480px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(201,168,76,0.15);
+    animation: modalIn 0.22s ease;
+  }
+  @keyframes modalIn {
+    from { transform: scale(0.92) translateY(20px); opacity: 0; }
+    to   { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  .modal-title {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; flex-wrap: wrap; }
+  .btn-secondary { background: rgba(138,154,181,0.15); color: var(--muted); border: 1px solid rgba(138,154,181,0.3); }
+  .btn-secondary:hover { background: rgba(138,154,181,0.25); }
+  .btn-edit { background: rgba(30,107,138,0.25); color: #7ecfed; border: 1px solid rgba(30,107,138,0.5); }
+  .btn-edit:hover { background: rgba(30,107,138,0.4); }
+</style>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+<!-- PASSWORD LOCK SCREEN -->
+<div id="lock-screen" style="
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:linear-gradient(135deg,#0a1628 0%,#0d2137 50%,#0a1628 100%);
+  display:flex;align-items:center;justify-content:center;
+  z-index:99999;flex-direction:column;
+">
+  <div style="text-align:center;margin-bottom:32px;">
+    <div style="font-size:56px;margin-bottom:12px;">⚓</div>
+    <div style="font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:#c9a84c;letter-spacing:3px;">Al Ahmed Fishing Boat</div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:2px;margin-top:6px;">FLEET MANAGEMENT SYSTEM</div>
+  </div>
+
+  <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.3);border-radius:16px;padding:36px 40px;width:320px;text-align:center;">
+    <div style="font-family:'Cinzel',serif;font-size:13px;color:#c9a84c;letter-spacing:2px;margin-bottom:20px;">🔒 ENTER PASSWORD</div>
+    <input type="password" id="lock-input"
+      placeholder="Password"
+      style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.3);border-radius:8px;color:#fff;font-size:18px;text-align:center;letter-spacing:4px;outline:none;margin-bottom:16px;box-sizing:border-box;"
+      onkeydown="if(event.key==='Enter') checkPassword()"
+    >
+    <div id="lock-error" style="color:#e74c3c;font-size:12px;margin-bottom:12px;min-height:18px;"></div>
+    <button onclick="checkPassword()" style="
+      width:100%;padding:14px;background:linear-gradient(135deg,#c9a84c,#a07830);
+      border:none;border-radius:8px;color:#0a1628;font-family:'Cinzel',serif;
+      font-size:13px;font-weight:700;letter-spacing:2px;cursor:pointer;
+    ">UNLOCK →</button>
+  </div>
+
+  <div style="margin-top:24px;font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;">
+    Authorised Personnel Only
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-icon">⚓</div>
+  <div>
+    <div class="header-title">Al Ahmed Fishing Boat</div>
+    <div class="header-sub">Fleet Management & Share Distribution System</div>
+  </div>
+</div>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="showPage(1)">⚓ Daily Records</button>
+  <button class="nav-btn" onclick="showPage(2)">👥 Shareholder Attendance</button>
+  <button class="nav-btn" onclick="showPage(3)">📊 Share Calculation</button>
+  <button class="nav-btn" onclick="showPage(4)">💰 Advances & Payments</button>
+  <button class="nav-btn" onclick="showPage(5)">🐟 Fish Sales & Suppliers</button>
+</nav>
+
+<!-- SYNC BAR -->
+<div id="sync-bar" style="background:rgba(10,22,40,0.95);border-bottom:1px solid rgba(201,168,76,0.2);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;display:flex;align-items:center;gap:8px;">
+    <span id="gdrive-status-dot" style="width:8px;height:8px;border-radius:50%;background:#888;display:inline-block;"></span>
+    <span id="gdrive-status-text" style="color:var(--muted);">Google Drive: Not connected</span>
+    &nbsp;·&nbsp;
+    <span id="sync-last-saved" style="color:var(--gold);">—</span>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+    <button id="gdrive-connect-btn" class="btn btn-sm" style="background:rgba(66,133,244,0.2);color:#7eaaff;border:1px solid rgba(66,133,244,0.4)" onclick="gdriveConnect()">
+      ☁ CONNECT GOOGLE DRIVE
+    </button>
+    <button class="btn btn-sm" style="background:rgba(201,168,76,0.2);color:#c9a84c;border:1px solid rgba(201,168,76,0.4);" onclick="toggleCalculator()" title="Calculator">🧮 CALC</button>
+    <button id="gdrive-save-btn" class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#52d48a;border:1px solid rgba(26,122,74,0.5);display:none" onclick="gdriveSave(true)">
+      ☁ SAVE TO DRIVE
+    </button>
+    <button id="gdrive-load-btn" class="btn btn-sm" style="background:rgba(30,107,138,0.25);color:#7ecfed;border:1px solid rgba(30,107,138,0.5);display:none" onclick="gdriveLoad()">
+      ☁ LOAD FROM DRIVE
+    </button>
+    <button class="btn btn-sm" style="background:rgba(100,100,100,0.2);color:#aaa;border:1px solid rgba(100,100,100,0.3)" onclick="exportData()">⬇ LOCAL BACKUP</button>
+    <label class="btn btn-sm" style="background:rgba(100,100,100,0.2);color:#aaa;border:1px solid rgba(100,100,100,0.3);cursor:pointer;margin:0;">
+      ⬆ LOCAL RESTORE
+      <input type="file" accept=".json" id="import-file-input" style="display:none" onchange="importData(event)">
+    </label>
+    <button class="btn btn-sm" style="background:rgba(192,57,43,0.2);color:#e74c3c;border:1px solid rgba(192,57,43,0.4);" onclick="logout()">🔒 LOGOUT</button>
+  </div>
+</div>
+
+<!-- ===== PAGE 1: DAILY RECORDS ===== -->
+<div class="page active" id="page1">
+  <div class="page-title">⚓ Daily Sales & Expenses</div>
+
+  <div class="card">
+    <div class="card-title">Add New Daily Entry</div>
+    <div class="form-row" style="margin-bottom:20px;">
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="p1-date">
+      </div>
+    </div>
+
+    <!-- SALES SECTION -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <span style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:1.5px;color:#2ecc71;">SALES ITEMS</span>
+        <button class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#2ecc71;border:1px solid rgba(26,122,74,0.5)" onclick="addSaleRow()">+ ADD SALE</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.1fr 85px 105px 115px auto;gap:6px;margin-bottom:4px;padding:0 2px;">
+        <span style="font-size:10px;color:var(--muted);letter-spacing:0.5px;">FISH NAME</span>
+        <span style="font-size:10px;color:var(--muted);">SUPPLIER / TYPE</span>
+        <span style="font-size:10px;color:#7ecfed;">QTY (KG)</span>
+        <span style="font-size:10px;color:#c9a84c;">RATE (₹)</span>
+        <span style="font-size:10px;color:#2ecc71;">AMOUNT (₹)</span>
+        <span></span>
+      </div>
+      <div id="sales-rows"></div>
+      <div style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#2ecc71;margin-top:8px;">
+        Total Sales: <strong id="sale-total-preview">₹0</strong>
+      </div>
+    </div>
+
+    <!-- EXPENSES SECTION -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <span style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:1.5px;color:#e74c3c;">EXPENSE ITEMS</span>
+        <button class="btn btn-sm" style="background:rgba(192,57,43,0.25);color:#e74c3c;border:1px solid rgba(192,57,43,0.5)" onclick="addExpenseRow()">+ ADD EXPENSE</button>
+      </div>
+      <div style="display:grid;grid-template-columns:130px 1fr 1fr 120px auto;gap:6px;margin-bottom:4px;padding:0 2px;">
+        <span style="font-size:10px;color:var(--muted);">CATEGORY</span>
+        <span style="font-size:10px;color:var(--muted);">NOTES (optional)</span>
+        <span style="font-size:10px;color:var(--muted);">SUPPLIER (optional)</span>
+        <span style="font-size:10px;color:#e74c3c;">AMOUNT (₹)</span>
+        <span></span>
+      </div>
+      <div id="expense-rows"></div>
+      <div style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#e74c3c;margin-top:8px;">
+        Total Expenses: <strong id="expense-total-preview">₹0</strong>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="addDailyRecord()">✓ SAVE DAILY RECORD</button>
+  </div>
+
+  <div class="stats-grid" id="p1-stats">
+    <div class="stat-card"><div class="stat-label">Total Sales</div><div class="stat-value" id="s1-sales">₹0</div></div>
+    <div class="stat-card"><div class="stat-label">Total Expenses</div><div class="stat-value red" id="s1-exp">₹0</div></div>
+    <div class="stat-card"><div class="stat-label">Net Profit</div><div class="stat-value green" id="s1-profit">₹0</div></div>
+    <div class="stat-card"><div class="stat-label">Total Records</div><div class="stat-value" id="s1-records">0</div></div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">
+      <div class="card-title" style="margin-bottom:0">Records Log</div>
+      <input type="month" id="p1-filter-month" onchange="renderP1Table()" style="width:180px; padding:8px 12px; font-size:14px;">
+    </div>
+    <div id="p1-records-container"></div>
+  </div>
+</div>
+
+<!-- ===== PAGE 2: SHAREHOLDER ATTENDANCE ===== -->
+<div class="page" id="page2">
+  <div class="page-title">👥 Shareholder Attendance</div>
+
+  <div class="card">
+    <div class="card-title">Record Attendance</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="p2-date">
+      </div>
+    </div>
+    <div class="card-title">Select Present Shareholders</div>
+    <div class="checkbox-grid" id="shareholder-checks"></div>
+    <br>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
+      <button class="btn btn-primary" onclick="saveAttendance()">✓ SAVE ATTENDANCE</button>
+      <button class="btn" style="background:rgba(30,107,138,0.3);color:#7ecfed;border:1px solid rgba(30,107,138,0.5)" onclick="selectAll()">SELECT ALL</button>
+      <button class="btn btn-danger" onclick="clearAll()">CLEAR ALL</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">
+      <div class="card-title" style="margin-bottom:0">Attendance Log</div>
+      <input type="month" id="p2-filter-month" onchange="renderP2Table()" style="width:180px; padding:8px 12px; font-size:14px;">
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Present Members</th>
+            <th>Count</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="p2-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 3: SHARE CALCULATION ===== -->
+<div class="page" id="page3">
+  <div class="page-title">📊 Share Calculation</div>
+
+  <div class="card">
+    <div class="card-title">Calculation Period</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Fishing Start Date</label>
+        <input type="date" id="p3-start">
+      </div>
+      <div class="form-group">
+        <label>Fishing End Date</label>
+        <input type="date" id="p3-end">
+      </div>
+      <div class="form-group">
+        <label style="color:var(--gold-light);">Settlement Date</label>
+        <input type="date" id="p3-settle-date" style="border-color:rgba(201,168,76,0.5);">
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="calculateShares()">⚡ CALCULATE SHARES</button>
+  </div>
+
+  <!-- Saved Periods Panel -->
+  <div class="card" id="p3-saved-periods-panel" style="border-color:rgba(201,168,76,0.2);">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+      <div class="card-title" style="margin-bottom:0">↩ Saved Period Settlements <span id="saved-period-count" style="font-size:11px;color:var(--muted);">(0 periods saved)</span></div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-sm" style="background:rgba(30,107,138,0.25);color:#7ecfed;border:1px solid rgba(30,107,138,0.5)" onclick="toggleSavedPeriods()">▼ SHOW / HIDE</button>
+        <button class="btn btn-danger btn-sm" onclick="clearSavedPeriods()">✕ CLEAR ALL</button>
+      </div>
+    </div>
+    <div id="saved-periods-list" style="display:none;margin-top:14px;">
+      <p style="color:var(--muted);font-size:13px;font-style:italic;">No saved periods yet. Calculate a period to save it.</p>
+    </div>
+  </div>
+
+  <div id="p3-results" style="display:none">
+    <div class="stats-grid" id="p3-stats"></div>
+
+    <div class="card">
+      <div class="card-title">Daily Breakdown</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Sales (₹)</th>
+              <th>Expense Ratio</th>
+              <th>Alloc. Expense (₹)</th>
+              <th>Profit (₹)</th>
+              <th>Shareholders</th>
+              <th>Share/Person (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="p3-daily-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Shareholder Distribution</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Shareholder</th>
+              <th>Days Present</th>
+              <th>Total Share (₹)</th>
+              <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody id="p3-share-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FINAL PAYMENT SECTION -->
+    <div class="card" style="border-color:rgba(46,204,113,0.35);box-shadow:0 0 20px rgba(46,204,113,0.08);">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+        <div>
+          <div class="card-title" style="margin-bottom:4px;">💳 Final Payment — Net Payable</div>
+          <div style="font-size:12px;color:var(--muted);">Share Earned − Advances Taken = Net Payable</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <div class="form-group" style="margin:0;flex-direction:row;align-items:center;gap:8px;">
+            <label style="font-size:12px;white-space:nowrap;margin:0;">Advances up to:</label>
+            <input type="date" id="fp-settle-date" style="padding:6px 10px;font-size:13px;width:160px;">
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="calculateFinalPayment()">⚡ CALCULATE PAYMENT</button>
+          <button id="fp-export-btn" class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#52d48a;border:1px solid rgba(26,122,74,0.5);display:none" onclick="exportFinalPaymentPDF()">⬇ EXPORT PDF</button>
+        </div>
+      </div>
+
+      <div id="fp-results" style="display:none;">
+        <!-- Summary stats -->
+        <div id="fp-stats" class="stats-grid" style="margin-bottom:16px;"></div>
+
+        <!-- Payment table -->
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Shareholder</th>
+                <th>Days</th>
+                <th>Share Earned (₹)</th>
+                <th>Advances Taken (₹)</th>
+                <th>Net Payable (₹)</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="fp-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP SETTLEMENT PANEL -->
+    <div class="card" style="border-color:rgba(201,168,76,0.35);">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <div class="card-title" style="margin-bottom:0;">👥 Group Settlement — Select Shareholders</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-sm" style="background:rgba(201,168,76,0.2);color:var(--gold-light);border:1px solid rgba(201,168,76,0.4)" onclick="groupSelectOwner()" title="Select all owner shares">⚓ OWNER GROUP</button>
+          <button class="btn btn-sm" style="background:rgba(26,122,74,0.2);color:#52d48a;border:1px solid rgba(26,122,74,0.4)" onclick="groupSelectAll()">✓ ALL</button>
+          <button class="btn btn-sm btn-danger" onclick="groupClearAll()">✕ CLEAR</button>
+          <button class="btn btn-primary btn-sm" onclick="calculateGroup()">⚡ CALCULATE GROUP</button>
+        </div>
+      </div>
+      <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:6px;padding:8px 12px;margin-bottom:12px;font-size:12px;color:var(--muted);">
+        💡 Click <strong style="color:var(--gold-light);">⚓ OWNER GROUP</strong> to pre-select all owner shares — then freely <strong style="color:var(--text);">tick or untick</strong> any checkbox to customise before calculating.
+      </div>
+      <div id="group-checkbox-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-bottom:16px;"></div>
+
+      <div id="group-results" style="display:none;">
+        <div id="group-stats" class="stats-grid" style="margin-bottom:16px;"></div>
+        <div id="group-label-banner" style="display:none;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:10px 16px;margin-bottom:12px;font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:1px;"></div>
+        <div class="table-wrap" style="margin-bottom:12px;">
+          <table>
+            <thead>
+              <tr>
+                <th>Shareholder</th>
+                <th>Days</th>
+                <th>Share Earned (₹)</th>
+              </tr>
+            </thead>
+            <tbody id="group-tbody"></tbody>
+          </table>
+        </div>
+        <button class="btn btn-primary" onclick="exportGroupPDF()">⬇ EXPORT GROUP PDF</button>
+      </div>
+    </div>
+
+    <!-- INDIVIDUAL SHAREHOLDER DETAIL PANEL -->
+    <div class="card" id="p3-individual-panel" style="display:none; border-color: var(--gold); box-shadow: 0 0 30px rgba(201,168,76,0.15);">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+        <div>
+          <div style="font-family:'Cinzel',serif; font-size:18px; color:var(--gold); letter-spacing:2px;" id="ind-name"></div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;" id="ind-period"></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-primary btn-sm" onclick="exportToPDF()">⬇ EXPORT PDF</button>
+          <button class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#52d48a;border:1px solid rgba(26,122,74,0.5);" onclick="exportToCSV()">⬇ EXPORT CSV (Excel)</button>
+          <button class="btn btn-danger btn-sm" onclick="closeIndividual()">✕ CLOSE</button>
+        </div>
+      </div>
+
+      <!-- Individual Summary Stats -->
+      <div class="stats-grid" id="ind-stats" style="margin-bottom:20px;"></div>
+
+      <!-- Per Date Share Table -->
+      <div class="card-title" style="margin-bottom:10px;">📅 Date-wise Share Earned</div>
+      <div class="table-wrap" style="margin-bottom:20px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th style="text-align:right">Share Earned (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="ind-daily-tbody"></tbody>
+        </table>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 4: ADVANCES & PAYMENTS ===== -->
+<div class="page" id="page4">
+  <div class="page-title">💰 Advances & Payments</div>
+
+  <div class="card">
+    <div class="card-title">Record Payment / Advance</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Shareholder</label>
+        <select id="p4-member">
+          <option value="">— Select Member —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="p4-date">
+      </div>
+      <div class="form-group">
+        <label>Amount (₹)</label>
+        <input type="number" id="p4-amount" placeholder="0.00" min="0">
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <input type="text" id="p4-notes" placeholder="Reason...">
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="addPayment()">+ ADD PAYMENT</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Payment Summary by Member</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Shareholder</th>
+            <th>Total Paid (₹)</th>
+          </tr>
+        </thead>
+        <tbody id="p4-summary-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ADVANCE STATEMENT SECTION -->
+  <div class="card" style="border-color:rgba(201,168,76,0.3);">
+    <div class="card-title">📋 Advance Statement by Date Range</div>
+    <div class="form-row" style="align-items:flex-end;gap:12px;flex-wrap:wrap;">
+      <div class="form-group">
+        <label>Shareholder</label>
+        <select id="adv-stmt-member" style="min-width:180px;">
+          <option value="">— All Members —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>From Date</label>
+        <input type="date" id="adv-stmt-from">
+      </div>
+      <div class="form-group">
+        <label>To Date</label>
+        <input type="date" id="adv-stmt-to">
+      </div>
+      <div class="form-group" style="justify-content:flex-end;">
+        <button class="btn btn-primary" onclick="generateAdvStmt()">🔍 GENERATE STATEMENT</button>
+      </div>
+    </div>
+
+    <div id="adv-stmt-results" style="display:none;margin-top:16px;">
+      <!-- Summary stats -->
+      <div id="adv-stmt-stats" class="stats-grid" style="margin-bottom:16px;"></div>
+
+      <!-- Details table -->
+      <div class="table-wrap" style="margin-bottom:16px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Shareholder</th>
+              <th>Amount (₹)</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="adv-stmt-tbody"></tbody>
+        </table>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;">
+        <button class="btn btn-primary" onclick="exportAdvStmtPDF()">⬇ EXPORT PDF</button>
+        <button class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#52d48a;border:1px solid rgba(26,122,74,0.5);" onclick="exportAdvStmtCSV()">⬇ EXPORT CSV (Excel)</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">
+      <div class="card-title" style="margin-bottom:0">All Transactions</div>
+      <select id="p4-filter-member" onchange="renderP4Table()" style="width:200px;padding:8px 12px;font-size:14px;">
+        <option value="">All Members</option>
+      </select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Shareholder</th>
+            <th>Type</th>
+            <th>Amount (₹)</th>
+            <th>Notes</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="p4-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- EDIT MODAL: Daily Record (multi-item) -->
+<div class="modal-overlay" id="modal-daily">
+  <div class="modal" style="max-width:600px;max-height:90vh;overflow-y:auto;">
+    <div class="modal-title">✎ EDIT DAILY RECORD</div>
+    <input type="hidden" id="edit-daily-id">
+    <div class="form-group" style="margin-bottom:16px">
+      <label>Date</label>
+      <input type="date" id="edit-daily-date">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <span style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:1.5px;color:#2ecc71;">SALES ITEMS</span>
+        <button class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#2ecc71;border:1px solid rgba(26,122,74,0.5)" onclick="addEditSaleRow()">+ ADD</button>
+      </div>
+      <div id="edit-sales-rows"></div>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <span style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:1.5px;color:#e74c3c;">EXPENSE ITEMS</span>
+        <button class="btn btn-sm" style="background:rgba(192,57,43,0.25);color:#e74c3c;border:1px solid rgba(192,57,43,0.5)" onclick="addEditExpenseRow()">+ ADD</button>
+      </div>
+      <div id="edit-expense-rows"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('modal-daily')">CANCEL</button>
+      <button class="btn btn-primary" onclick="saveEditDaily()">✓ SAVE CHANGES</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL: Payment -->
+<div class="modal-overlay" id="modal-payment">
+  <div class="modal">
+    <div class="modal-title">✎ EDIT PAYMENT RECORD</div>
+    <input type="hidden" id="edit-pay-id">
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Shareholder</label>
+      <select id="edit-pay-member"></select>
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Date</label>
+      <input type="date" id="edit-pay-date">
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Amount (₹)</label>
+      <input type="number" id="edit-pay-amount" min="0">
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Notes</label>
+      <input type="text" id="edit-pay-notes" placeholder="Reason...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('modal-payment')">CANCEL</button>
+      <button class="btn btn-primary" onclick="saveEditPayment()">✓ SAVE CHANGES</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 5: FISH SALES & SUPPLIERS ===== -->
+<div class="page" id="page5">
+  <div class="page-title">🐟 Fish Sales & Supplier Ledger</div>
+
+  <!-- RECORD SALE -->
+  <div class="card">
+    <div class="card-title">Record Fish Sale</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="fs-date">
+      </div>
+      <div class="form-group">
+        <label>Supplier</label>
+        <select id="fs-supplier">
+          <option value="">— Select Supplier —</option>
+          <option>A Gift</option>
+          <option>MGM</option>
+          <option>Noori Fish</option>
+          <option>Mansoori</option>
+          <option>AFF</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Fish Qty (kg)</label>
+        <input type="number" id="fs-qty" placeholder="0.00" min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label>Sale Amount (₹)</label>
+        <input type="number" id="fs-amount" placeholder="0.00" min="0">
+      </div>
+      <div class="form-group">
+        <label>Payment Type</label>
+        <select id="fs-pay-type">
+          <option value="credit">Credit (Pay Later)</option>
+          <option value="cash">Cash (Paid Now)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <input type="text" id="fs-notes" placeholder="Optional...">
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="addFishSale()">+ ADD SALE</button>
+  </div>
+
+  <!-- RECORD PAYMENT RECEIVED -->
+  <div class="card">
+    <div class="card-title">Record Payment Received from Supplier</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="fp2-date">
+      </div>
+      <div class="form-group">
+        <label>Supplier</label>
+        <select id="fp2-supplier">
+          <option value="">— Select Supplier —</option>
+          <option>Local</option>
+          <option>Auction</option>
+          <option>A Gift</option>
+          <option>MGM</option>
+          <option>Noori Fish</option>
+          <option>Mansoori</option>
+          <option>AFF</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Amount Received (₹)</label>
+        <input type="number" id="fp2-amount" placeholder="0.00" min="0">
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <input type="text" id="fp2-notes" placeholder="Optional...">
+      </div>
+    </div>
+    <button class="btn btn-primary" style="background:rgba(26,122,74,0.3);border-color:rgba(26,122,74,0.6);" onclick="addSupplierPayment()">+ RECORD PAYMENT RECEIVED</button>
+  </div>
+
+  <!-- SUPPLIER SUMMARY CARDS -->
+  <div class="card">
+    <div class="card-title">Supplier Balance Summary</div>
+    <div id="fs-supplier-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;"></div>
+  </div>
+
+  <!-- SUPPLIER LEDGER BY DATE RANGE -->
+  <div class="card" style="border-color:rgba(201,168,76,0.3);">
+    <div class="card-title">📋 Supplier Ledger — Date Range Statement</div>
+    <div class="form-row" style="align-items:flex-end;gap:12px;flex-wrap:wrap;">
+      <div class="form-group">
+        <label>Supplier</label>
+        <select id="fs-ledger-supplier" style="min-width:160px;">
+          <option value="">— All Suppliers —</option>
+          <option>Local</option>
+          <option>Auction</option>
+          <option>A Gift</option>
+          <option>MGM</option>
+          <option>Noori Fish</option>
+          <option>Mansoori</option>
+          <option>AFF</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>From Date</label>
+        <input type="date" id="fs-ledger-from">
+      </div>
+      <div class="form-group">
+        <label>To Date</label>
+        <input type="date" id="fs-ledger-to">
+      </div>
+      <div class="form-group" style="justify-content:flex-end;">
+        <button class="btn btn-primary" onclick="generateSupplierLedger()">🔍 GENERATE LEDGER</button>
+      </div>
+    </div>
+
+    <div id="fs-ledger-results" style="display:none;margin-top:16px;">
+      <div id="fs-ledger-stats" class="stats-grid" style="margin-bottom:16px;"></div>
+
+      <!-- Sales table -->
+      <div class="card-title" style="margin-bottom:8px;font-size:13px;">🐟 Fish Sales</div>
+      <div class="table-wrap" style="margin-bottom:16px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Supplier</th>
+              <th>Sale Type</th>
+              <th>Qty (kg)</th>
+              <th style="text-align:right">Amount (₹)</th>
+              <th>Payment</th>
+              <th>Notes</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="fs-ledger-sales-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- Payments table -->
+      <div class="card-title" style="margin-bottom:8px;font-size:13px;">💰 Payments Received</div>
+      <div class="table-wrap" style="margin-bottom:16px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Supplier</th>
+              <th style="text-align:right">Amount Received (₹)</th>
+              <th>Notes</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="fs-ledger-pay-tbody"></tbody>
+        </table>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="exportSupplierLedgerPDF()">⬇ EXPORT PDF</button>
+        <button class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#52d48a;border:1px solid rgba(26,122,74,0.5);" onclick="exportSupplierLedgerCSV()">⬇ EXPORT CSV (Excel)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALL TRANSACTIONS -->
+  <div class="card">
+    <div class="section-header">
+      <div class="card-title" style="margin-bottom:0">All Fish Sale Transactions</div>
+      <select id="fs-filter-supplier" onchange="renderFSTable()" style="width:180px;padding:8px 12px;font-size:14px;">
+        <option value="">All Suppliers</option>
+        <option>Local</option>
+        <option>Auction</option>
+        <option>A Gift</option>
+        <option>MGM</option>
+        <option>Noori Fish</option>
+        <option>Mansoori</option>
+        <option>AFF</option>
+      </select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Supplier</th>
+            <th>Sale Type</th>
+            <th>Qty (kg)</th>
+            <th style="text-align:right">Amount (₹)</th>
+            <th>Payment</th>
+            <th>Notes</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="fs-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== SMART CALCULATOR ===== -->
+<div id="calc-modal" style="display:none;position:fixed;bottom:70px;right:24px;z-index:99997;
+  background:#0d1f35;border:1px solid rgba(201,168,76,0.4);border-radius:16px;
+  box-shadow:0 8px 40px rgba(0,0,0,0.6);width:340px;overflow:hidden;">
+
+  <!-- Header -->
+  <div style="background:rgba(201,168,76,0.12);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(201,168,76,0.2);">
+    <span style="font-family:'Cinzel',serif;font-size:12px;color:var(--gold);letter-spacing:1px;">🧮 SMART CALCULATOR</span>
+    <button onclick="toggleCalculator()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;padding:0 4px;">✕</button>
+  </div>
+
+  <!-- Input -->
+  <div style="padding:14px 16px 10px;">
+    <div style="font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:0.5px;">Type any expression — result shows instantly</div>
+    <input id="calc-input" type="text" placeholder="e.g. 36 * 80 + 500 - 200"
+      autocomplete="off" autocorrect="off" spellcheck="false"
+      style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.4);
+        border-radius:8px;padding:12px 14px;color:#fff;font-size:18px;outline:none;
+        font-family:Arial,sans-serif;letter-spacing:0.5px;"
+      oninput="calcEval()" onkeydown="if(event.key==='Escape')toggleCalculator()">
+
+    <!-- Result -->
+    <div id="calc-result" style="margin-top:10px;text-align:right;min-height:44px;padding:10px 14px;
+      background:rgba(255,255,255,0.04);border-radius:8px;border:1px solid rgba(255,255,255,0.06);">
+      <div id="calc-result-label" style="font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;text-transform:uppercase;"></div>
+      <div id="calc-result-value" style="font-size:28px;font-weight:700;color:#c9a84c;">—</div>
+    </div>
+
+    <!-- History -->
+    <div id="calc-history" style="margin-top:10px;max-height:140px;overflow-y:auto;"></div>
+
+    <!-- Hint -->
+    <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,0.2);text-align:center;letter-spacing:0.5px;">
+      Use + − * / ( ) for calculations &nbsp;·&nbsp; Press Enter to save to history
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const SHAREHOLDERS = [
+  'Azim','Taasir','Maqsood','Ittifaque','Zubair','Sufiyan',
+  'IrfanW','IrfanS','Shafi','Riyaz','Salim','Maqbool','Maazin',
+  'Sagir','Parvez','Tandel 1','Tandel 2','Owner',
+  'Al Muhammad Boat','Al Muhammad Boat Engine',
+  'Al Bahar Boat','Al Bahar Boat Engine',
+  'Maryam Boat','Maryam Boat Engine',
+  'Safiya Boat','Safiya Boat Engine',
+  'Net A 1','Net A 2','Net R 1','Net R 2',
+  'Dhanda 1','Dhanda 2'
+];
+
+// Storage keys
+const KEY_DAILY = 'aafb_daily';
+const KEY_ATTEND = 'aafb_attend';
+const KEY_PAYMENT = 'aafb_payment';
+const KEY_PERIODS  = 'aafb_periods';
+const KEY_FISHSALES = 'aafb_fishsales';
+const KEY_SUPPAY    = 'aafb_suppay';
+
+function load(key) {
+  try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; }
+}
+function save(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+  scheduleAutoSave();
+}
+
+let dailyRecords = load(KEY_DAILY);
+let attendanceRecords = load(KEY_ATTEND);
+let paymentRecords = load(KEY_PAYMENT);
+let savedPeriods  = load(KEY_PERIODS);
+let fishSales     = load(KEY_FISHSALES); // [{id,date,supplier,saleType,qty,amount,payType,notes}]
+let supplierPays  = load(KEY_SUPPAY);    // [{id,date,supplier,amount,notes}]
+
+// ===== UTILITIES =====
+function fmt(n) {
+  if (n === undefined || n === null || isNaN(n)) return '₹0';
+  return '₹' + Number(n).toLocaleString('en-IN', {maximumFractionDigits: 2});
+}
+
+function fmtDate(dateStr) {
+  if (!dateStr) return '—';
+  // Convert YYYY-MM-DD to DD-MM-YYYY
+  const parts = dateStr.split('-');
+  if (parts.length === 3) return parts[2] + '-' + parts[1] + '-' + parts[0];
+  return dateStr;
+}
+
+function today() {
+  return new Date().toISOString().split('T')[0];
+}
+
+function showPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page' + n).classList.add('active');
+  document.querySelectorAll('.nav-btn')[n-1].classList.add('active');
+  if (n === 1) renderP1Table();
+  if (n === 2) renderP2Table();
+  if (n === 3) renderSavedPeriods();
+  if (n === 4) { renderP4Table(); renderP4Summary(); initAdvStmtDropdown();
+  document.getElementById('fs-date').value = today();
+  document.getElementById('fp2-date').value = today();
+  renderFSTable();
+  renderSupplierCards(); }
+  if (n === 5) { renderFSTable(); renderSupplierCards(); }
+}
+
+// ===== PAGE 1 =====
+document.getElementById('p1-date').value = today();
+
+// ---- Dynamic row builders ----
+function makeSaleSupplierOptions(selected) {
+  return ['','Local','Auction','A Gift','MGM','Noori Fish','Mansoori','AFF']
+    .map(function(s) {
+      const val = s;
+      const label = s === '' ? '— Select —' : s;
+      const sel = selected && selected === val ? 'selected' : '';
+      return '<option value="' + val + '" ' + sel + '>' + label + '</option>';
+    }).join('');
+}
+
+function makeItemRow(containerId, type) {
+  const container = document.getElementById(containerId);
+  const rowId = Date.now() + Math.random();
+  const color = type === 'sale' ? '#2ecc71' : '#e74c3c';
+  const div = document.createElement('div');
+  div.dataset.rowid = rowId;
+
+  if (type === 'sale') {
+    // Rich sale row: fish name | supplier | sale type | qty | rate | amount (auto) | delete
+    div.style.cssText = 'display:grid;grid-template-columns:1.4fr 1.1fr 85px 105px 115px auto;gap:6px;margin-bottom:8px;align-items:center;';
+    div.innerHTML =
+      '<input type="text" placeholder="Fish name" data-field="fishname"' +
+      ' style="background:rgba(10,22,40,0.8);border:1px solid rgba(26,122,74,0.4);border-radius:6px;padding:8px 10px;color:var(--white);font-size:14px;width:100%"' +
+      ' oninput="updatePreview()">' +
+      '<select data-field="supplier"' +
+      ' style="background:rgba(10,22,40,0.9);border:1px solid rgba(26,122,74,0.4);border-radius:6px;padding:8px 8px;color:var(--white);font-size:13px;width:100%"' +
+      ' onchange="updatePreview()">' +
+      makeSaleSupplierOptions() +
+      '</select>' +
+      '<input type="number" placeholder="Qty kg" min="0" step="0.01" data-field="qty"' +
+      ' style="background:rgba(10,22,40,0.8);border:1px solid rgba(26,122,74,0.4);border-radius:6px;padding:8px 8px;color:#7ecfed;font-size:14px;width:100%"' +
+      ' oninput="calcSaleRowAmount(this);updatePreview()">' +
+      '<input type="number" placeholder="Rate ₹" min="0" data-field="rate"' +
+      ' style="background:rgba(10,22,40,0.8);border:1px solid rgba(26,122,74,0.4);border-radius:6px;padding:8px 8px;color:#c9a84c;font-size:14px;width:100%"' +
+      ' oninput="calcSaleRowAmount(this);updatePreview()">' +
+      '<input type="number" placeholder="₹ Amount" min="0" data-field="amount"' +
+      ' style="background:rgba(10,22,40,0.8);border:1px solid rgba(26,122,74,0.4);border-radius:6px;padding:8px 8px;color:#2ecc71;font-size:14px;font-weight:700;width:100%"' +
+      ' oninput="updatePreview()">' +
+      '<button onclick="this.closest(\'[data-rowid]\').remove();updatePreview();"' +
+      ' style="background:rgba(192,57,43,0.2);color:#e74c3c;border:1px solid rgba(192,57,43,0.4);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:13px;">\u2715</button>';
+  } else {
+    // Expense row: category dropdown + custom text + supplier + amount
+    div.style.cssText = 'display:grid;grid-template-columns:130px 1fr 1fr 120px auto;gap:6px;margin-bottom:8px;align-items:center;';
+    const expCatOpts = ['Petrol','Ice','Waqti','Tractor','Engine Oil','2T Oil','Bhatta','Nashta','Dinner','Lunch','Water','Cold Drink','Other']
+      .map(c => '<option value="' + c + '">' + c + '</option>').join('');
+    const expSupOpts = ['','A Gift','MGM','Noori Fish','Mansoori','AFF']
+      .map(s => '<option value="' + s + '">' + (s||'— No Supplier —') + '</option>').join('');
+    div.innerHTML =
+      '<select data-field="expcat" onchange="updateExpCatLabel(this);updatePreview();"' +
+      ' style="background:rgba(10,22,40,0.9);border:1px solid rgba(192,57,43,0.4);border-radius:6px;padding:8px 8px;color:#e74c3c;font-size:13px;width:100%">' +
+      expCatOpts + '</select>' +
+      '<input type="text" data-field="expnotes" placeholder="Custom notes (optional)"' +
+      ' style="background:rgba(10,22,40,0.8);border:1px solid rgba(192,57,43,0.3);border-radius:6px;padding:8px 10px;color:var(--white);font-size:13px;width:100%"' +
+      ' oninput="updatePreview()">' +
+      '<select data-field="expsupplier" onchange="updatePreview();"' +
+      ' style="background:rgba(10,22,40,0.9);border:1px solid rgba(192,57,43,0.3);border-radius:6px;padding:8px 8px;color:var(--muted);font-size:13px;width:100%">' +
+      expSupOpts + '</select>' +
+      '<input type="number" data-field="expamount" placeholder="₹ Amount" min="0"' +
+      ' style="background:rgba(10,22,40,0.8);border:1px solid rgba(192,57,43,0.4);border-radius:6px;padding:8px 10px;color:#e74c3c;font-size:14px;font-weight:700;width:100%"' +
+      ' oninput="updatePreview()">' +
+      '<button onclick="this.closest(\'[data-rowid]\').remove();updatePreview();"' +
+      ' style="background:rgba(192,57,43,0.2);color:#e74c3c;border:1px solid rgba(192,57,43,0.4);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:13px;">\u2715</button>';
+  }
+  container.appendChild(div);
+  updatePreview();
+}
+
+function updateExpCatLabel(sel) {
+  // Nothing extra needed — just triggers updatePreview
+}
+
+function calcSaleRowAmount(input) {
+  const row = input.closest('[data-rowid]');
+  const qty  = parseFloat(row.querySelector('[data-field="qty"]').value) || 0;
+  const rate = parseFloat(row.querySelector('[data-field="rate"]').value) || 0;
+  if (qty > 0 && rate > 0) {
+    row.querySelector('[data-field="amount"]').value = (qty * rate).toFixed(2);
+  }
+}
+
+function makeEditItemRow(containerId, notes, amount, type) {
+  const container = document.getElementById(containerId);
+  const rowId = Date.now() + Math.random();
+  const color = type === 'sale' ? '#2ecc71' : '#e74c3c';
+  const div = document.createElement('div');
+  div.dataset.rowid = rowId;
+  div.style.cssText = 'display:grid;grid-template-columns:1fr 140px auto;gap:8px;margin-bottom:8px;align-items:center;';
+  div.innerHTML = `
+    <input type="text" value="${notes || ''}" placeholder="${type === 'sale' ? 'Sale description...' : 'Expense description...'}"
+      style="background:rgba(10,22,40,0.8);border:1px solid ${type==='sale'?'rgba(26,122,74,0.4)':'rgba(192,57,43,0.4)'};border-radius:6px;padding:8px 12px;color:var(--white);font-size:15px;width:100%">
+    <input type="number" value="${amount || ''}" placeholder="₹ Amount" min="0"
+      style="background:rgba(10,22,40,0.8);border:1px solid ${type==='sale'?'rgba(26,122,74,0.4)':'rgba(192,57,43,0.4)'};border-radius:6px;padding:8px 12px;color:${color};font-size:15px;width:100%">
+    <button onclick="this.closest('[data-rowid]').remove();"
+      style="background:rgba(192,57,43,0.2);color:#e74c3c;border:1px solid rgba(192,57,43,0.4);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:13px;white-space:nowrap">✕</button>
+  `;
+  container.appendChild(div);
+}
+
+function addSaleRow()    { makeItemRow('sales-rows', 'sale'); }
+function addExpenseRow() { makeItemRow('expense-rows', 'expense'); }
+function addEditSaleRow()    { makeEditItemRow('edit-sales-rows', '', '', 'sale'); }
+function addEditExpenseRow() { makeEditItemRow('edit-expense-rows', '', '', 'expense'); }
+
+function updatePreview() {
+  let sTotal = 0, eTotal = 0;
+  document.querySelectorAll('#sales-rows [data-rowid]').forEach(row => {
+    const amtField = row.querySelector('[data-field="amount"]');
+    sTotal += parseFloat(amtField ? amtField.value : row.querySelectorAll('input')[1].value) || 0;
+  });
+  document.querySelectorAll('#expense-rows [data-rowid]').forEach(row => {
+    const amtEl = row.querySelector('[data-field="expamount"]');
+    eTotal += parseFloat(amtEl ? amtEl.value : (row.querySelectorAll('input')[1] ? row.querySelectorAll('input')[1].value : 0)) || 0;
+  });
+  document.getElementById('sale-total-preview').textContent = fmt(sTotal);
+  document.getElementById('expense-total-preview').textContent = fmt(eTotal);
+}
+
+function getItemsFromRows(containerId) {
+  const items = [];
+  const isSale = containerId === 'sales-rows';
+  document.querySelectorAll('#' + containerId + ' [data-rowid]').forEach(row => {
+    if (isSale) {
+      const fishname    = (row.querySelector('[data-field="fishname"]') ? row.querySelector('[data-field="fishname"]').value.trim() : '');
+      const supplierVal = (row.querySelector('[data-field="supplier"]') ? row.querySelector('[data-field="supplier"]').value : '');
+      const supplier    = supplierVal;
+      const saletype    = (supplierVal === 'Local' || supplierVal === 'Auction') ? supplierVal.toLowerCase() : 'supplier';
+      const qty      = parseFloat(row.querySelector('[data-field="qty"]') ? row.querySelector('[data-field="qty"]').value : 0) || 0;
+      const rate     = parseFloat(row.querySelector('[data-field="rate"]') ? row.querySelector('[data-field="rate"]').value : 0) || 0;
+      const amount   = parseFloat(row.querySelector('[data-field="amount"]') ? row.querySelector('[data-field="amount"]').value : 0) || 0;
+      if (amount > 0 || fishname) items.push({ notes: fishname, fishname, supplier, saletype, qty, rate, amount });
+    } else {
+      const catEl  = row.querySelector('[data-field="expcat"]');
+      const notesEl = row.querySelector('[data-field="expnotes"]');
+      const supEl  = row.querySelector('[data-field="expsupplier"]');
+      const amtEl  = row.querySelector('[data-field="expamount"]');
+      // Fallback for old-style rows (edit modal)
+      const inputs = row.querySelectorAll('input');
+      const cat    = catEl ? catEl.value : '';
+      const custom = notesEl ? notesEl.value.trim() : (inputs[0] ? inputs[0].value.trim() : '');
+      const expSupplier = supEl ? supEl.value : '';
+      const notes  = cat ? (custom ? cat + ': ' + custom : cat) : custom;
+      const amount = amtEl ? (parseFloat(amtEl.value) || 0) : (parseFloat(inputs[1] ? inputs[1].value : 0) || 0);
+      if (amount > 0 || notes) items.push({ notes, cat, custom, expSupplier, amount });
+    }
+  });
+  return items;
+}
+
+function addDailyRecord() {
+  const date = document.getElementById('p1-date').value;
+  if (!date) { alert('Please select a date.'); return; }
+
+  const saleItems    = getItemsFromRows('sales-rows');
+  const expenseItems = getItemsFromRows('expense-rows');
+
+  if (saleItems.length === 0 && expenseItems.length === 0) {
+    alert('Please add at least one sale or expense item.'); return;
+  }
+
+  const totalSales   = saleItems.reduce((s, i) => s + i.amount, 0);
+  const totalExpense = expenseItems.reduce((s, i) => s + i.amount, 0);
+
+  const existing = dailyRecords.findIndex(r => r.date === date);
+  if (existing >= 0) {
+    if (!confirm('Record for this date exists. Replace?')) return;
+    dailyRecords.splice(existing, 1);
+  }
+
+  const recId = Date.now();
+  dailyRecords.push({ id: recId, date, sales: totalSales, expense: totalExpense, saleItems, expenseItems });
+  dailyRecords.sort((a,b) => a.date.localeCompare(b.date));
+  save(KEY_DAILY, dailyRecords);
+
+  // Auto-sync supplier sales to Fish Sales page (skip Local/Auction — those aren't supplier sales)
+  saleItems.forEach(function(item) {
+    if (item.supplier && item.supplier !== 'Local' && item.supplier !== 'Auction') {
+      fishSales.push({
+        id: Date.now() + Math.random(),
+        date, supplier: item.supplier,
+        saleType: 'supplier',
+        qty: item.qty || 0,
+        rate: item.rate || 0,
+        amount: item.amount,
+        payType: 'credit', // default — can change in Fish Sales page
+        notes: item.fishname || item.notes || '',
+        fromDaily: true, // flag: came from daily record
+        dailyRecId: recId
+      });
+    }
+  });
+  fishSales.sort((a,b) => a.date.localeCompare(b.date));
+  save(KEY_FISHSALES, fishSales);
+
+  // Auto-sync supplier-related expenses to supplier payments (debit from supplier balance)
+  expenseItems.forEach(function(item) {
+    if (item.expSupplier) {
+      supplierPays.push({
+        id: Date.now() + Math.random(),
+        date, supplier: item.expSupplier,
+        amount: item.amount,
+        notes: item.notes || '',
+        fromDaily: true,
+        isExpense: true
+      });
+    }
+  });
+  supplierPays.sort((a,b) => a.date.localeCompare(b.date));
+  save(KEY_SUPPAY, supplierPays);
+
+  document.getElementById('sales-rows').innerHTML = '';
+  document.getElementById('expense-rows').innerHTML = '';
+  updatePreview();
+  renderP1Table();
+  renderSupplierCards();
+}
+
+function deleteDailyRecord(id) {
+  if (!confirm('Delete this record?')) return;
+  dailyRecords = dailyRecords.filter(r => r.id !== id);
+  save(KEY_DAILY, dailyRecords);
+  renderP1Table();
+}
+
+function renderP1Table() {
+  const filter = document.getElementById('p1-filter-month').value;
+  let data = dailyRecords;
+  if (filter) data = data.filter(r => r.date.startsWith(filter));
+
+  const container = document.getElementById('p1-records-container');
+  container.innerHTML = '';
+
+  let grandSales = 0, grandExp = 0;
+
+  data.forEach(r => {
+    const totalSales   = r.sales || 0;
+    const totalExpense = r.expense || 0;
+    const profit       = totalSales - totalExpense;
+    grandSales += totalSales;
+    grandExp   += totalExpense;
+
+    const saleItems    = r.saleItems    || (totalSales   > 0 ? [{ notes: r.notes || '—', amount: totalSales }]   : []);
+    const expenseItems = r.expenseItems || (totalExpense > 0 ? [{ notes: r.notes || '—', amount: totalExpense }] : []);
+
+    const saleRows = saleItems.map(i => {
+      const detail = [
+        i.fishname || i.notes || '—',
+        i.supplier ? `<span style="background:rgba(201,168,76,0.15);color:#c9a84c;padding:1px 6px;border-radius:3px;font-size:11px;">${i.supplier}</span>` : '',
+        i.qty ? `${i.qty}kg` : '',
+        i.rate ? `@₹${i.rate}` : ''
+      ].filter(Boolean).join(' ');
+      return `<tr>
+        <td style="padding:6px 12px;border-bottom:1px dashed rgba(201,168,76,0.06);color:var(--muted);font-size:13px;">${detail}</td>
+        <td style="padding:6px 12px;border-bottom:1px dashed rgba(201,168,76,0.06);color:#2ecc71;font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:right">${fmt(i.amount)}</td>
+      </tr>`;
+    }).join('');
+
+    const expRows = expenseItems.map(i => {
+      const supTag = i.expSupplier ? '<span style="background:rgba(201,168,76,0.15);color:#c9a84c;padding:1px 6px;border-radius:3px;font-size:11px;margin-left:4px;">' + i.expSupplier + '</span>' : '';
+      return '<tr>' +
+        '<td style="padding:6px 12px;border-bottom:1px dashed rgba(201,168,76,0.06);color:var(--muted);font-size:13px;">' + (i.notes || '—') + supTag + '</td>' +
+        '<td style="padding:6px 12px;border-bottom:1px dashed rgba(201,168,76,0.06);color:#e74c3c;font-family:Arial,sans-serif;font-size:13px;text-align:right">' + fmt(i.amount) + '</td>' +
+        '</tr>';
+    }).join('');
+
+    const card = document.createElement('div');
+    card.style.cssText = 'background:rgba(10,22,40,0.5);border:1px solid rgba(201,168,76,0.2);border-radius:10px;margin-bottom:14px;overflow:hidden;';
+    card.innerHTML = `
+      <!-- Record Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(201,168,76,0.08);border-bottom:1px solid rgba(201,168,76,0.15);flex-wrap:wrap;gap:8px;">
+        <span style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:1px;">⚓ ${fmtDate(r.date)}</span>
+        <div style="display:flex;gap:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;">
+          <span style="color:#2ecc71">Sales: ${fmt(totalSales)}</span>
+          <span style="color:#e74c3c">Exp: ${fmt(totalExpense)}</span>
+          <span style="color:${profit>=0?'#2ecc71':'#e74c3c'}">Profit: ${profit<0?'-':''}${fmt(Math.abs(profit))}</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-edit btn-sm" onclick="editDailyRecord(${r.id})">✎ EDIT</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteDailyRecord(${r.id})">✕ DEL</button>
+        </div>
+      </div>
+      <!-- Detail Tables -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+        <div style="border-right:1px solid rgba(201,168,76,0.1);">
+          <div style="padding:8px 12px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:#2ecc71;background:rgba(26,122,74,0.08);">SALES</div>
+          <table style="width:100%;border-collapse:collapse;">${saleRows}
+            <tr><td colspan="2" style="padding:6px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#2ecc71;text-align:right;font-weight:600;border-top:1px solid rgba(26,122,74,0.2);">Total: ${fmt(totalSales)}</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="padding:8px 12px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:#e74c3c;background:rgba(192,57,43,0.08);">EXPENSES</div>
+          <table style="width:100%;border-collapse:collapse;">${expRows}
+            <tr><td colspan="2" style="padding:6px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#e74c3c;text-align:right;font-weight:600;border-top:1px solid rgba(192,57,43,0.2);">Total: ${fmt(totalExpense)}</td></tr>
+          </table>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Grand total bar
+  if (data.length > 0) {
+    const netProfit = grandSales - grandExp;
+    const bar = document.createElement('div');
+    bar.style.cssText = 'background:rgba(201,168,76,0.1);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:"IBM Plex Mono",monospace;font-size:13px;';
+    bar.innerHTML = `
+      <span style="color:var(--gold);font-family:'Cinzel',serif;letter-spacing:1.5px;font-size:12px;">PERIOD TOTAL</span>
+      <span style="color:#2ecc71">Sales: ${fmt(grandSales)}</span>
+      <span style="color:#e74c3c">Expenses: ${fmt(grandExp)}</span>
+      <span style="color:${netProfit>=0?'#2ecc71':'#e74c3c'}">Net Profit: ${netProfit<0?'-':''}${fmt(Math.abs(netProfit))}</span>
+    `;
+    container.appendChild(bar);
+  }
+
+  // Update stats cards (all records)
+  const allSales = dailyRecords.reduce((s, r) => s + (r.sales||0), 0);
+  const allExp   = dailyRecords.reduce((s, r) => s + (r.expense||0), 0);
+  document.getElementById('s1-sales').textContent  = fmt(allSales);
+  document.getElementById('s1-exp').textContent    = fmt(allExp);
+  document.getElementById('s1-profit').textContent = fmt(allSales - allExp);
+  document.getElementById('s1-records').textContent = dailyRecords.length;
+}
+
+// ===== PAGE 2 =====
+document.getElementById('p2-date').value = today();
+
+// Build checkboxes
+const grid = document.getElementById('shareholder-checks');
+SHAREHOLDERS.forEach(sh => {
+  const div = document.createElement('div');
+  div.className = 'checkbox-item';
+  div.dataset.name = sh;
+  div.innerHTML = `<input type="checkbox"><div class="check-box"></div><span>${sh}</span>`;
+  div.onclick = () => toggleCheck(div);
+  grid.appendChild(div);
+});
+
+function toggleCheck(div) {
+  div.classList.toggle('checked');
+  const cb = div.querySelector('.check-box');
+  cb.textContent = div.classList.contains('checked') ? '✓' : '';
+}
+
+function selectAll() {
+  document.querySelectorAll('.checkbox-item').forEach(d => {
+    d.classList.add('checked');
+    d.querySelector('.check-box').textContent = '✓';
+  });
+}
+
+function clearAll() {
+  document.querySelectorAll('.checkbox-item').forEach(d => {
+    d.classList.remove('checked');
+    d.querySelector('.check-box').textContent = '';
+  });
+}
+
+function saveAttendance() {
+  const date = document.getElementById('p2-date').value;
+  if (!date) { alert('Please select a date.'); return; }
+
+  const present = Array.from(document.querySelectorAll('.checkbox-item.checked')).map(d => d.dataset.name);
+  if (present.length === 0) { alert('Please select at least one shareholder.'); return; }
+
+  const existing = attendanceRecords.findIndex(r => r.date === date);
+  if (existing >= 0) {
+    if (!confirm('Attendance for this date exists. Replace?')) return;
+    attendanceRecords.splice(existing, 1);
+  }
+
+  attendanceRecords.push({ date, present });
+  attendanceRecords.sort((a,b) => a.date.localeCompare(b.date));
+  save(KEY_ATTEND, attendanceRecords);
+
+  clearAll();
+  renderP2Table();
+  alert('Attendance saved for ' + date);
+}
+
+function deleteAttendance(date) {
+  if (!confirm('Delete attendance for ' + date + '?')) return;
+  attendanceRecords = attendanceRecords.filter(r => r.date !== date);
+  save(KEY_ATTEND, attendanceRecords);
+  renderP2Table();
+}
+
+function loadAttendanceForEdit(date) {
+  const rec = attendanceRecords.find(r => r.date === date);
+  if (!rec) return;
+  document.getElementById('p2-date').value = date;
+  clearAll();
+  rec.present.forEach(name => {
+    const div = document.querySelector(`.checkbox-item[data-name="${name}"]`);
+    if (div) { div.classList.add('checked'); div.querySelector('.check-box').textContent = '✓'; }
+  });
+  window.scrollTo(0, 0);
+}
+
+function renderP2Table() {
+  const filter = document.getElementById('p2-filter-month').value;
+  let data = attendanceRecords;
+  if (filter) data = data.filter(r => r.date.startsWith(filter));
+
+  const tbody = document.getElementById('p2-tbody');
+  tbody.innerHTML = '';
+  data.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge badge-gold">${fmtDate(r.date)}</span></td>
+      <td style="font-size:13px;color:var(--muted)">${r.present.join(', ')}</td>
+      <td><span class="badge badge-green">${r.present.length}</span></td>
+      <td style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-sm" style="background:rgba(30,107,138,0.3);color:#7ecfed;border:1px solid rgba(30,107,138,0.5)" onclick="loadAttendanceForEdit('${r.date}')">✎ EDIT</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteAttendance('${r.date}')">✕ DEL</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ===== PAGE 3 =====
+let _p3DailyBreakdown = [];
+let _p3StartDate  = '';
+let _p3EndDate    = '';
+let _p3SettleDate = '';
+let _p3ShareMap   = {};
+
+// Set default settlement date to today
+document.addEventListener('DOMContentLoaded', function() {
+  const sd = document.getElementById('p3-settle-date');
+  if (sd) sd.value = today();
+});
+
+// Get the carry-forward balance for a member from all SAVED periods before startDate
+// Returns: positive = member owes us (excess advance), negative = we owe member (unpaid share)
+function getAdvanceCutoffDate(memberName, currentStartDate) {
+  // Find the latest settleDate from all saved periods that ended before currentStartDate
+  // Advances already counted up to that date — new period should only count advances AFTER it
+  let latestSettle = null;
+  savedPeriods.forEach(period => {
+    if (period.endDate < currentStartDate && period.settlements && period.settlements[memberName] !== undefined) {
+      const sd = period.settleDate || period.endDate;
+      if (!latestSettle || sd > latestSettle) latestSettle = sd;
+    }
+  });
+  if (!latestSettle) return null; // no previous period — start from currentStartDate
+  // Return day after last settlement date
+  const d = new Date(latestSettle);
+  d.setDate(d.getDate() + 1);
+  return d.toISOString().split('T')[0];
+}
+
+function getCarryForward(memberName, startDate) {
+  // Sum raw period balances (shareEarned - periodAdvance) from ALL periods ending before startDate
+  // Each period's balance is stored raw (without its own carry), so chaining works correctly:
+  //   Week1 raw = +500 (we owe them ₹500)
+  //   Week2 carry = +500 → added as credit
+  //   Week2 raw = -200 (they owe us ₹200, excess advance)
+  //   Week3 carry = +500 + (-200) = +300
+  let carryBalance = 0;
+  savedPeriods.forEach(period => {
+    if (period.endDate < startDate) {
+      const bal = period.settlements ? period.settlements[memberName] : undefined;
+      if (bal !== undefined && bal !== null) {
+        carryBalance += bal;
+      }
+    }
+  });
+  // positive = net credit (we owe them from past), negative = net debt (they owe us from past)
+  return carryBalance;
+}
+
+function savePeriodSettlement(startDate, endDate, settleDate, settlements) {
+  // Remove any existing saved period with same start+end, then push new one
+  savedPeriods = savedPeriods.filter(p => !(p.startDate === startDate && p.endDate === endDate));
+  savedPeriods.push({ periodId: Date.now(), startDate, endDate, settleDate, settlements });
+  save(KEY_PERIODS, savedPeriods);
+  // Also reload from storage to keep in-memory copy in sync
+  savedPeriods = load(KEY_PERIODS);
+}
+
+function renderSavedPeriods() {
+  const count = savedPeriods.length;
+  const countEl = document.getElementById('saved-period-count');
+  const listEl  = document.getElementById('saved-periods-list');
+  if (countEl) countEl.textContent = '(' + count + ' period' + (count !== 1 ? 's' : '') + ' saved)';
+  if (!listEl) return;
+
+  if (count === 0) {
+    listEl.innerHTML = '<p style="color:var(--muted);font-size:13px;font-style:italic;">No saved periods yet. Calculate a period to save it.</p>';
+    return;
+  }
+
+  let html = '<div class="table-wrap"><table><thead><tr>' +
+    '<th>Period</th><th>Shareholders</th><th>Balances (Payable / Excess)</th>' +
+    '</tr></thead><tbody>';
+
+  savedPeriods.forEach(function(period) {
+    const members = Object.keys(period.settlements || {});
+    const positives = members.filter(m => period.settlements[m] > 0).length;
+    const negatives = members.filter(m => period.settlements[m] < 0).length;
+    const sdLabel = period.settleDate && period.settleDate !== period.endDate
+      ? ' &nbsp;<span style="color:var(--gold-light);font-size:10px;">(settled ' + fmtDate(period.settleDate) + ')</span>' : '';
+    html += '<tr>' +
+      '<td><span class="badge badge-gold">' + fmtDate(period.startDate) + ' → ' + fmtDate(period.endDate) + '</span>' + sdLabel + '</td>' +
+      '<td><span class="badge badge-green">' + members.length + ' members</span></td>' +
+      '<td style="font-size:13px;">' +
+        '<span style="color:#2ecc71;margin-right:12px;">✓ ' + positives + ' payable</span>' +
+        '<span style="color:#e74c3c;">✗ ' + negatives + ' excess</span>' +
+      '</td>' +
+      '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+  listEl.innerHTML = html;
+}
+
+function toggleSavedPeriods() {
+  const el = document.getElementById('saved-periods-list');
+  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+function clearSavedPeriods() {
+  if (!confirm('Clear ALL saved period settlements? Carry-forward will be reset to zero for all shareholders.')) return;
+  savedPeriods = [];
+  save(KEY_PERIODS, savedPeriods);
+  renderSavedPeriods();
+  alert('All saved periods cleared.');
+}
+
+function calculateShares() {
+  const startDate    = document.getElementById('p3-start').value;
+  const endDate      = document.getElementById('p3-end').value;
+  const settleDate   = document.getElementById('p3-settle-date').value || endDate;
+  if (!startDate || !endDate) { alert('Please select both dates.'); return; }
+  if (startDate > endDate) { alert('Start date must be before end date.'); return; }
+  if (settleDate < endDate) { alert('Settlement Date cannot be before Fishing End Date.'); return; }
+
+  _p3StartDate  = startDate;
+  _p3EndDate    = endDate;
+  _p3SettleDate = settleDate;
+
+  // Filter records
+  const salesData = dailyRecords.filter(r => r.date >= startDate && r.date <= endDate);
+  const attendData = attendanceRecords.filter(r => r.date >= startDate && r.date <= endDate);
+
+  if (salesData.length === 0) { alert('No sales records found in selected range.'); return; }
+
+  const totalSales = salesData.reduce((s, r) => s + r.sales, 0);
+  const totalExpense = salesData.reduce((s, r) => s + r.expense, 0);
+  const ratio = totalSales > 0 ? totalExpense / totalSales : 0;
+
+  // Per-day calculation
+  const dailyBreakdown = [];
+  salesData.forEach(dayRec => {
+    const allocExpense = dayRec.sales * ratio;
+    const profit = dayRec.sales - allocExpense;
+    const attend = attendData.find(a => a.date === dayRec.date);
+    const numPresent = attend ? attend.present.length : 0;
+    const sharePerPerson = numPresent > 0 ? profit / numPresent : 0;
+    dailyBreakdown.push({
+      date: dayRec.date,
+      sales: dayRec.sales,
+      ratio,
+      allocExpense,
+      profit,
+      numPresent,
+      sharePerPerson,
+      present: attend ? attend.present : []
+    });
+  });
+
+  _p3DailyBreakdown = dailyBreakdown;
+
+  // Per-shareholder totals
+  const shareMap = {};
+  SHAREHOLDERS.forEach(sh => { shareMap[sh] = { days: 0, total: 0 }; });
+  _p3ShareMap = shareMap; // store for Final Payment section
+  dailyBreakdown.forEach(d => {
+    d.present.forEach(sh => {
+      if (!shareMap[sh]) shareMap[sh] = { days: 0, total: 0 };
+      shareMap[sh].days++;
+      shareMap[sh].total += d.sharePerPerson;
+    });
+  });
+
+  const totalProfit = dailyBreakdown.reduce((s, d) => s + d.profit, 0);
+
+  // Render stats
+  document.getElementById('p3-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total Sales</div><div class="stat-value">${fmt(totalSales)}</div></div>
+    <div class="stat-card"><div class="stat-label">Total Expense</div><div class="stat-value red">${fmt(totalExpense)}</div></div>
+    <div class="stat-card"><div class="stat-label">Expense Ratio</div><div class="stat-value">${(ratio * 100).toFixed(2)}%</div></div>
+    <div class="stat-card"><div class="stat-label">Net Profit</div><div class="stat-value green">${fmt(totalProfit)}</div></div>
+    <div class="stat-card"><div class="stat-label">Days</div><div class="stat-value">${salesData.length}</div></div>
+  `;
+
+  // Render daily table
+  const dtbody = document.getElementById('p3-daily-tbody');
+  dtbody.innerHTML = '';
+  dailyBreakdown.forEach(d => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge badge-gold">${fmtDate(d.date)}</span></td>
+      <td>${fmt(d.sales)}</td>
+      <td><span class="badge badge-red">${(d.ratio * 100).toFixed(2)}%</span></td>
+      <td class="result-negative">${fmt(d.allocExpense)}</td>
+      <td class="result-positive">${fmt(d.profit)}</td>
+      <td><span class="badge badge-green">${d.numPresent}</span></td>
+      <td class="result-positive">${fmt(d.sharePerPerson)}</td>
+    `;
+    dtbody.appendChild(tr);
+  });
+
+  // Render shareholder summary table
+  const stbody = document.getElementById('p3-share-tbody');
+  stbody.innerHTML = '';
+
+  // Build settlements map for saving
+  const periodSettlements = {};
+
+  SHAREHOLDERS.forEach(sh => {
+    const s = shareMap[sh];
+    if (s.days === 0) return;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${sh}</strong></td>
+      <td><span class="badge badge-gold">${s.days}</span></td>
+      <td class="result-positive">${fmt(s.total)}</td>
+      <td><button class="btn btn-sm" style="background:rgba(201,168,76,0.15);color:var(--gold-light);border:1px solid var(--border)" onclick="showIndividual('${sh}')">🔍 VIEW DETAIL</button></td>
+    `;
+    stbody.appendChild(tr);
+  });
+
+  renderSavedPeriods();
+
+  document.getElementById('p3-results').style.display = 'block';
+  document.getElementById('p3-individual-panel').style.display = 'none';
+  document.getElementById('group-results').style.display = 'none';
+  document.getElementById('fp-results').style.display = 'none';
+  document.getElementById('fp-export-btn').style.display = 'none';
+  // Set fp-settle-date to p3-settle-date value
+  const fpS = document.getElementById('fp-settle-date');
+  if (fpS) fpS.value = document.getElementById('p3-settle-date').value || today();
+  renderGroupCheckboxes();
+}
+
+function showIndividual(name) {
+  const startDate  = _p3StartDate;
+  const endDate    = _p3EndDate;
+  const settleDate = _p3SettleDate || _p3EndDate;
+  const panel = document.getElementById('p3-individual-panel');
+  panel.style.display = 'block';
+
+  document.getElementById('ind-name').textContent = '⚓ ' + name;
+  document.getElementById('ind-period').textContent =
+    fmtDate(startDate) + ' → ' + fmtDate(endDate) +
+    (settleDate !== endDate ? '  |  Advances up to: ' + fmtDate(settleDate) : '');
+
+  // ── Date-wise share table ─────────────────────────────────────────────────
+  let totalShareEarned = 0, daysPresent = 0;
+  const dtbody = document.getElementById('ind-daily-tbody');
+  dtbody.innerHTML = '';
+  const dailyRows = [];
+
+  _p3DailyBreakdown.forEach(d => {
+    if (!d.present.includes(name)) return;
+    daysPresent++;
+    totalShareEarned += d.sharePerPerson;
+    dailyRows.push({ date: d.date, earned: d.sharePerPerson });
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge badge-gold">${fmtDate(d.date)}</span></td>
+      <td class="result-positive" style="text-align:right;font-size:15px;font-weight:700;">${fmt(d.sharePerPerson)}</td>
+    `;
+    dtbody.appendChild(tr);
+  });
+
+  if (daysPresent === 0) {
+    dtbody.innerHTML = '<tr><td colspan="2" style="text-align:center;color:var(--muted);padding:16px;font-style:italic;">Not present any day in this period</td></tr>';
+  } else {
+    const sumTr = document.createElement('tr');
+    sumTr.style.cssText = 'background:rgba(26,122,74,0.1);font-weight:700;';
+    sumTr.innerHTML = `<td style="color:var(--gold);">TOTAL — ${daysPresent} days</td><td class="result-positive" style="text-align:right;font-size:16px;font-weight:700;">${fmt(totalShareEarned)}</td>`;
+    dtbody.appendChild(sumTr);
+  }
+
+  // ── Stats — share only ───────────────────────────────────────────────────
+  document.getElementById('ind-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Days Present</div><div class="stat-value">${daysPresent}</div></div>
+    <div class="stat-card"><div class="stat-label">Share Earned</div><div class="stat-value green">${fmt(totalShareEarned)}</div></div>
+  `;
+
+  // ── Store for PDF ─────────────────────────────────────────────────────────
+  window._indData = { name, startDate, endDate, settleDate, daysPresent, totalShareEarned, dailyRows };
+
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeIndividual() {
+  document.getElementById('p3-individual-panel').style.display = 'none';
+}
+
+function exportToPDF() {
+  const d = window._indData;
+  if (!d) { alert('Please open a shareholder detail first.'); return; }
+
+  function fmtN(n) { return Number(n||0).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+  function pdfD(s) { if (!s) return '—'; var p = s.split('-'); return p.length===3?p[2]+'-'+p[1]+'-'+p[0]:s; }
+
+  var genDate = new Date().toLocaleDateString('en-IN', {day:'2-digit',month:'2-digit',year:'numeric'});
+  // Daily share rows
+  var shareRows = '';
+  (d.dailyRows||[]).forEach(function(r) {
+    shareRows += '<tr><td>' + pdfD(r.date) + '</td>' +
+      '<td style="text-align:right;color:#1a7a4a;font-size:15px;font-weight:700;">&#8377;' + fmtN(r.earned) + '</td></tr>';
+  });
+  shareRows += '<tr style="background:#0a1628;"><td style="color:#c9a84c;font-weight:700;">TOTAL — ' + d.daysPresent + ' days present</td>' +
+    '<td style="text-align:right;color:#2ecc71;font-size:16px;font-weight:700;">&#8377;' + fmtN(d.totalShareEarned) + '</td></tr>';
+
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Statement - ' + d.name + '</title>' +
+    '<style>* {box-sizing:border-box;margin:0;padding:0;} body{font-family:Arial,Helvetica,sans-serif;color:#1a1a2e;background:#fff;padding:28px;font-size:14px;} table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;} th{background:#0a1628;color:#c9a84c;font-size:10px;text-transform:uppercase;padding:9px 14px;text-align:left;font-weight:700;} td{padding:9px 14px;border-bottom:1px solid #e8e0d0;} tr:nth-child(even) td{background:#faf7f0;} @media print{body{padding:15px;}@page{margin:12mm;size:A4;}}</style>' +
+    '</head><body>' +
+
+    // Letterhead
+    '<div style="text-align:center;border-bottom:3px double #c9a84c;padding-bottom:16px;margin-bottom:18px;">' +
+    '<div style="font-size:36px;margin-bottom:6px;">&#9875;</div>' +
+    '<div style="font-size:22px;font-weight:700;color:#0a1628;letter-spacing:2px;">Al Ahmed Fishing Boat</div>' +
+    '<div style="font-size:11px;color:#888;margin-top:4px;letter-spacing:1px;">FLEET MANAGEMENT &amp; SHARE DISTRIBUTION SYSTEM</div>' +
+    '<div style="display:inline-block;background:#0a1628;color:#c9a84c;font-size:11px;padding:5px 18px;border-radius:4px;margin-top:10px;font-weight:700;letter-spacing:1px;">SHAREHOLDER PAYMENT STATEMENT</div>' +
+    '</div>' +
+
+    // Meta
+    '<div style="display:flex;justify-content:space-between;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:8px;padding:12px 18px;margin-bottom:16px;flex-wrap:wrap;gap:10px;">' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Shareholder</div><div style="font-size:16px;font-weight:700;color:#0a1628;">' + d.name + '</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Fishing Period</div><div style="font-size:15px;font-weight:700;">' + pdfD(d.startDate) + ' to ' + pdfD(d.endDate) + '</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Advances Up To</div><div style="font-size:15px;font-weight:700;color:#c9a84c;">' + pdfD(d.settleDate||d.endDate) + '</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Generated On</div><div style="font-size:15px;font-weight:700;">' + genDate + '</div></div>' +
+    '</div>' +
+
+    // Summary stats
+    '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px;">' +
+    '<div style="text-align:center;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:8px;padding:12px;"><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Days Present</div><div style="font-size:22px;font-weight:700;">' + d.daysPresent + '</div></div>' +
+    '<div style="text-align:center;background:#eaf7f0;border:2px solid #a8dcc2;border-radius:8px;padding:12px;"><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Total Share Earned</div><div style="font-size:22px;font-weight:700;color:#1a7a4a;">&#8377;' + fmtN(d.totalShareEarned) + '</div></div>' +
+    '</div>' +
+
+    // Share table
+    '<div style="background:#0a1628;color:#c9a84c;font-size:11px;padding:8px 14px;border-radius:4px 4px 0 0;font-weight:700;letter-spacing:1px;display:inline-block;margin-bottom:0;">📅 DATE-WISE SHARE EARNED</div>' +
+    '<table><thead><tr><th>Date</th><th style="text-align:right;">Share Earned (&#8377;)</th></tr></thead>' +
+    '<tbody>' + shareRows + '</tbody></table>' +
+
+
+
+    // Signatures
+    '<div style="display:flex;justify-content:space-between;margin-top:32px;padding:0 20px;">' +
+    '<div style="text-align:center;width:160px;"><div style="height:40px;border-bottom:1px solid #555;"></div><div style="padding-top:6px;font-size:11px;color:#555;">AUTHORISED SIGNATORY</div></div>' +
+    '<div style="text-align:center;width:160px;"><div style="height:40px;border-bottom:1px solid #555;"></div><div style="padding-top:6px;font-size:11px;color:#555;">SHAREHOLDER SIGNATURE</div></div>' +
+    '</div>' +
+
+    '<div style="text-align:center;margin-top:24px;padding-top:14px;border-top:1px solid #e0d5b8;font-size:11px;color:#aaa;">Al Ahmed Fishing Boat &nbsp;&middot;&nbsp; Payment Statement &nbsp;&middot;&nbsp; ' + genDate + '</div>' +
+    '<script>window.onload=function(){window.print();}<\/script>' +
+    '</body></html>';
+
+  var win = window.open('', '_blank');
+  if (!win) { alert('Please allow popups to export PDF.'); return; }
+  win.document.write(html);
+  win.document.close();
+}
+
+function exportToCSV() {
+  const d = window._indData;
+  if (!d) { alert('Please open a shareholder detail first.'); return; }
+
+  function pdfD(s) {
+    if (!s) return '';
+    var p = s.split('-');
+    return p.length === 3 ? p[2]+'-'+p[1]+'-'+p[0] : s;
+  }
+
+  const lines = [];
+
+  // Header info
+  lines.push(['Al Ahmed Fishing Boat — Share Statement']);
+  lines.push(['Shareholder', d.name]);
+  lines.push(['Fishing Period', pdfD(d.startDate) + ' to ' + pdfD(d.endDate)]);
+  lines.push(['Generated On', new Date().toLocaleDateString('en-IN')]);
+  lines.push([]);
+
+  // Summary
+  lines.push(['SUMMARY']);
+  lines.push(['Days Present', d.daysPresent]);
+  lines.push(['Total Share Earned', d.totalShareEarned]);
+  lines.push([]);
+
+  // Table header
+  lines.push(['Date', 'Share Earned (Rs)']);
+
+  // Daily rows
+  (d.dailyRows || []).forEach(function(r) {
+    lines.push([pdfD(r.date), r.earned]);
+  });
+
+  // Total row
+  lines.push(['TOTAL (' + d.daysPresent + ' days)', d.totalShareEarned]);
+
+  // Build CSV
+  const csv = lines.map(function(row) {
+    return row.map(function(cell) {
+      const str = String(cell === undefined || cell === null ? '' : cell);
+      if (str.indexOf(',') >= 0 || str.indexOf('"') >= 0 || str.indexOf('\n') >= 0) {
+        return '"' + str.replace(/"/g, '""') + '"';
+      }
+      return str;
+    }).join(',');
+  }).join('\r\n');
+
+  // Download with UTF-8 BOM for Excel
+  const bom = '﻿';
+  const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Share_Statement_' + d.name.replace(/\s+/g, '_') + '_' + d.startDate + '_to_' + d.endDate + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ===== SMART CALCULATOR =====
+let _calcHistory = [];
+
+function toggleCalculator() {
+  const modal = document.getElementById('calc-modal');
+  const isOpen = modal.style.display !== 'none';
+  modal.style.display = isOpen ? 'none' : 'block';
+  if (!isOpen) {
+    setTimeout(function() {
+      var inp = document.getElementById('calc-input');
+      if (inp) { inp.focus(); inp.select(); }
+    }, 50);
+  }
+}
+
+function calcEval() {
+  const input = document.getElementById('calc-input').value.trim();
+  const resVal = document.getElementById('calc-result-value');
+  const resLbl = document.getElementById('calc-result-label');
+
+  if (!input) {
+    resVal.textContent = '—';
+    resLbl.textContent = '';
+    resVal.style.color = '#c9a84c';
+    return;
+  }
+
+  try {
+    // Clean input: allow numbers, operators, dot, parens, spaces
+    const clean = input.replace(/x/gi, '*').replace(/÷/g, '/').replace(/−/g, '-');
+    const result = Function('"use strict"; return (' + clean + ')')();
+    if (typeof result !== 'number' || !isFinite(result)) throw new Error('Invalid');
+    const rounded = Math.round(result * 1e10) / 1e10;
+    resVal.textContent = '₹' + rounded.toLocaleString('en-IN', {maximumFractionDigits: 4});
+    resVal.style.color = '#2ecc71';
+    resLbl.textContent = input + ' =';
+    // Bind Enter to save history
+    document.getElementById('calc-input').onkeydown = function(e) {
+      if (e.key === 'Enter') calcSaveHistory(input, rounded);
+      if (e.key === 'Escape') toggleCalculator();
+    };
+  } catch(e) {
+    resVal.textContent = '...';
+    resVal.style.color = 'var(--muted)';
+    resLbl.textContent = '';
+  }
+}
+
+function calcSaveHistory(expr, result) {
+  _calcHistory.unshift({ expr, result, time: new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'}) });
+  if (_calcHistory.length > 8) _calcHistory.pop();
+  calcRenderHistory();
+}
+
+function calcRenderHistory() {
+  const hist = document.getElementById('calc-history');
+  if (!hist) return;
+  if (_calcHistory.length === 0) { hist.innerHTML = ''; return; }
+  hist.innerHTML = '<div style="font-size:10px;color:var(--muted);letter-spacing:0.5px;margin-bottom:6px;">HISTORY (Enter to save)</div>' +
+    _calcHistory.map(function(h, i) {
+      return '<div onclick="calcUseHistory(' + i + ')" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:rgba(255,255,255,0.03);border-radius:6px;margin-bottom:4px;cursor:pointer;border:1px solid rgba(255,255,255,0.05);" onmouseover="this.style.background=\'rgba(201,168,76,0.08)\'" onmouseout="this.style.background=\'rgba(255,255,255,0.03)\'">' +
+        '<span style="color:var(--muted);font-size:12px;">' + h.expr + '</span>' +
+        '<span style="color:#c9a84c;font-weight:700;font-size:13px;">₹' + h.result.toLocaleString('en-IN', {maximumFractionDigits:4}) + '</span>' +
+        '</div>';
+    }).join('');
+}
+
+function calcUseHistory(idx) {
+  const h = _calcHistory[idx];
+  if (!h) return;
+  const inp = document.getElementById('calc-input');
+  inp.value = String(h.result);
+  calcEval();
+  inp.focus();
+}
+
+// Close on outside click
+document.addEventListener('click', function(e) {
+  const modal = document.getElementById('calc-modal');
+  if (!modal || modal.style.display === 'none') return;
+  if (!modal.contains(e.target) && !e.target.closest('[onclick*="toggleCalculator"]')) {
+    modal.style.display = 'none';
+  }
+});
+
+// ===== TOAST NOTIFICATION =====
+function showToast(msg) {
+  let toast = document.getElementById('global-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'global-toast';
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a7a4a;color:#fff;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:600;z-index:99998;box-shadow:0 4px 20px rgba(0,0,0,0.4);transition:opacity 0.4s;pointer-events:none;letter-spacing:0.5px;';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(function() { toast.style.opacity = '0'; }, 2500);
+}
+
+// ===== PAGE 4 =====
+// Populate select
+const p4Select = document.getElementById('p4-member');
+const p4Filter = document.getElementById('p4-filter-member');
+const editPayMember = document.getElementById('edit-pay-member');
+SHAREHOLDERS.forEach(sh => {
+  const o1 = document.createElement('option');
+  o1.value = sh; o1.textContent = sh;
+  p4Select.appendChild(o1);
+  const o2 = document.createElement('option');
+  o2.value = sh; o2.textContent = sh;
+  p4Filter.appendChild(o2);
+  const o3 = document.createElement('option');
+  o3.value = sh; o3.textContent = sh;
+  editPayMember.appendChild(o3);
+});
+
+document.getElementById('p4-date').value = today();
+
+function addPayment() {
+  const member = document.getElementById('p4-member').value;
+  const date   = document.getElementById('p4-date').value;
+  const amount = parseFloat(document.getElementById('p4-amount').value) || 0;
+  const notes  = document.getElementById('p4-notes').value;
+
+  if (!member) { alert('Please select a shareholder.'); return; }
+  if (!date)   { alert('Please select a date.'); return; }
+  if (amount <= 0) { alert('Please enter a valid amount.'); return; }
+
+  paymentRecords.push({ id: Date.now(), member, date, type: 'advance', amount, notes });
+  paymentRecords.sort((a,b) => a.date.localeCompare(b.date));
+  save(KEY_PAYMENT, paymentRecords);
+
+  document.getElementById('p4-amount').value = '';
+  document.getElementById('p4-notes').value = '';
+
+  renderP4Table();
+  renderP4Summary();
+
+  // Pop-up confirmation
+  showToast('✓ Record Added — ' + member + ' | ' + fmtDate(date) + ' | ' + fmt(amount));
+}
+
+function deletePayment(id) {
+  if (!confirm('Delete this payment?')) return;
+  paymentRecords = paymentRecords.filter(p => p.id !== id);
+  save(KEY_PAYMENT, paymentRecords);
+  renderP4Table();
+  renderP4Summary();
+}
+
+function renderP4Table() {
+  const filter = document.getElementById('p4-filter-member').value;
+  let data = paymentRecords;
+  if (filter) data = data.filter(p => p.member === filter);
+
+  const tbody = document.getElementById('p4-tbody');
+  tbody.innerHTML = '';
+  data.forEach(p => {
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge badge-gold">${fmtDate(p.date)}</span></td>
+      <td><strong>${p.member}</strong></td>
+      <td class="adv-pending">${fmt(p.amount)}</td>
+      <td style="color:var(--muted);font-style:italic">${p.notes || '—'}</td>
+      <td style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-edit btn-sm" onclick="editPayment(${p.id})">✎ EDIT</button>
+        <button class="btn btn-danger btn-sm" onclick="deletePayment(${p.id})">✕ DEL</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderP4Summary() {
+  const tbody = document.getElementById('p4-summary-tbody');
+  tbody.innerHTML = '';
+
+  SHAREHOLDERS.forEach(sh => {
+    const payments = paymentRecords.filter(p => p.member === sh);
+    if (payments.length === 0) return;
+    const totalAdv = payments.filter(p => p.type === 'advance').reduce((s, p) => s + p.amount, 0);
+    const totalSal = payments.filter(p => p.type === 'salary').reduce((s, p) => s + p.amount, 0);
+    const totalOther = payments.filter(p => p.type === 'other').reduce((s, p) => s + p.amount, 0);
+    const totalPaid = totalAdv + totalSal + totalOther;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${sh}</strong></td>
+      <td class="adv-pending">${fmt(totalAdv)}</td>
+      <td class="adv-paid">${fmt(totalSal)}</td>
+      <td class="result-positive">${fmt(totalPaid)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  if (tbody.innerHTML === '') {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:24px">No payment records yet</td></tr>';
+  }
+}
+
+
+// ===== MODAL HELPERS =====
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+// Close modal when clicking overlay background
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+});
+
+// ===== PAGE 1 EDIT =====
+function editDailyRecord(id) {
+  const rec = dailyRecords.find(r => r.id === id);
+  if (!rec) return;
+  document.getElementById('edit-daily-id').value = id;
+  document.getElementById('edit-daily-date').value = rec.date;
+
+  // Populate sale rows
+  const salesContainer = document.getElementById('edit-sales-rows');
+  salesContainer.innerHTML = '';
+  const saleItems = rec.saleItems || (rec.sales > 0 ? [{ notes: rec.notes || '', amount: rec.sales }] : []);
+  saleItems.forEach(i => makeEditItemRow('edit-sales-rows', i.notes, i.amount, 'sale'));
+  if (saleItems.length === 0) makeEditItemRow('edit-sales-rows', '', '', 'sale');
+
+  // Populate expense rows
+  const expContainer = document.getElementById('edit-expense-rows');
+  expContainer.innerHTML = '';
+  const expenseItems = rec.expenseItems || (rec.expense > 0 ? [{ notes: rec.notes || '', amount: rec.expense }] : []);
+  expenseItems.forEach(i => makeEditItemRow('edit-expense-rows', i.notes, i.amount, 'expense'));
+  if (expenseItems.length === 0) makeEditItemRow('edit-expense-rows', '', '', 'expense');
+
+  document.getElementById('modal-daily').classList.add('open');
+}
+
+function saveEditDaily() {
+  const id = parseInt(document.getElementById('edit-daily-id').value);
+  const date = document.getElementById('edit-daily-date').value;
+  if (!date) { alert('Please select a date.'); return; }
+
+  const saleItems    = [];
+  document.querySelectorAll('#edit-sales-rows [data-rowid]').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const notes = inputs[0].value.trim();
+    const amount = parseFloat(inputs[1].value) || 0;
+    if (amount > 0 || notes) saleItems.push({ notes, amount });
+  });
+
+  const expenseItems = [];
+  document.querySelectorAll('#edit-expense-rows [data-rowid]').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const notes = inputs[0].value.trim();
+    const amount = parseFloat(inputs[1].value) || 0;
+    if (amount > 0 || notes) expenseItems.push({ notes, amount });
+  });
+
+  if (saleItems.length === 0 && expenseItems.length === 0) {
+    alert('Please add at least one sale or expense item.'); return;
+  }
+
+  const totalSales   = saleItems.reduce((s, i) => s + i.amount, 0);
+  const totalExpense = expenseItems.reduce((s, i) => s + i.amount, 0);
+
+  const conflict = dailyRecords.findIndex(r => r.date === date && r.id !== id);
+  if (conflict >= 0) {
+    if (!confirm('Another record exists for this date. Replace it?')) return;
+    dailyRecords.splice(conflict, 1);
+  }
+
+  const idx = dailyRecords.findIndex(r => r.id === id);
+  if (idx < 0) return;
+  dailyRecords[idx] = { id, date, sales: totalSales, expense: totalExpense, saleItems, expenseItems };
+  dailyRecords.sort((a, b) => a.date.localeCompare(b.date));
+  save(KEY_DAILY, dailyRecords);
+  closeModal('modal-daily');
+  renderP1Table();
+}
+
+// ===== PAGE 4 EDIT =====
+function editPayment(id) {
+  const rec = paymentRecords.find(p => p.id === id);
+  if (!rec) return;
+  document.getElementById('edit-pay-id').value = id;
+  document.getElementById('edit-pay-member').value = rec.member;
+  document.getElementById('edit-pay-date').value = rec.date;
+
+  document.getElementById('edit-pay-amount').value = rec.amount;
+  document.getElementById('edit-pay-notes').value = rec.notes || '';
+  document.getElementById('modal-payment').classList.add('open');
+}
+
+function saveEditPayment() {
+  const id = parseInt(document.getElementById('edit-pay-id').value);
+  const member = document.getElementById('edit-pay-member').value;
+  const date = document.getElementById('edit-pay-date').value;
+  const type = document.getElementById('edit-pay-type').value;
+  const amount = parseFloat(document.getElementById('edit-pay-amount').value) || 0;
+  const notes = document.getElementById('edit-pay-notes').value;
+
+  if (!member) { alert('Please select a shareholder.'); return; }
+  if (!date) { alert('Please select a date.'); return; }
+  if (amount <= 0) { alert('Please enter a valid amount.'); return; }
+
+  const idx = paymentRecords.findIndex(p => p.id === id);
+  if (idx < 0) return;
+  paymentRecords[idx] = { id, member, date, type, amount, notes };
+  paymentRecords.sort((a, b) => a.date.localeCompare(b.date));
+  save(KEY_PAYMENT, paymentRecords);
+  closeModal('modal-payment');
+  renderP4Table();
+  renderP4Summary();
+}
+
+// ===== GOOGLE DRIVE SYNC =====
+const GDRIVE_CLIENT_ID = '216032794821-o2thpd3k5aoomk00gn9p7e8oit6iiquu.apps.googleusercontent.com';
+const GDRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.appdata';
+const GDRIVE_FILE_NAME = 'al-ahmed-fishing-boat-data.json';
+let gdriveToken = null;
+let gdriveFileId = null;
+let gdriveAutoSaveTimer = null;
+let gdriveTokenClient = null;
+let gdriveTokenExpiry = 0;
+let gdrivePendingSaveAfterRefresh = false;
+
+function updateSyncLabel() {
+  const ts = localStorage.getItem('aafb_last_export');
+  const el = document.getElementById('sync-last-saved');
+  if (el) el.textContent = ts ? 'Last saved: ' + ts : '';
+}
+
+function setDriveStatus(connected, text) {
+  const dot  = document.getElementById('gdrive-status-dot');
+  const txt  = document.getElementById('gdrive-status-text');
+  const cBtn = document.getElementById('gdrive-connect-btn');
+  const sBtn = document.getElementById('gdrive-save-btn');
+  const lBtn = document.getElementById('gdrive-load-btn');
+  if (dot) dot.style.background = connected ? '#2ecc71' : '#e74c3c';
+  if (txt) txt.textContent = 'Google Drive: ' + text;
+  if (cBtn) cBtn.style.display = connected ? 'none' : 'inline-flex';
+  if (sBtn) sBtn.style.display = connected ? 'inline-flex' : 'none';
+  if (lBtn) lBtn.style.display = connected ? 'inline-flex' : 'none';
+}
+
+function isTokenExpired() {
+  return !gdriveToken || Date.now() > gdriveTokenExpiry - 60000;
+}
+
+function initTokenClient(onSuccess) {
+  if (!window.google || !window.google.accounts) return;
+  gdriveTokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: GDRIVE_CLIENT_ID,
+    scope: GDRIVE_SCOPE,
+    prompt: '',
+    callback: function(resp) {
+      if (resp.error) {
+        // Only show connect button if silent refresh fails
+        setDriveStatus(false, 'Session expired — click to reconnect');
+        return;
+      }
+      gdriveToken = resp.access_token;
+      gdriveTokenExpiry = Date.now() + ((resp.expires_in || 3600) * 1000);
+      localStorage.setItem('aafb_gdrive_token', gdriveToken);
+      setDriveStatus(true, 'Connected ✓');
+      if (onSuccess) onSuccess();
+      // If there was a pending save, do it now
+      if (gdrivePendingSaveAfterRefresh) {
+        gdrivePendingSaveAfterRefresh = false;
+        gdriveSave(false);
+      }
+    }
+  });
+  return gdriveTokenClient;
+}
+
+function silentRefreshToken(onSuccess) {
+  // Try to get a new token silently (no popup)
+  if (!window.google || !window.google.accounts) return;
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id: GDRIVE_CLIENT_ID,
+    scope: GDRIVE_SCOPE,
+    prompt: '',
+    callback: function(resp) {
+      if (!resp.error) {
+        gdriveToken = resp.access_token;
+        gdriveTokenExpiry = Date.now() + ((resp.expires_in || 3600) * 1000);
+        localStorage.setItem('aafb_gdrive_token', gdriveToken);
+        setDriveStatus(true, 'Connected ✓');
+        if (onSuccess) onSuccess();
+      } else {
+        // Silent failed — show reconnect button quietly
+        setDriveStatus(false, 'Session expired — click to reconnect');
+      }
+    }
+  });
+  client.requestAccessToken({ prompt: '' });
+}
+
+function gdriveConnect() {
+  if (!window.google || !window.google.accounts) {
+    alert('Google Sign-In is loading. Please wait a moment and try again.');
+    return;
+  }
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id: GDRIVE_CLIENT_ID,
+    scope: GDRIVE_SCOPE,
+    callback: function(resp) {
+      if (resp.error) {
+        setDriveStatus(false, 'Connection failed');
+        alert('Google Drive connection failed: ' + resp.error);
+        return;
+      }
+      gdriveToken = resp.access_token;
+      gdriveTokenExpiry = Date.now() + ((resp.expires_in || 3600) * 1000);
+      localStorage.setItem('aafb_gdrive_token', gdriveToken);
+      setDriveStatus(true, 'Connected ✓');
+      gdriveLoad(true);
+    }
+  });
+  client.requestAccessToken();
+}
+
+function getAllData() {
+  return {
+    version: 2,
+    savedAt: new Date().toISOString(),
+    savedAtReadable: new Date().toLocaleString('en-IN'),
+    dailyRecords,
+    attendanceRecords,
+    paymentRecords,
+    savedPeriods,
+    fishSales,
+    supplierPays
+  };
+}
+
+function applyAllData(data) {
+  dailyRecords      = data.dailyRecords      || [];
+  attendanceRecords = data.attendanceRecords || [];
+  paymentRecords    = data.paymentRecords    || [];
+  savedPeriods      = data.savedPeriods      || [];
+  fishSales         = data.fishSales         || [];
+  supplierPays      = data.supplierPays      || [];
+  save(KEY_DAILY,    dailyRecords);
+  save(KEY_ATTEND,   attendanceRecords);
+  save(KEY_PAYMENT,  paymentRecords);
+  save(KEY_PERIODS,  savedPeriods);
+  save(KEY_FISHSALES, fishSales);
+  save(KEY_SUPPAY,   supplierPays);
+  renderP1Table();
+  renderP2Table();
+  renderP4Table();
+  renderP4Summary();
+  renderSavedPeriods();
+  renderFSTable();
+  renderSupplierCards();
+}
+
+async function gdriveFindFile() {
+  const resp = await fetch(
+    'https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=name%3D%22' + GDRIVE_FILE_NAME + '%22&fields=files(id%2Cname)',
+    { headers: { Authorization: 'Bearer ' + gdriveToken } }
+  );
+  const data = await resp.json();
+  if (data.files && data.files.length > 0) {
+    gdriveFileId = data.files[0].id;
+    return data.files[0].id;
+  }
+  return null;
+}
+
+async function gdriveSave(manual) {
+  if (!gdriveToken) {
+    if (manual) alert('Please connect Google Drive first.');
+    return;
+  }
+  // If token is expired, silently refresh then save
+  if (isTokenExpired()) {
+    gdrivePendingSaveAfterRefresh = true;
+    silentRefreshToken(function() {
+      gdriveSave(manual);
+    });
+    return;
+  }
+  try {
+    const fileId = gdriveFileId || await gdriveFindFile();
+    const body   = JSON.stringify(getAllData());
+    let response;
+    if (fileId) {
+      response = await fetch('https://www.googleapis.com/upload/drive/v3/files/' + fileId + '?uploadType=media', {
+        method: 'PATCH',
+        headers: { Authorization: 'Bearer ' + gdriveToken, 'Content-Type': 'application/json' },
+        body
+      });
+    } else {
+      const meta = JSON.stringify({ name: GDRIVE_FILE_NAME, parents: ['appDataFolder'] });
+      const form = new FormData();
+      form.append('metadata', new Blob([meta], { type: 'application/json' }));
+      form.append('file',     new Blob([body], { type: 'application/json' }));
+      response = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + gdriveToken },
+        body: form
+      });
+      const created = await response.json();
+      gdriveFileId = created.id;
+    }
+    if (response.ok) {
+      const ts = new Date().toLocaleString('en-IN');
+      localStorage.setItem('aafb_last_export', ts);
+      updateSyncLabel();
+      setDriveStatus(true, 'Connected ✓ — Saved ' + ts);
+      if (manual) alert('Data saved to Google Drive successfully!');
+    } else if (response.status === 401) {
+      // Token expired — silently refresh and retry
+      gdriveToken = null;
+      gdrivePendingSaveAfterRefresh = true;
+      silentRefreshToken(function() { gdriveSave(manual); });
+    } else {
+      // Other error — only show if manual save
+      if (manual) alert('Save failed. Please try again or reconnect Google Drive.');
+      setDriveStatus(true, 'Save failed — tap to reconnect');
+    }
+  } catch(e) {
+    if (manual) alert('Error saving to Drive: ' + e.message);
+  }
+}
+
+async function gdriveLoad(silent) {
+  if (!gdriveToken) { if (!silent) alert('Please connect Google Drive first.'); return; }
+  try {
+    const fileId = await gdriveFindFile();
+    if (!fileId) {
+      if (!silent) alert('No backup found on Google Drive. Data will be saved automatically when you make changes.');
+      setDriveStatus(true, 'Connected ✓ — No backup yet');
+      return;
+    }
+    const resp = await fetch('https://www.googleapis.com/drive/v3/files/' + fileId + '?alt=media', {
+      headers: { Authorization: 'Bearer ' + gdriveToken }
+    });
+    const data = await resp.json();
+    if (!data.dailyRecords && !data.attendanceRecords) {
+      if (!silent) alert('Backup file appears empty or corrupted.');
+      return;
+    }
+    const savedAt = data.savedAtReadable || data.savedAt || 'Unknown';
+    const dr  = (data.dailyRecords || []).length;
+    const ar  = (data.attendanceRecords || []).length;
+    const pr  = (data.paymentRecords || []).length;
+    if (!silent) {
+      if (!confirm('Load from Google Drive? Saved: ' + savedAt + ' | Contains: ' + dr + ' daily, ' + ar + ' attendance, ' + pr + ' payments. This replaces current data.')) return;
+    }
+    applyAllData(data);
+    updateSyncLabel();
+    setDriveStatus(true, 'Connected ✓ — Loaded from Drive');
+    if (!silent) alert('Data loaded from Google Drive successfully!');
+  } catch(e) {
+    if (!silent) alert('Error loading from Drive: ' + e.message);
+  }
+}
+
+// Auto-save to Drive 3 seconds after any data change
+function scheduleAutoSave() {
+  if (!gdriveToken && !localStorage.getItem('aafb_gdrive_token')) return;
+  clearTimeout(gdriveAutoSaveTimer);
+  gdriveAutoSaveTimer = setTimeout(function() { gdriveSave(false); }, 3000);
+}
+
+function exportData() {
+  const data = {
+    version: 2,
+    exportedAt: new Date().toISOString(),
+    exportedAtReadable: new Date().toLocaleString('en-IN'),
+    dailyRecords,
+    attendanceRecords,
+    paymentRecords,
+    savedPeriods
+  };
+
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0,10);
+  a.href     = url;
+  a.download = 'AlAhmed-Backup-' + dateStr + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  const ts = new Date().toLocaleString('en-IN');
+  localStorage.setItem('aafb_last_export', ts);
+  updateSyncLabel();
+  alert('Backup exported! Send this file via WhatsApp to sync with another device. On the other device tap Import Backup and select this file.');
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+
+      if (!data.version || (!data.dailyRecords && !data.attendanceRecords)) {
+        alert('Invalid backup file. Please use a file exported from Al Ahmed Fishing Boat app.');
+        event.target.value = '';
+        return;
+      }
+
+      const exportDate = data.exportedAtReadable || data.exportedAt || 'Unknown';
+      const dr  = (data.dailyRecords      || []).length;
+      const ar  = (data.attendanceRecords || []).length;
+      const pr  = (data.paymentRecords    || []).length;
+      const spr = (data.savedPeriods      || []).length;
+      const counts = dr + ' daily, ' + ar + ' attendance, ' + pr + ' payments, ' + spr + ' periods';
+
+      if (!confirm('Import backup from: ' + exportDate + ' | Contains: ' + counts + ' | This will REPLACE all current data. Continue?')) {
+        event.target.value = '';
+        return;
+      }
+
+      dailyRecords      = data.dailyRecords      || [];
+      attendanceRecords = data.attendanceRecords || [];
+      paymentRecords    = data.paymentRecords    || [];
+      savedPeriods      = data.savedPeriods      || [];
+
+      save(KEY_DAILY,   dailyRecords);
+      save(KEY_ATTEND,  attendanceRecords);
+      save(KEY_PAYMENT, paymentRecords);
+      save(KEY_PERIODS, savedPeriods);
+
+      renderP1Table();
+      renderP2Table();
+      renderP4Table();
+      renderP4Summary();
+      renderSavedPeriods();
+      updateSyncLabel();
+
+      event.target.value = '';
+      alert('Import successful! ' + counts + ' records synced.');
+    } catch(err) {
+      alert('Failed to import. File may be corrupted. Error: ' + err.message);
+      event.target.value = '';
+    }
+  };
+  reader.readAsText(file);
+}
+
+
+// ===== PASSWORD LOCK =====
+const _LOCK_PASS = '25261022';
+const _LOCK_KEY  = 'aafb_unlocked';
+
+function logout() {
+  if (confirm('Are you sure you want to logout?')) {
+    sessionStorage.removeItem(_LOCK_KEY);
+    document.getElementById('lock-screen').style.display = 'flex';
+    document.getElementById('lock-input').value = '';
+    document.getElementById('lock-error').textContent = '';
+    setTimeout(function() {
+      document.getElementById('lock-input').focus();
+    }, 100);
+  }
+}
+
+function checkPassword() {
+  const val = document.getElementById('lock-input').value;
+  if (val === _LOCK_PASS) {
+    sessionStorage.setItem(_LOCK_KEY, '1');
+    document.getElementById('lock-screen').style.display = 'none';
+    document.getElementById('lock-input').value = '';
+  } else {
+    document.getElementById('lock-error').textContent = 'Incorrect password. Try again.';
+    document.getElementById('lock-input').value = '';
+    document.getElementById('lock-input').focus();
+    setTimeout(function() {
+      document.getElementById('lock-error').textContent = '';
+    }, 3000);
+  }
+}
+
+// On load — check session
+if (sessionStorage.getItem(_LOCK_KEY) === '1') {
+  document.getElementById('lock-screen').style.display = 'none';
+} else {
+  setTimeout(function() {
+    var inp = document.getElementById('lock-input');
+    if (inp) inp.focus();
+  }, 200);
+}
+
+// ===== FINAL PAYMENT =====
+let _fpData = null;
+
+function calculateFinalPayment() {
+  const settleDate = document.getElementById('fp-settle-date').value || _p3EndDate;
+  const startDate  = _p3StartDate;
+  const endDate    = _p3EndDate;
+
+  if (!startDate || !endDate) { alert('Please calculate shares first.'); return; }
+
+  let totalShareAll = 0, totalAdvAll = 0, totalNetAll = 0;
+  let payList = [], oweList = [], zeroList = [];
+  let rows = [];
+
+  SHAREHOLDERS.forEach(sh => {
+    const s = _p3ShareMap ? _p3ShareMap[sh] : null;
+    if (!s || s.days === 0) return;
+
+    const shareEarned = s.total;
+    const advances = paymentRecords.filter(p =>
+      p.member === sh && p.date >= startDate && p.date <= settleDate
+    );
+    const advTotal = advances.reduce((sum, p) => sum + p.amount, 0);
+    const net = shareEarned - advTotal;
+
+    totalShareAll += shareEarned;
+    totalAdvAll   += advTotal;
+    totalNetAll   += net;
+
+    if (net > 0) payList.push(sh);
+    else if (net < 0) oweList.push(sh);
+    else zeroList.push(sh);
+
+    rows.push({ sh, days: s.days, shareEarned, advTotal, net, advances });
+  });
+
+  _fpData = { rows, totalShareAll, totalAdvAll, totalNetAll, startDate, endDate, settleDate, payList, oweList };
+
+  // Stats
+  document.getElementById('fp-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total Share Earned</div><div class="stat-value green">${fmt(totalShareAll)}</div></div>
+    <div class="stat-card"><div class="stat-label">Total Advances</div><div class="stat-value red">${fmt(totalAdvAll)}</div></div>
+    <div class="stat-card"><div class="stat-label">Total Net Payable</div><div class="stat-value ${totalNetAll >= 0 ? 'green' : 'red'}">${fmt(totalNetAll)}</div></div>
+    <div class="stat-card"><div class="stat-label">To Pay (${payList.length})</div><div class="stat-value green">${payList.length} members</div></div>
+    <div class="stat-card"><div class="stat-label">Owes Back (${oweList.length})</div><div class="stat-value red">${oweList.length} members</div></div>
+  `;
+
+  // Table
+  const tbody = document.getElementById('fp-tbody');
+  tbody.innerHTML = '';
+
+  // Sort: payable first, then owes, then zero
+  rows.sort((a, b) => b.net - a.net);
+
+  rows.forEach(r => {
+    const status = r.net > 0
+      ? `<span class="badge" style="background:rgba(26,122,74,0.2);color:#52d48a;border:1px solid rgba(26,122,74,0.4);font-size:11px;">✓ PAY</span>`
+      : r.net < 0
+      ? `<span class="badge" style="background:rgba(192,57,43,0.2);color:#e74c3c;border:1px solid rgba(192,57,43,0.4);font-size:11px;">⚠ OWES</span>`
+      : `<span class="badge" style="background:rgba(255,255,255,0.1);color:var(--muted);font-size:11px;">= SETTLED</span>`;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${r.sh}</strong></td>
+      <td><span class="badge badge-gold">${r.days}</span></td>
+      <td class="result-positive">${fmt(r.shareEarned)}</td>
+      <td class="adv-pending">${fmt(r.advTotal)}</td>
+      <td class="${r.net >= 0 ? 'result-positive' : 'adv-pending'}" style="font-size:15px;font-weight:700;">${r.net < 0 ? '-' : ''}${fmt(Math.abs(r.net))}</td>
+      <td>${status}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Grand total row
+  const totTr = document.createElement('tr');
+  totTr.style.cssText = 'background:rgba(201,168,76,0.1);';
+  totTr.innerHTML = `
+    <td colspan="2" style="font-family:'Cinzel',serif;color:var(--gold);font-size:13px;letter-spacing:1px;">GRAND TOTAL</td>
+    <td class="result-positive" style="font-weight:700;">${fmt(totalShareAll)}</td>
+    <td class="adv-pending" style="font-weight:700;">${fmt(totalAdvAll)}</td>
+    <td class="${totalNetAll >= 0 ? 'result-positive' : 'adv-pending'}" style="font-size:16px;font-weight:700;">${totalNetAll < 0 ? '-' : ''}${fmt(Math.abs(totalNetAll))}</td>
+    <td></td>
+  `;
+  tbody.appendChild(totTr);
+
+  document.getElementById('fp-results').style.display = 'block';
+  document.getElementById('fp-export-btn').style.display = 'inline-flex';
+  document.getElementById('fp-results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function exportFinalPaymentPDF() {
+  const d = _fpData;
+  if (!d) return;
+
+  function fmtN(n) { return Number(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+  function pdfD(s) { if (!s) return '—'; var p = s.split('-'); return p.length===3?p[2]+'-'+p[1]+'-'+p[0]:s; }
+
+  const genDate = new Date().toLocaleDateString('en-IN', {day:'2-digit',month:'2-digit',year:'numeric'});
+
+  // Sort: pay first, owes last
+  const sorted = [...d.rows].sort((a, b) => b.net - a.net);
+
+  let rows = '';
+  sorted.forEach(function(r) {
+    const netColor  = r.net >= 0 ? '#1a7a4a' : '#c0392b';
+    const statusBg  = r.net > 0 ? '#1a7a4a' : r.net < 0 ? '#c0392b' : '#888';
+    const statusTxt = r.net > 0 ? '✓ PAY' : r.net < 0 ? '⚠ OWES' : '= SETTLED';
+    rows += '<tr>' +
+      '<td><strong>' + r.sh + '</strong></td>' +
+      '<td style="text-align:center;">' + r.days + '</td>' +
+      '<td style="text-align:right;color:#1a7a4a;font-weight:700;">&#8377;' + fmtN(r.shareEarned) + '</td>' +
+      '<td style="text-align:right;color:#c0392b;font-weight:700;">&#8377;' + fmtN(r.advTotal) + '</td>' +
+      '<td style="text-align:right;font-weight:700;font-size:15px;color:' + netColor + ';">' + (r.net<0?'-':'') + '&#8377;' + fmtN(Math.abs(r.net)) + '</td>' +
+      '<td style="text-align:center;"><span style="background:' + statusBg + ';color:#fff;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;">' + statusTxt + '</span></td>' +
+      '</tr>';
+  });
+
+  // Grand total row
+  rows += '<tr style="background:#0a1628;">' +
+    '<td colspan="2" style="color:#c9a84c;font-weight:700;letter-spacing:1px;">GRAND TOTAL</td>' +
+    '<td style="text-align:right;color:#c9a84c;font-weight:700;">&#8377;' + fmtN(d.totalShareAll) + '</td>' +
+    '<td style="text-align:right;color:#c9a84c;font-weight:700;">&#8377;' + fmtN(d.totalAdvAll) + '</td>' +
+    '<td style="text-align:right;font-size:16px;font-weight:700;color:' + (d.totalNetAll>=0?'#2ecc71':'#e74c3c') + ';">' + (d.totalNetAll<0?'-':'') + '&#8377;' + fmtN(Math.abs(d.totalNetAll)) + '</td>' +
+    '<td></td></tr>';
+
+  const html = '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
+    '<title>Final Payment Statement</title>' +
+    '<style>* {box-sizing:border-box;margin:0;padding:0;} body{font-family:Arial,Helvetica,sans-serif;color:#1a1a2e;background:#fff;padding:28px;font-size:14px;} @media print{body{padding:15px;}@page{margin:12mm;size:A4;}}</style>' +
+    '</head><body>' +
+
+    // Letterhead
+    '<div style="text-align:center;border-bottom:3px double #c9a84c;padding-bottom:18px;margin-bottom:20px;">' +
+    '<div style="font-size:38px;margin-bottom:6px;">&#9875;</div>' +
+    '<div style="font-size:22px;font-weight:700;color:#0a1628;letter-spacing:2px;">Al Ahmed Fishing Boat</div>' +
+    '<div style="font-size:11px;color:#888;margin-top:4px;letter-spacing:1px;">FLEET MANAGEMENT &amp; SHARE DISTRIBUTION SYSTEM</div>' +
+    '<div style="display:inline-block;background:#0a1628;color:#c9a84c;font-size:11px;padding:5px 18px;border-radius:4px;margin-top:10px;font-weight:700;letter-spacing:1px;">FINAL PAYMENT STATEMENT</div>' +
+    '</div>' +
+
+    // Meta
+    '<div style="display:flex;justify-content:space-between;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:8px;padding:14px 20px;margin-bottom:20px;flex-wrap:wrap;gap:10px;">' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Fishing Period</div><div style="font-size:15px;font-weight:700;">' + pdfD(d.startDate) + ' to ' + pdfD(d.endDate) + '</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Advances Up To</div><div style="font-size:15px;font-weight:700;color:#c9a84c;">' + pdfD(d.settleDate) + '</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">To Pay</div><div style="font-size:15px;font-weight:700;color:#1a7a4a;">' + d.payList.length + ' members</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Owes Back</div><div style="font-size:15px;font-weight:700;color:#c0392b;">' + d.oweList.length + ' members</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Generated</div><div style="font-size:15px;font-weight:700;">' + genDate + '</div></div>' +
+    '</div>' +
+
+    // Summary stats
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">' +
+    '<div style="text-align:center;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:8px;padding:14px;"><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:6px;">Total Share Earned</div><div style="font-size:20px;font-weight:700;color:#1a7a4a;">&#8377;' + fmtN(d.totalShareAll) + '</div></div>' +
+    '<div style="text-align:center;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:8px;padding:14px;"><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:6px;">Total Advances Taken</div><div style="font-size:20px;font-weight:700;color:#c0392b;">&#8377;' + fmtN(d.totalAdvAll) + '</div></div>' +
+    '<div style="text-align:center;background:' + (d.totalNetAll>=0?'#eaf7f0':'#fdf0ee') + ';border:2px solid ' + (d.totalNetAll>=0?'#a8dcc2':'#f0b8b0') + ';border-radius:8px;padding:14px;"><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:6px;">Grand Net Payable</div><div style="font-size:22px;font-weight:700;color:' + (d.totalNetAll>=0?'#1a7a4a':'#c0392b') + ';">' + (d.totalNetAll<0?'-':'') + '&#8377;' + fmtN(Math.abs(d.totalNetAll)) + '</div></div>' +
+    '</div>' +
+
+    // Table
+    '<table style="width:100%;border-collapse:collapse;font-size:14px;">' +
+    '<thead><tr style="background:#0a1628;">' +
+    '<th style="color:#c9a84c;padding:10px 14px;text-align:left;font-size:10px;text-transform:uppercase;">Shareholder</th>' +
+    '<th style="color:#c9a84c;padding:10px 14px;text-align:center;font-size:10px;text-transform:uppercase;">Days</th>' +
+    '<th style="color:#c9a84c;padding:10px 14px;text-align:right;font-size:10px;text-transform:uppercase;">Share Earned</th>' +
+    '<th style="color:#c9a84c;padding:10px 14px;text-align:right;font-size:10px;text-transform:uppercase;">Advances Taken</th>' +
+    '<th style="color:#c9a84c;padding:10px 14px;text-align:right;font-size:10px;text-transform:uppercase;">Net Payable</th>' +
+    '<th style="color:#c9a84c;padding:10px 14px;text-align:center;font-size:10px;text-transform:uppercase;">Status</th>' +
+    '</tr></thead>' +
+    '<tbody>' + rows + '</tbody></table>' +
+
+    // Signature
+    '<div style="display:flex;justify-content:space-between;margin-top:40px;padding:0 20px;">' +
+    '<div style="text-align:center;width:160px;"><div style="height:40px;border-bottom:1px solid #555;"></div><div style="padding-top:6px;font-size:11px;color:#555;">AUTHORISED SIGNATORY</div></div>' +
+    '<div style="text-align:center;width:160px;"><div style="height:40px;border-bottom:1px solid #555;"></div><div style="padding-top:6px;font-size:11px;color:#555;">CAPTAIN / OWNER</div></div>' +
+    '</div>' +
+
+    '<div style="text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid #e0d5b8;font-size:11px;color:#aaa;">Al Ahmed Fishing Boat &nbsp;&middot;&nbsp; Final Payment Statement &nbsp;&middot;&nbsp; ' + genDate + '</div>' +
+    '<script>window.onload=function(){window.print();}<\/script>' +
+    '</body></html>';
+
+  var win = window.open('', '_blank');
+  if (!win) { alert('Please allow popups to export PDF.'); return; }
+  win.document.write(html);
+  win.document.close();
+}
+
+// ===== GROUP SETTLEMENT =====
+let _groupData = null;
+
+// Owner's shares — all boat/engine/dhanda entries that belong to the boat owner
+// Default owner shares — pre-selected when clicking ⚓ OWNER GROUP
+// User can freely add/remove any checkbox after clicking the button
+const OWNER_SHARES = [
+  'Owner',
+  'Al Muhammad Boat','Al Muhammad Boat Engine',
+  'Al Bahar Boat','Al Bahar Boat Engine',
+  'Maryam Boat','Maryam Boat Engine',
+  'Safiya Boat','Safiya Boat Engine',
+  'Net R 1','Net R 2',
+  'Dhanda 1','Dhanda 2'
+];
+
+function groupSelectOwner() {
+  // First clear all
+  document.querySelectorAll('.group-sh-chk').forEach(c => c.checked = false);
+  // Then select only owner shares that are present in checkboxes
+  document.querySelectorAll('.group-sh-chk').forEach(c => {
+    if (OWNER_SHARES.includes(c.value)) c.checked = true;
+  });
+}
+
+function renderGroupCheckboxes() {
+  const grid = document.getElementById('group-checkbox-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  // Only show shareholders who have at least 1 day in current calculation
+  const activeShares = {};
+  _p3DailyBreakdown.forEach(d => {
+    d.present.forEach(sh => { activeShares[sh] = true; });
+  });
+  const activeList = Object.keys(activeShares);
+  if (activeList.length === 0) return;
+  activeList.forEach(sh => {
+    const isOwner = OWNER_SHARES.includes(sh);
+    const label = document.createElement('label');
+    label.style.cssText = 'display:flex;align-items:center;gap:8px;padding:8px 12px;background:' +
+      (isOwner ? 'rgba(201,168,76,0.06)' : 'rgba(255,255,255,0.03)') +
+      ';border:1px solid ' + (isOwner ? 'rgba(201,168,76,0.25)' : 'var(--border)') +
+      ';border-radius:6px;cursor:pointer;font-size:13px;color:var(--text);transition:all 0.2s;';
+    label.innerHTML = '<input type="checkbox" class="group-sh-chk" value="' + sh + '" style="width:16px;height:16px;accent-color:var(--gold);"> ' +
+      (isOwner ? '<span style="color:var(--gold-light);">⚓ ' + sh + '</span>' : sh);
+    grid.appendChild(label);
+  });
+}
+
+function groupSelectAll() {
+  document.querySelectorAll('.group-sh-chk').forEach(c => c.checked = true);
+}
+
+function groupClearAll() {
+  document.querySelectorAll('.group-sh-chk').forEach(c => c.checked = false);
+  document.getElementById('group-results').style.display = 'none';
+}
+
+function calculateGroup() {
+  const selected = Array.from(document.querySelectorAll('.group-sh-chk:checked')).map(c => c.value);
+  if (selected.length === 0) { alert('Please select at least one shareholder.'); return; }
+
+  // Detect if this is owner group selection
+  const isOwnerGroup = selected.length > 0 && selected.every(s => OWNER_SHARES.includes(s)) &&
+    OWNER_SHARES.filter(o => {
+      const chk = document.querySelector('.group-sh-chk[value="' + o + '"]');
+      return chk && chk.checked;
+    }).length === selected.length;
+
+  const banner = document.getElementById('group-label-banner');
+  if (banner) {
+    if (isOwnerGroup || selected.some(s => OWNER_SHARES.includes(s))) {
+      banner.style.display = 'block';
+      banner.textContent = '⚓ Owner Combined Share — ' + selected.filter(s => OWNER_SHARES.includes(s)).join(' + ');
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+
+  const startDate  = _p3StartDate;
+  const endDate    = _p3EndDate;
+  const settleDate = _p3SettleDate || endDate;
+
+  let groupRows = [];
+  let grandShare = 0;
+
+  selected.forEach(sh => {
+    // Share earned
+    let days = 0, shareEarned = 0;
+    _p3DailyBreakdown.forEach(d => {
+      if (d.present.includes(sh)) {
+        days++;
+        shareEarned += d.sharePerPerson;
+      }
+    });
+    // Carry forward
+    const carry = getCarryForward(sh, startDate);
+    // Advances (from cutoff to settle date)
+    const advFrom = getAdvanceCutoffDate(sh, startDate) || startDate;
+    const advs = paymentRecords.filter(p => p.member === sh && p.date >= advFrom && p.date <= settleDate);
+    const advTotal = advs.reduce((s, p) => s + p.amount, 0);
+    // Net
+    const net = shareEarned + carry - advTotal;
+
+    grandShare += shareEarned;
+
+    groupRows.push({ sh, days, shareEarned });
+  });
+
+  const ownerGroupFlag = selected.some(s => OWNER_SHARES.includes(s));
+  _groupData = { groupRows, grandShare, startDate, endDate, settleDate, selected, isOwnerGroup: ownerGroupFlag };
+
+  // Stats
+  document.getElementById('group-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Shareholders Selected</div><div class="stat-value">${selected.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Combined Share Earned</div><div class="stat-value green">${fmt(grandShare)}</div></div>
+  `;
+
+  // Table
+  const tbody = document.getElementById('group-tbody');
+  tbody.innerHTML = '';
+  groupRows.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${r.sh}</strong></td>
+      <td><span class="badge badge-gold">${r.days}</span></td>
+      <td class="result-positive" style="font-size:15px;font-weight:700;">${fmt(r.shareEarned)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Grand total row
+  const totTr = document.createElement('tr');
+  totTr.style.cssText = 'background:rgba(201,168,76,0.12);';
+  totTr.innerHTML = `
+    <td colspan="2" style="font-family:'Cinzel',serif;color:var(--gold);letter-spacing:1px;font-size:13px;">GRAND TOTAL (${selected.length} shareholders)</td>
+    <td class="result-positive" style="font-size:16px;font-weight:700;">${fmt(grandShare)}</td>
+  `;
+  tbody.appendChild(totTr);
+
+  document.getElementById('group-results').style.display = 'block';
+}
+
+function exportGroupPDF() {
+  const d = _groupData;
+  if (!d) return;
+
+  function fmtN(n) { return Number(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+  function pdfD(s) { if (!s) return '—'; var p = s.split('-'); return p.length===3 ? p[2]+'-'+p[1]+'-'+p[0] : s; }
+  function clr(n) { return n >= 0 ? '#1a7a4a' : '#c0392b'; }
+  function sgn(n) { return n < 0 ? '-' : ''; }
+
+  const genDate = new Date().toLocaleDateString('en-IN', {day:'2-digit', month:'2-digit', year:'numeric'});
+
+  // Build per-shareholder sections
+  let sections = '';
+  d.groupRows.forEach(function(r) {
+
+
+    sections += '<div style="margin-bottom:28px;border:1px solid #e0d5b8;border-radius:10px;overflow:hidden;">' +
+      '<div style="background:#0a1628;color:#c9a84c;padding:10px 16px;font-size:13px;font-weight:700;letter-spacing:1px;">&#9875; ' + r.sh.toUpperCase() + '</div>' +
+      '<div style="padding:14px 16px;">' +
+      '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">' +
+      '<div style="text-align:center;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:6px;padding:10px;"><div style="font-size:9px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Days Present</div><div style="font-size:16px;font-weight:700;">' + r.days + '</div></div>' +
+      '<div style="text-align:center;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:6px;padding:10px;"><div style="font-size:9px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Share Earned</div><div style="font-size:16px;font-weight:700;color:#1a7a4a;">&#8377;' + fmtN(r.shareEarned) + '</div></div>' +
+
+      '</div>' +
+
+      '</div></div>';
+  });
+
+  const html = '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
+    '<title>Group Settlement</title>' +
+    '<style>* {box-sizing:border-box;margin:0;padding:0;} body{font-family:Arial,Helvetica,sans-serif;color:#1a1a2e;background:#fff;padding:28px;font-size:14px;} .letterhead{text-align:center;border-bottom:3px double #c9a84c;padding-bottom:18px;margin-bottom:20px;} @media print{body{padding:15px;} @page{margin:12mm;size:A4;}}</style>' +
+    '</head><body>' +
+    '<div class="letterhead">' +
+    '<div style="font-size:38px;margin-bottom:6px;">&#9875;</div>' +
+    '<div style="font-size:22px;font-weight:700;color:#0a1628;letter-spacing:2px;">Al Ahmed Fishing Boat</div>' +
+    '<div style="font-size:11px;color:#888;margin-top:4px;letter-spacing:1px;">FLEET MANAGEMENT &amp; SHARE DISTRIBUTION SYSTEM</div>' +
+    '<div style="display:inline-block;background:#0a1628;color:#c9a84c;font-size:11px;padding:5px 18px;border-radius:4px;margin-top:10px;font-weight:700;letter-spacing:1px;">' + (d.isOwnerGroup ? 'OWNER COMBINED SHARE STATEMENT' : 'GROUP SETTLEMENT STATEMENT') + '</div>' +
+    '</div>' +
+    '<div style="display:flex;justify-content:space-between;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:8px;padding:14px 20px;margin-bottom:20px;flex-wrap:wrap;gap:10px;">' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Fishing Period</div><div style="font-size:15px;font-weight:700;">' + pdfD(d.startDate) + ' to ' + pdfD(d.endDate) + '</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Settlement Date</div><div style="font-size:15px;font-weight:700;color:#c9a84c;">' + pdfD(d.settleDate) + '</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Shareholders</div><div style="font-size:15px;font-weight:700;">' + d.selected.length + ' selected</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Generated On</div><div style="font-size:15px;font-weight:700;">' + genDate + '</div></div>' +
+    '</div>' +
+    (d.isOwnerGroup ? '<div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.4);border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:13px;font-weight:700;color:#c9a84c;letter-spacing:1px;">⚓ OWNER COMBINED SHARES: ' + d.selected.join(' + ') + '</div>' : '') +
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">' +
+    '<div style="text-align:center;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:8px;padding:12px;"><div style="font-size:9px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:6px;">Total Share Earned</div><div style="font-size:18px;font-weight:700;color:#1a7a4a;">&#8377;' + fmtN(d.grandShare) + '</div></div>' +
+
+    '</div>' +
+    sections +
+    '<script>window.onload=function(){window.print();}<\/script>' +
+    '</body></html>';
+
+  var win = window.open('', '_blank');
+  if (!win) { alert('Please allow popups to export PDF.'); return; }
+  win.document.write(html);
+  win.document.close();
+}
+
+// ===== PAGE 5: FISH SALES & SUPPLIER LEDGER =====
+const SUPPLIERS = ['Local','Auction','A Gift','MGM','Noori Fish','Mansoori','AFF'];
+
+let _fsLedgerData = null;
+
+function addFishSale() {
+  const date     = document.getElementById('fs-date').value;
+  const supplier = document.getElementById('fs-supplier').value;
+  const saleType = 'supplier'; // type determined by supplier selection
+  const qty      = parseFloat(document.getElementById('fs-qty').value) || 0;
+  const amount   = parseFloat(document.getElementById('fs-amount').value) || 0;
+  const payType  = document.getElementById('fs-pay-type').value;
+  const notes    = document.getElementById('fs-notes').value.trim();
+
+  if (!date)     { alert('Please select a date.'); return; }
+  if (!supplier) { alert('Please select a supplier.'); return; }
+  if (amount <= 0) { alert('Please enter a valid sale amount.'); return; }
+
+  fishSales.push({ id: Date.now(), date, supplier, saleType, qty, amount, payType, notes });
+  fishSales.sort((a, b) => a.date.localeCompare(b.date));
+  save(KEY_FISHSALES, fishSales);
+
+  // Reset form
+  document.getElementById('fs-qty').value = '';
+  document.getElementById('fs-amount').value = '';
+  document.getElementById('fs-notes').value = '';
+
+  renderFSTable();
+  renderSupplierCards();
+}
+
+function addSupplierPayment() {
+  const date     = document.getElementById('fp2-date').value;
+  const supplier = document.getElementById('fp2-supplier').value;
+  const amount   = parseFloat(document.getElementById('fp2-amount').value) || 0;
+  const notes    = document.getElementById('fp2-notes').value.trim();
+
+  if (!date)     { alert('Please select a date.'); return; }
+  if (!supplier) { alert('Please select a supplier.'); return; }
+  if (amount <= 0) { alert('Please enter a valid amount.'); return; }
+
+  supplierPays.push({ id: Date.now(), date, supplier, amount, notes });
+  supplierPays.sort((a, b) => a.date.localeCompare(b.date));
+  save(KEY_SUPPAY, supplierPays);
+
+  document.getElementById('fp2-amount').value = '';
+  document.getElementById('fp2-notes').value = '';
+
+  renderSupplierCards();
+}
+
+function deleteFishSale(id) {
+  if (!confirm('Delete this sale record?')) return;
+  fishSales = fishSales.filter(r => r.id !== id);
+  save(KEY_FISHSALES, fishSales);
+  renderFSTable();
+  renderSupplierCards();
+}
+
+function deleteSupplierPayment(id) {
+  if (!confirm('Delete this payment record?')) return;
+  supplierPays = supplierPays.filter(r => r.id !== id);
+  save(KEY_SUPPAY, supplierPays);
+  renderSupplierCards();
+}
+
+function renderFSTable() {
+  const filter = document.getElementById('fs-filter-supplier') ?
+    document.getElementById('fs-filter-supplier').value : '';
+  const tbody = document.getElementById('fs-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+
+  const filtered = filter ? fishSales.filter(r => r.supplier === filter) : fishSales;
+  if (filtered.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:20px;font-style:italic;">No sales recorded yet</td></tr>';
+    return;
+  }
+
+  filtered.slice().reverse().forEach(r => {
+    const payBadge = r.payType === 'cash'
+      ? '<span class="badge badge-green">Cash</span>'
+      : '<span class="badge badge-red">Credit</span>';
+    const typeBadge = r.saleType === 'auction'
+      ? '<span class="badge badge-gold">Auction</span>'
+      : '<span class="badge" style="background:rgba(30,107,138,0.2);color:#7ecfed;border:1px solid rgba(30,107,138,0.4);">Local</span>';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge badge-gold">${fmtDate(r.date)}</span></td>
+      <td><strong>${r.supplier}</strong></td>
+      <td>${typeBadge}</td>
+      <td>${r.qty ? r.qty + ' kg' : '—'}</td>
+      <td class="result-positive" style="text-align:right;font-weight:700;">${fmt(r.amount)}</td>
+      <td>${payBadge}</td>
+      <td style="color:var(--muted);font-style:italic;">${r.notes || '—'}</td>
+      <td><button class="btn btn-sm btn-danger" onclick="deleteFishSale(${r.id})">✕</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderSupplierCards() {
+  const container = document.getElementById('fs-supplier-cards');
+  if (!container) return;
+  container.innerHTML = '';
+
+  SUPPLIERS.forEach(sup => {
+    const totalSales = fishSales.filter(r => r.supplier === sup).reduce((s, r) => s + r.amount, 0);
+    const totalPaid  = supplierPays.filter(r => r.supplier === sup).reduce((s, r) => s + r.amount, 0);
+    const pending    = totalSales - totalPaid;
+    const excess     = pending < 0;
+    const settled    = pending === 0 && totalSales > 0;
+
+    const statusColor = excess ? '#c9a84c' : pending > 0 ? '#e74c3c' : totalSales === 0 ? '#888' : '#2ecc71';
+    const statusText  = excess ? '⬆ EXCESS' : pending > 0 ? '⚠ PENDING' : totalSales === 0 ? '— NO SALES' : '✓ CLEARED';
+
+    const card = document.createElement('div');
+    card.style.cssText = 'background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;';
+    card.innerHTML = `
+      <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:1px;margin-bottom:10px;">🐟 ${sup}</div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+        <span style="font-size:11px;color:var(--muted);">Total Sales</span>
+        <span style="font-size:13px;font-weight:700;color:#2ecc71;">${fmt(totalSales)}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+        <span style="font-size:11px;color:var(--muted);">Received</span>
+        <span style="font-size:13px;font-weight:700;color:#7ecfed;">${fmt(totalPaid)}</span>
+      </div>
+      <div style="border-top:1px solid var(--border);margin:8px 0;"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:11px;color:var(--muted);">${excess ? 'Excess Paid' : 'Pending'}</span>
+        <span style="font-size:15px;font-weight:700;color:${statusColor};">${fmt(Math.abs(pending))}</span>
+      </div>
+      <div style="margin-top:8px;text-align:center;">
+        <span style="font-size:10px;font-weight:700;color:${statusColor};letter-spacing:1px;">${statusText}</span>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function generateSupplierLedger() {
+  const supplier = document.getElementById('fs-ledger-supplier').value;
+  const fromDate = document.getElementById('fs-ledger-from').value;
+  const toDate   = document.getElementById('fs-ledger-to').value;
+
+  if (!fromDate || !toDate) { alert('Please select From and To dates.'); return; }
+  if (fromDate > toDate) { alert('From date must be before To date.'); return; }
+
+  let sales = fishSales.filter(r => r.date >= fromDate && r.date <= toDate);
+  let pays  = supplierPays.filter(r => r.date >= fromDate && r.date <= toDate);
+  if (supplier) { sales = sales.filter(r => r.supplier === supplier); pays = pays.filter(r => r.supplier === supplier); }
+
+  const totalSales   = sales.reduce((s, r) => s + r.amount, 0);
+  const totalQty     = sales.reduce((s, r) => s + (r.qty || 0), 0);
+  const totalCash    = sales.filter(r => r.payType === 'cash').reduce((s, r) => s + r.amount, 0);
+  const totalCredit  = sales.filter(r => r.payType === 'credit').reduce((s, r) => s + r.amount, 0);
+  const totalPaid    = pays.reduce((s, r) => s + r.amount, 0);
+  const pending      = totalSales - totalPaid;
+
+  _fsLedgerData = { supplier, fromDate, toDate, sales, pays, totalSales, totalQty, totalCash, totalCredit, totalPaid, pending };
+
+  // Stats
+  document.getElementById('fs-ledger-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total Sales</div><div class="stat-value green">${fmt(totalSales)}</div></div>
+    <div class="stat-card"><div class="stat-label">Total Qty</div><div class="stat-value">${totalQty.toFixed(1)} kg</div></div>
+    <div class="stat-card"><div class="stat-label">Cash Sales</div><div class="stat-value green">${fmt(totalCash)}</div></div>
+    <div class="stat-card"><div class="stat-label">Credit Sales</div><div class="stat-value red">${fmt(totalCredit)}</div></div>
+    <div class="stat-card"><div class="stat-label">Payments Received</div><div class="stat-value" style="color:#7ecfed;">${fmt(totalPaid)}</div></div>
+    <div class="stat-card"><div class="stat-label">${pending < 0 ? 'Excess Paid' : 'Pending'}</div><div class="stat-value ${pending < 0 ? '' : pending > 0 ? 'red' : 'green'}">${pending < 0 ? '⬆ ' : pending > 0 ? '⚠ ' : '✓ '}${fmt(Math.abs(pending))}</div></div>
+  `;
+
+  // Sales table
+  const stbody = document.getElementById('fs-ledger-sales-tbody');
+  stbody.innerHTML = '';
+  if (sales.length === 0) {
+    stbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:16px;font-style:italic;">No sales in this period</td></tr>';
+  } else {
+    sales.forEach(r => {
+      const payBadge = r.payType === 'cash' ? '<span class="badge badge-green">Cash</span>' : '<span class="badge badge-red">Credit</span>';
+      const typeBadge = r.saleType === 'auction' ? '<span class="badge badge-gold">Auction</span>' : '<span class="badge" style="background:rgba(30,107,138,0.2);color:#7ecfed;border:1px solid rgba(30,107,138,0.4);">Local</span>';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="badge badge-gold">${fmtDate(r.date)}</span></td>
+        <td><strong>${r.supplier}</strong></td>
+        <td>${typeBadge}</td>
+        <td>${r.qty ? r.qty + ' kg' : '—'}</td>
+        <td class="result-positive" style="text-align:right;font-weight:700;">${fmt(r.amount)}</td>
+        <td>${payBadge}</td>
+        <td style="color:var(--muted);font-style:italic;">${r.notes || '—'}</td>
+        <td></td>
+      `;
+      stbody.appendChild(tr);
+    });
+    // Total row
+    const totTr = document.createElement('tr');
+    totTr.style.cssText = 'background:rgba(201,168,76,0.1);font-weight:700;';
+    totTr.innerHTML = `<td colspan="3" style="color:var(--gold);">TOTAL (${sales.length} sales)</td><td>${totalQty.toFixed(1)} kg</td><td class="result-positive" style="text-align:right;font-size:15px;">${fmt(totalSales)}</td><td colspan="3"></td>`;
+    stbody.appendChild(totTr);
+  }
+
+  // Payments table
+  const ptbody = document.getElementById('fs-ledger-pay-tbody');
+  ptbody.innerHTML = '';
+  if (pays.length === 0) {
+    ptbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:16px;font-style:italic;">No payments received in this period</td></tr>';
+  } else {
+    pays.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="badge badge-gold">${fmtDate(r.date)}</span></td>
+        <td><strong>${r.supplier}</strong></td>
+        <td class="result-positive" style="text-align:right;font-size:15px;font-weight:700;">${fmt(r.amount)}</td>
+        <td style="color:var(--muted);font-style:italic;">${r.notes || '—'}</td>
+        <td></td>
+      `;
+      ptbody.appendChild(tr);
+    });
+    const ptotTr = document.createElement('tr');
+    ptotTr.style.cssText = 'background:rgba(26,122,74,0.1);font-weight:700;';
+    ptotTr.innerHTML = `<td colspan="2" style="color:var(--gold);">TOTAL RECEIVED (${pays.length} payments)</td><td class="result-positive" style="text-align:right;font-size:15px;">${fmt(totalPaid)}</td><td colspan="2"></td>`;
+    ptbody.appendChild(ptotTr);
+  }
+
+  document.getElementById('fs-ledger-results').style.display = 'block';
+  document.getElementById('fs-ledger-results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function exportSupplierLedgerPDF() {
+  const d = _fsLedgerData;
+  if (!d) return;
+
+  function fmtN(n) { return Number(n||0).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+  function pdfD(s) { if (!s) return '—'; var p = s.split('-'); return p.length===3?p[2]+'-'+p[1]+'-'+p[0]:s; }
+
+  const genDate = new Date().toLocaleDateString('en-IN', {day:'2-digit',month:'2-digit',year:'numeric'});
+  const supLabel = d.supplier || 'All Suppliers';
+  const pendingColor = d.pending < 0 ? '#c9a84c' : d.pending > 0 ? '#c0392b' : '#1a7a4a';
+  const pendingLabel = d.pending < 0 ? '⬆ EXCESS PAID' : d.pending > 0 ? '⚠ PENDING' : '✓ FULLY CLEARED';
+
+  let salesRows = '';
+  d.sales.forEach(function(r) {
+    salesRows += '<tr>' +
+      '<td>' + pdfD(r.date) + '</td>' +
+      '<td><strong>' + r.supplier + '</strong></td>' +
+      '<td><span style="background:' + (r.saleType==='auction'?'#c9a84c':'#1e6b8a') + ';color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;">' + (r.saleType==='auction'?'Auction':'Local') + '</span></td>' +
+      '<td>' + (r.qty ? r.qty + ' kg' : '—') + '</td>' +
+      '<td style="text-align:right;color:#1a7a4a;font-weight:700;">&#8377;' + fmtN(r.amount) + '</td>' +
+      '<td><span style="background:' + (r.payType==='cash'?'#1a7a4a':'#c0392b') + ';color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;">' + (r.payType==='cash'?'Cash':'Credit') + '</span></td>' +
+      '<td style="color:#666;font-style:italic;">' + (r.notes||'—') + '</td></tr>';
+  });
+  if (d.sales.length > 0) {
+    salesRows += '<tr style="background:#0a1628;"><td colspan="4" style="color:#c9a84c;font-weight:700;">TOTAL — ' + d.sales.length + ' sales</td><td style="text-align:right;color:#2ecc71;font-weight:700;font-size:15px;">&#8377;' + fmtN(d.totalSales) + '</td><td colspan="2"></td></tr>';
+  }
+
+  let payRows = '';
+  d.pays.forEach(function(r) {
+    payRows += '<tr>' +
+      '<td>' + pdfD(r.date) + '</td>' +
+      '<td><strong>' + r.supplier + '</strong></td>' +
+      '<td style="text-align:right;color:#1a7a4a;font-weight:700;font-size:15px;">&#8377;' + fmtN(r.amount) + '</td>' +
+      '<td style="color:#666;font-style:italic;">' + (r.notes||'—') + '</td></tr>';
+  });
+  if (d.pays.length > 0) {
+    payRows += '<tr style="background:#0a1628;"><td colspan="2" style="color:#c9a84c;font-weight:700;">TOTAL RECEIVED — ' + d.pays.length + ' payments</td><td style="text-align:right;color:#2ecc71;font-weight:700;font-size:15px;">&#8377;' + fmtN(d.totalPaid) + '</td><td></td></tr>';
+  }
+
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Supplier Ledger - ' + supLabel + '</title>' +
+    '<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,Helvetica,sans-serif;color:#1a1a2e;background:#fff;padding:28px;font-size:14px;}table{width:100%;border-collapse:collapse;margin-bottom:20px;}th{background:#0a1628;color:#c9a84c;font-size:10px;text-transform:uppercase;padding:9px 14px;text-align:left;font-weight:700;}td{padding:9px 14px;border-bottom:1px solid #e8e0d0;}tr:nth-child(even) td{background:#faf7f0;}@media print{body{padding:15px;}@page{margin:12mm;size:A4;}}</style>' +
+    '</head><body>' +
+
+    '<div style="text-align:center;border-bottom:3px double #c9a84c;padding-bottom:16px;margin-bottom:18px;">' +
+    '<div style="font-size:36px;margin-bottom:6px;">🐟</div>' +
+    '<div style="font-size:22px;font-weight:700;color:#0a1628;letter-spacing:2px;">Al Ahmed Fishing Boat</div>' +
+    '<div style="font-size:11px;color:#888;margin-top:4px;letter-spacing:1px;">FISH SALES &amp; SUPPLIER LEDGER</div>' +
+    '<div style="display:inline-block;background:#0a1628;color:#c9a84c;font-size:11px;padding:5px 18px;border-radius:4px;margin-top:10px;font-weight:700;letter-spacing:1px;">SUPPLIER STATEMENT</div>' +
+    '</div>' +
+
+    '<div style="display:flex;justify-content:space-between;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:8px;padding:12px 18px;margin-bottom:16px;flex-wrap:wrap;gap:10px;">' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Supplier</div><div style="font-size:16px;font-weight:700;">' + supLabel + '</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Period</div><div style="font-size:15px;font-weight:700;">' + pdfD(d.fromDate) + ' to ' + pdfD(d.toDate) + '</div></div>' +
+    '<div><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;">Generated</div><div style="font-size:15px;font-weight:700;">' + genDate + '</div></div>' +
+    '</div>' +
+
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;">' +
+    '<div style="text-align:center;background:#eaf7f0;border:1px solid #a8dcc2;border-radius:8px;padding:12px;"><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Total Fish Sales</div><div style="font-size:20px;font-weight:700;color:#1a7a4a;">&#8377;' + fmtN(d.totalSales) + '</div><div style="font-size:11px;color:#888;margin-top:2px;">' + d.totalQty.toFixed(1) + ' kg total</div></div>' +
+    '<div style="text-align:center;background:#f7f3eb;border:1px solid #e0d5b8;border-radius:8px;padding:12px;"><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Payments Received</div><div style="font-size:20px;font-weight:700;color:#1e6b8a;">&#8377;' + fmtN(d.totalPaid) + '</div></div>' +
+    '<div style="text-align:center;background:' + (d.pending>0?'#fdf0ee':d.pending<0?'#fff9ee':'#eaf7f0') + ';border:2px solid ' + (d.pending>0?'#f0b8b0':d.pending<0?'#e0d5b8':'#a8dcc2') + ';border-radius:8px;padding:12px;"><div style="font-size:10px;color:#888;text-transform:uppercase;font-weight:600;margin-bottom:4px;">' + pendingLabel + '</div><div style="font-size:22px;font-weight:700;color:' + pendingColor + ';">&#8377;' + fmtN(Math.abs(d.pending)) + '</div></div>' +
+    '</div>' +
+
+    '<div style="background:#0a1628;color:#c9a84c;font-size:11px;padding:8px 14px;font-weight:700;letter-spacing:1px;margin-bottom:0;">🐟 FISH SALES</div>' +
+    '<table><thead><tr><th>Date</th><th>Supplier</th><th>Type</th><th>Qty</th><th style="text-align:right">Amount</th><th>Payment</th><th>Notes</th></tr></thead><tbody>' + (salesRows || '<tr><td colspan="7" style="text-align:center;color:#888;font-style:italic;padding:12px;">No sales in this period</td></tr>') + '</tbody></table>' +
+
+    '<div style="background:#0a1628;color:#c9a84c;font-size:11px;padding:8px 14px;font-weight:700;letter-spacing:1px;margin-bottom:0;">💰 PAYMENTS RECEIVED</div>' +
+    '<table><thead><tr><th>Date</th><th>Supplier</th><th style="text-align:right">Amount Received</th><th>Notes</th></tr></thead><tbody>' + (payRows || '<tr><td colspan="4" style="text-align:center;color:#888;font-style:italic;padding:12px;">No payments in this period</td></tr>') + '</tbody></table>' +
+
+    '<div style="border:2px solid ' + (d.pending>0?'#f0b8b0':d.pending<0?'#e0d5b8':'#a8dcc2') + ';border-radius:10px;overflow:hidden;margin-bottom:24px;">' +
+    '<div style="background:#0a1628;color:#c9a84c;padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:1px;">FINAL BALANCE</div>' +
+    '<div style="padding:0;">' +
+    '<div style="display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #e8e0d0;"><span style="color:#444;font-weight:600;">Total Fish Sales</span><span style="color:#1a7a4a;font-weight:700;font-size:16px;">&#8377;' + fmtN(d.totalSales) + '</span></div>' +
+    '<div style="display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #e8e0d0;"><span style="color:#444;font-weight:600;">Payments Received</span><span style="color:#1e6b8a;font-weight:700;font-size:16px;">− &#8377;' + fmtN(d.totalPaid) + '</span></div>' +
+    '<div style="display:flex;justify-content:space-between;padding:16px;background:' + (d.pending>0?'#fdf0ee':d.pending<0?'#fff9ee':'#eaf7f0') + ';"><span style="font-size:15px;font-weight:700;color:' + pendingColor + ';">' + pendingLabel + ' — ' + supLabel.toUpperCase() + '</span><span style="font-size:24px;font-weight:700;color:' + pendingColor + ';">&#8377;' + fmtN(Math.abs(d.pending)) + '</span></div>' +
+    '</div></div>' +
+
+    '<div style="text-align:center;margin-top:24px;padding-top:14px;border-top:1px solid #e0d5b8;font-size:11px;color:#aaa;">Al Ahmed Fishing Boat &nbsp;&middot;&nbsp; Supplier Ledger &nbsp;&middot;&nbsp; ' + genDate + '</div>' +
+    '<script>window.onload=function(){window.print();}<\/script>' +
+    '</body></html>';
+
+  var win = window.open('', '_blank');
+  if (!win) { alert('Please allow popups to export PDF.'); return; }
+  win.document.write(html);
+  win.document.close();
+}
+
+function exportSupplierLedgerCSV() {
+  const d = _fsLedgerData;
+  if (!d) return;
+
+  function pdfD(s) { if (!s) return ''; var p = s.split('-'); return p.length===3?p[2]+'-'+p[1]+'-'+p[0]:s; }
+
+  const lines = [];
+  lines.push(['Al Ahmed Fishing Boat — Supplier Ledger']);
+  lines.push(['Supplier', d.supplier || 'All Suppliers']);
+  lines.push(['From Date', pdfD(d.fromDate)]);
+  lines.push(['To Date', pdfD(d.toDate)]);
+  lines.push(['Generated On', new Date().toLocaleDateString('en-IN')]);
+  lines.push([]);
+  lines.push(['SUMMARY']);
+  lines.push(['Total Fish Sales (Rs)', d.totalSales]);
+  lines.push(['Total Qty (kg)', d.totalQty]);
+  lines.push(['Cash Sales (Rs)', d.totalCash]);
+  lines.push(['Credit Sales (Rs)', d.totalCredit]);
+  lines.push(['Payments Received (Rs)', d.totalPaid]);
+  lines.push([d.pending < 0 ? 'Excess Paid (Rs)' : 'Pending (Rs)', Math.abs(d.pending)]);
+  lines.push([]);
+  lines.push(['FISH SALES']);
+  lines.push(['Date','Supplier','Sale Type','Qty (kg)','Amount (Rs)','Payment Type','Notes']);
+  d.sales.forEach(function(r) {
+    lines.push([pdfD(r.date), r.supplier, r.saleType, r.qty||0, r.amount, r.payType, r.notes||'']);
+  });
+  lines.push(['TOTAL','','',d.totalQty,d.totalSales,'','']);
+  lines.push([]);
+  lines.push(['PAYMENTS RECEIVED']);
+  lines.push(['Date','Supplier','Amount (Rs)','Notes']);
+  d.pays.forEach(function(r) {
+    lines.push([pdfD(r.date), r.supplier, r.amount, r.notes||'']);
+  });
+  lines.push(['TOTAL','',d.totalPaid,'']);
+
+  const csv = lines.map(function(row) {
+    return row.map(function(cell) {
+      const str = String(cell === undefined || cell === null ? '' : cell);
+      if (str.indexOf(',') >= 0 || str.indexOf('"') >= 0 || str.indexOf('\n') >= 0) {
+        return '"' + str.replace(/"/g, '""') + '"';
+      }
+      return str;
+    }).join(',');
+  }).join('\r\n');
+
+  const bom = '﻿';
+  const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Supplier_Ledger_' + (d.supplier||'All').replace(/\s+/g,'_') + '_' + d.fromDate + '_to_' + d.toDate + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ===== ADVANCE STATEMENT =====
+let _advStmtData = null;
+
+function initAdvStmtDropdown() {
+  const sel = document.getElementById('adv-stmt-member');
+  if (!sel) return;
+  sel.innerHTML = '<option value="">— All Members —</option>';
+  SHAREHOLDERS.forEach(sh => {
+    const o = document.createElement('option');
+    o.value = sh; o.textContent = sh;
+    sel.appendChild(o);
+  });
+}
+
+function generateAdvStmt() {
+  const member  = document.getElementById('adv-stmt-member').value;
+  const fromDate = document.getElementById('adv-stmt-from').value;
+  const toDate   = document.getElementById('adv-stmt-to').value;
+
+  if (!fromDate || !toDate) { alert('Please select both From and To dates.'); return; }
+  if (fromDate > toDate) { alert('From date must be before To date.'); return; }
+
+  // Filter payments
+  let filtered = paymentRecords.filter(p => p.date >= fromDate && p.date <= toDate);
+  if (member) filtered = filtered.filter(p => p.member === member);
+  filtered.sort((a, b) => a.date.localeCompare(b.date) || a.member.localeCompare(b.member));
+
+  const totalAdv  = filtered.filter(p => p.type === 'advance').reduce((s, p) => s + p.amount, 0);
+  const totalSal  = filtered.filter(p => p.type === 'salary').reduce((s, p) => s + p.amount, 0);
+  const totalOth  = filtered.filter(p => p.type === 'other').reduce((s, p) => s + p.amount, 0);
+  const totalAll  = filtered.reduce((s, p) => s + p.amount, 0);
+
+  // Save for PDF
+  _advStmtData = { member, fromDate, toDate, filtered, totalAdv, totalSal, totalOth, totalAll };
+
+  // Render stats
+  document.getElementById('adv-stmt-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total Advance</div><div class="stat-value red">${fmt(totalAdv)}</div></div>
+    <div class="stat-card"><div class="stat-label">Total Salary</div><div class="stat-value green">${fmt(totalSal)}</div></div>
+    <div class="stat-card"><div class="stat-label">Other</div><div class="stat-value">${fmt(totalOth)}</div></div>
+    <div class="stat-card"><div class="stat-label">Grand Total</div><div class="stat-value red">${fmt(totalAll)}</div></div>
+    <div class="stat-card"><div class="stat-label">Transactions</div><div class="stat-value">${filtered.length}</div></div>
+  `;
+
+  // Render table
+  const tbody = document.getElementById('adv-stmt-tbody');
+  tbody.innerHTML = '';
+  if (filtered.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:20px;font-style:italic;">No transactions found for selected period</td></tr>';
+  } else {
+    filtered.forEach(p => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="badge badge-gold">${fmtDate(p.date)}</span></td>
+        <td><strong>${p.member}</strong></td>
+        <td class="adv-pending">${fmt(p.amount)}</td>
+        <td style="color:var(--muted);font-style:italic;">${p.notes || '—'}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+    // Total row
+    const totTr = document.createElement('tr');
+    totTr.style.cssText = 'background:rgba(201,168,76,0.1);font-weight:700;';
+    totTr.innerHTML = `
+      <td colspan="3" style="font-family:'Cinzel',serif;letter-spacing:1px;color:var(--gold);">GRAND TOTAL (${filtered.length} transactions)</td>
+      <td class="adv-pending" style="font-size:16px;">${fmt(totalAll)}</td>
+      <td></td>
+    `;
+    tbody.appendChild(totTr);
+  }
+
+  document.getElementById('adv-stmt-results').style.display = 'block';
+}
+
+function exportAdvStmtPDF() {
+  const d = _advStmtData;
+  if (!d) return;
+
+  function fmtN(n) {
+    return Number(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  function pdfD(s) {
+    if (!s) return '—';
+    var p = s.split('-');
+    return p.length === 3 ? p[2]+'-'+p[1]+'-'+p[0] : s;
+  }
+
+  // Build table rows
+  let rows = '';
+  d.filtered.forEach(function(p) {
+    const typeColor = p.type === 'advance' ? '#c0392b' : p.type === 'salary' ? '#1a7a4a' : '#c9a84c';
+    const typeName  = p.type.charAt(0).toUpperCase() + p.type.slice(1);
+    rows += '<tr>' +
+      '<td>' + pdfD(p.date) + '</td>' +
+      '<td><strong>' + p.member + '</strong></td>' +
+      '<td><span style="background:' + typeColor + ';color:#fff;padding:2px 10px;border-radius:4px;font-size:12px;">' + typeName + '</span></td>' +
+      '<td style="text-align:right;font-weight:700;color:#c0392b;font-size:15px;">&#8377;' + fmtN(p.amount) + '</td>' +
+      '<td style="color:#666;font-style:italic;">' + (p.notes || '—') + '</td>' +
+      '</tr>';
+  });
+
+  const memberLabel = d.member || 'All Shareholders';
+  const genDate = new Date().toLocaleDateString('en-IN', {day:'2-digit', month:'2-digit', year:'numeric'});
+
+  const html = '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
+    '<title>Advance Statement - ' + memberLabel + '</title>' +
+    '<style>' +
+    '* { box-sizing:border-box; margin:0; padding:0; }' +
+    'body { font-family:Arial,Helvetica,sans-serif; color:#1a1a2e; background:#fff; padding:32px; font-size:14px; }' +
+    '.letterhead { text-align:center; border-bottom:3px double #c9a84c; padding-bottom:20px; margin-bottom:24px; }' +
+    '.company { font-size:22px; font-weight:700; color:#0a1628; letter-spacing:2px; }' +
+    '.tagline { font-size:11px; color:#888; letter-spacing:1px; margin-top:4px; }' +
+    '.doc-badge { display:inline-block; background:#0a1628; color:#c9a84c; font-size:11px; padding:5px 18px; border-radius:4px; margin-top:10px; font-weight:700; letter-spacing:1px; }' +
+    '.meta { display:flex; justify-content:space-between; background:#f7f3eb; border:1px solid #e0d5b8; border-radius:8px; padding:14px 20px; margin-bottom:20px; flex-wrap:wrap; gap:12px; }' +
+    '.meta-item { display:flex; flex-direction:column; gap:3px; }' +
+    '.meta-lbl { font-size:10px; letter-spacing:0.5px; color:#888; text-transform:uppercase; font-weight:600; }' +
+    '.meta-val { font-size:15px; color:#0a1628; font-weight:700; }' +
+    '.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:20px; }' +
+    '.stat { border:1px solid #e0d5b8; border-radius:8px; padding:12px; text-align:center; background:#faf7f0; }' +
+    '.stat-lbl { font-size:10px; color:#888; text-transform:uppercase; font-weight:600; margin-bottom:6px; }' +
+    '.stat-val { font-size:18px; font-weight:700; }' +
+    '.red { color:#c0392b; } .green { color:#1a7a4a; }' +
+    'table { width:100%; border-collapse:collapse; margin-bottom:20px; font-size:14px; }' +
+    'th { background:#0a1628; color:#c9a84c; font-size:10px; text-transform:uppercase; padding:10px 14px; text-align:left; font-weight:700; }' +
+    'td { padding:10px 14px; border-bottom:1px solid #e8e0d0; }' +
+    'tr:nth-child(even) td { background:#faf7f0; }' +
+    '.tot-row td { background:#0a1628 !important; color:#c9a84c; font-weight:700; font-size:14px; border:none; }' +
+    '.footer { text-align:center; margin-top:24px; padding-top:16px; border-top:1px solid #e0d5b8; font-size:11px; color:#aaa; }' +
+    '.sig-area { display:flex; justify-content:space-between; margin-top:40px; padding:0 20px; }' +
+    '.sig-box { text-align:center; width:160px; }' +
+    '.sig-line { border-top:1px solid #555; padding-top:6px; font-size:11px; color:#555; }' +
+    '@media print { body { padding:20px; } @page { margin:15mm; size:A4; } }' +
+    '</style></head><body>' +
+
+    '<div class="letterhead">' +
+    '<div style="font-size:40px;margin-bottom:8px;">&#9875;</div>' +
+    '<div class="company">Al Ahmed Fishing Boat</div>' +
+    '<div class="tagline">FLEET MANAGEMENT &amp; SHARE DISTRIBUTION SYSTEM</div>' +
+    '<div class="doc-badge">ADVANCE PAYMENT STATEMENT</div>' +
+    '</div>' +
+
+    '<div class="meta">' +
+    '<div class="meta-item"><span class="meta-lbl">Shareholder</span><span class="meta-val">' + memberLabel + '</span></div>' +
+    '<div class="meta-item"><span class="meta-lbl">From Date</span><span class="meta-val">' + pdfD(d.fromDate) + '</span></div>' +
+    '<div class="meta-item"><span class="meta-lbl">To Date</span><span class="meta-val">' + pdfD(d.toDate) + '</span></div>' +
+    '<div class="meta-item"><span class="meta-lbl">Generated On</span><span class="meta-val">' + genDate + '</span></div>' +
+    '</div>' +
+
+    '<div class="stats">' +
+    '<div class="stat"><div class="stat-lbl">Total Advance</div><div class="stat-val red">&#8377;' + fmtN(d.totalAdv) + '</div></div>' +
+    '<div class="stat"><div class="stat-lbl">Total Salary</div><div class="stat-val green">&#8377;' + fmtN(d.totalSal) + '</div></div>' +
+    '<div class="stat"><div class="stat-lbl">Other</div><div class="stat-val">&#8377;' + fmtN(d.totalOth) + '</div></div>' +
+    '<div class="stat"><div class="stat-lbl">Grand Total</div><div class="stat-val red">&#8377;' + fmtN(d.totalAll) + '</div></div>' +
+    '</div>' +
+
+    '<table><thead><tr>' +
+    '<th>Date</th><th>Shareholder</th><th>Type</th><th style="text-align:right">Amount (&#8377;)</th><th>Notes</th>' +
+    '</tr></thead><tbody>' + rows +
+    '<tr class="tot-row">' +
+    '<td colspan="3">GRAND TOTAL &mdash; ' + d.filtered.length + ' Transactions</td>' +
+    '<td style="text-align:right;font-size:16px;">&#8377;' + fmtN(d.totalAll) + '</td>' +
+    '<td></td></tr>' +
+    '</tbody></table>' +
+
+    '<div class="sig-area">' +
+    '<div class="sig-box"><div style="height:40px;"></div><div class="sig-line">AUTHORISED SIGNATORY</div></div>' +
+    '<div class="sig-box"><div style="height:40px;"></div><div class="sig-line">SHAREHOLDER SIGNATURE</div></div>' +
+    '</div>' +
+
+    '<div class="footer">Al Ahmed Fishing Boat &nbsp;&middot;&nbsp; Generated ' + genDate + ' &nbsp;&middot;&nbsp; Advance Payment Statement</div>' +
+    '<script>window.onload=function(){window.print();}<\/script>' +
+    '</body></html>';
+
+  var win = window.open('', '_blank');
+  if (!win) { alert('Please allow popups to export PDF.'); return; }
+  win.document.write(html);
+  win.document.close();
+}
+
+function exportAdvStmtCSV() {
+  const d = _advStmtData;
+  if (!d) return;
+
+  function pdfD(s) {
+    if (!s) return '';
+    var p = s.split('-');
+    return p.length === 3 ? p[2]+'-'+p[1]+'-'+p[0] : s;
+  }
+
+  const memberLabel = d.member || 'All Shareholders';
+
+  // Header rows
+  const lines = [];
+  lines.push(['Al Ahmed Fishing Boat — Advance Statement']);
+  lines.push(['Shareholder', memberLabel]);
+  lines.push(['From Date', pdfD(d.fromDate)]);
+  lines.push(['To Date', pdfD(d.toDate)]);
+  lines.push(['Generated On', new Date().toLocaleDateString('en-IN')]);
+  lines.push([]); // blank row
+
+  // Summary
+  lines.push(['SUMMARY']);
+  lines.push(['Total Advance', d.totalAdv]);
+  lines.push(['Total Salary', d.totalSal]);
+  lines.push(['Other', d.totalOth]);
+  lines.push(['Grand Total', d.totalAll]);
+  lines.push(['Transactions', d.filtered.length]);
+  lines.push([]); // blank row
+
+  // Table header
+  lines.push(['Date', 'Shareholder', 'Type', 'Amount (Rs)', 'Notes']);
+
+  // Table rows
+  d.filtered.forEach(function(p) {
+    lines.push([
+      pdfD(p.date),
+      p.member,
+      p.type.charAt(0).toUpperCase() + p.type.slice(1),
+      p.amount,
+      p.notes || ''
+    ]);
+  });
+
+  // Total row
+  lines.push(['GRAND TOTAL', '', '', d.totalAll, '']);
+
+  // Convert to CSV string
+  const csv = lines.map(function(row) {
+    return row.map(function(cell) {
+      const str = String(cell === undefined || cell === null ? '' : cell);
+      // Wrap in quotes if contains comma, quote, or newline
+      if (str.indexOf(',') >= 0 || str.indexOf('"') >= 0 || str.indexOf('\n') >= 0) {
+        return '"' + str.replace(/"/g, '""') + '"';
+      }
+      return str;
+    }).join(',');
+  }).join('\r\n');
+
+  // Download
+  const bom = '﻿'; // UTF-8 BOM for Excel
+  const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Advance_Statement_' + (d.member || 'All').replace(/\s+/g, '_') + '_' + d.fromDate + '_to_' + d.toDate + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ===== INIT =====
+renderP1Table();
+renderP2Table();
+renderSavedPeriods();
+updateSyncLabel();
+initAdvStmtDropdown();
+
+// Try to restore Drive connection from previous session token
+(function() {
+  const t = localStorage.getItem('aafb_gdrive_token');
+  if (t) {
+    gdriveToken = t;
+    setDriveStatus(true, 'Connected ✓ — verifying...');
+    // Verify token is still valid by finding file
+    gdriveFindFile().then(function(id) {
+      if (id) {
+        setDriveStatus(true, 'Connected ✓');
+      } else {
+        setDriveStatus(true, 'Connected ✓ — No backup yet');
+      }
+    }).catch(function() {
+      gdriveToken = null;
+      localStorage.removeItem('aafb_gdrive_token');
+      setDriveStatus(false, 'Session expired — reconnect');
+    });
+  }
+})();
+</script>
+</body>
+</html>
