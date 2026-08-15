@@ -1147,6 +1147,7 @@
           <option>AFF</option>
           <option>Farook</option>
           <option>Chawan</option>
+          <option>Gulshad</option>
         </select>
       </div>
 
@@ -1194,6 +1195,7 @@
           <option>AFF</option>
           <option>Farook</option>
           <option>Chawan</option>
+          <option>Gulshad</option>
         </select>
       </div>
       <div class="form-group">
@@ -1223,6 +1225,7 @@
         <option>AFF</option>
           <option>Farook</option>
           <option>Chawan</option>
+          <option>Gulshad</option>
       </select>
     </div>
     <div class="table-wrap">
@@ -1264,6 +1267,7 @@
           <option>AFF</option>
           <option>Farook</option>
           <option>Chawan</option>
+          <option>Gulshad</option>
         </select>
       </div>
       <div class="form-group">
@@ -1341,6 +1345,7 @@
         <option>AFF</option>
           <option>Farook</option>
           <option>Chawan</option>
+          <option>Gulshad</option>
       </select>
     </div>
     <div class="table-wrap">
@@ -1377,6 +1382,7 @@
         <option>Noori Fish</option><option>Mansoori</option><option>AFF</option>
           <option>Farook</option>
           <option>Chawan</option>
+          <option>Gulshad</option>
       </select>
     </div>
     <div class="form-group" style="margin-bottom:14px">
@@ -1846,7 +1852,7 @@ document.getElementById('p1-date').value = today();
 
 // ---- Dynamic row builders ----
 function makeSaleSupplierOptions(selected) {
-  return ['','Local','Auction','A Gift','MGM','Noori Fish','Mansoori','AFF','Farook','Chawan']
+  return ['','Local','Auction','A Gift','MGM','Noori Fish','Mansoori','AFF','Farook','Chawan','Gulshad']
     .map(function(s) {
       const val = s;
       const label = s === '' ? '— Select —' : s;
@@ -1894,7 +1900,7 @@ function makeItemRow(containerId, type) {
     const expCatOpts = ['Petrol','Ice','Waqti','Tractor','Engine Oil','2T Oil','Bhatta','Nashta','Dinner','Lunch','Water','Cold Drink','Rickshaw Petrol Rent','Tempo Rent','Bangda','Other']
       .map(c => '<option value="' + c + '">' + c + '</option>').join('');
     const expCatSelect = '<option value="">— Select Category —</option>' + expCatOpts;
-    const expSupOpts = ['','A Gift','MGM','Noori Fish','Mansoori','AFF','Farook','Chawan']
+    const expSupOpts = ['','A Gift','MGM','Noori Fish','Mansoori','AFF','Farook','Chawan','Gulshad']
       .map(s => '<option value="' + s + '">' + (s||'— No Supplier —') + '</option>').join('');
     div.innerHTML =
       '<div style="display:grid;grid-template-columns:130px 1fr 70px 80px 1fr 110px auto;gap:5px;align-items:center;">' +
@@ -2032,7 +2038,7 @@ function makeEditItemRow(containerId, item, amount, type) {
     const isTractor = cat === 'Tractor';
     const expCatOpts = ['Petrol','Ice','Waqti','Tractor','Engine Oil','2T Oil','Bhatta','Nashta','Dinner','Lunch','Water','Cold Drink','Rickshaw Petrol Rent','Tempo Rent','Bangda','Other']
       .map(function(c) { return '<option value="' + c + '"' + (c===cat?' selected':'') + '>' + c + '</option>'; }).join('');
-    const expSupOpts = ['','A Gift','MGM','Noori Fish','Mansoori','AFF','Farook','Chawan']
+    const expSupOpts = ['','A Gift','MGM','Noori Fish','Mansoori','AFF','Farook','Chawan','Gulshad']
       .map(function(s) { return '<option value="' + s + '"' + (s===expSup?' selected':'') + '>' + (s||'— No Supplier —') + '</option>'; }).join('');
     const expQtyV  = isObj ? (item.expQty  || '') : '';
     const expRateV = isObj ? (item.expRate || '') : '';
@@ -4185,7 +4191,7 @@ function exportGroupPDF() {
 }
 
 // ===== PAGE 5: FISH SALES & SUPPLIER LEDGER =====
-const SUPPLIERS = ['Local','Auction','A Gift','MGM','Noori Fish','Mansoori','AFF','Farook','Chawan'];
+const SUPPLIERS = ['Local','Auction','A Gift','MGM','Noori Fish','Mansoori','AFF','Farook','Chawan','Gulshad'];
 
 let _fsLedgerData = null;
 
