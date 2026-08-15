@@ -3,9 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#c9a84c">
-<meta name="mobile-web-app-capable" content="yes">
 <title>Al Ahmed Fishing Boat</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -81,14 +78,11 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { overflow-x: hidden; }
-
   body {
     background: var(--navy);
     color: var(--text);
     font-family: 'Crimson Text', serif;
     min-height: 100vh;
-    overflow-x: hidden;
     background-image: 
       radial-gradient(ellipse at 20% 50%, rgba(30, 107, 138, 0.15) 0%, transparent 60%),
       radial-gradient(ellipse at 80% 20%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
@@ -107,8 +101,6 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    width: 100%;
-    overflow: hidden;
   }
 
   .header-icon {
@@ -448,279 +440,10 @@
     .card { border: 1px solid #ccc; }
   }
 
-  /* ===== MOBILE / PWA OPTIMISED STYLES ===== */
   @media (max-width: 600px) {
-
-    /* HEADER — compact on mobile */
-    .header { padding: 10px 14px; gap: 10px; }
-    .header-icon { font-size: 24px; }
-    .header-title { font-size: 15px; letter-spacing: 1px; }
-    .header-sub { font-size: 10px; letter-spacing: 0.5px; }
-
-    /* NAV — smaller tabs, better scroll */
-    .nav-btn {
-      min-width: 100px;
-      padding: 11px 12px;
-      font-size: 10px;
-      letter-spacing: 0.8px;
-    }
-
-    /* PAGES — tighter padding */
-    .page { padding: 12px; }
-
-    /* CARDS — less padding on mobile */
-    .card { padding: 14px; margin-bottom: 14px; border-radius: 10px; }
-
-    /* STATS GRID — 2 columns always */
-    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .stat-card { padding: 12px 8px; }
-    .stat-value { font-size: 18px; }
-    .stat-label { font-size: 9px; }
-
-    /* FORM ROWS — single column on mobile */
-    .form-row { grid-template-columns: 1fr; gap: 10px; }
-
-    /* INPUTS — larger touch targets */
-    input[type="date"],
-    input[type="number"],
-    input[type="text"],
-    select, textarea {
-      padding: 12px 14px;
-      font-size: 15px;
-      border-radius: 8px;
-    }
-
-    /* BUTTONS — full width primary buttons */
-    .btn-primary { width: 100%; padding: 13px; font-size: 12px; }
-    .btn { font-size: 10px; padding: 9px 14px; }
-
-    /* PAGE TITLE — smaller */
-    .page-title { font-size: 15px; letter-spacing: 1.5px; margin-bottom: 14px; }
-
-    /* TABLES — horizontal scroll with readable font */
-    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    table { font-size: 12px; min-width: 500px; }
-    th { padding: 9px 8px; font-size: 9px; }
-    td { padding: 9px 8px; }
-
-    /* CHECKBOX GRID — 2 columns max */
-    .checkbox-grid { grid-template-columns: repeat(2, 1fr); }
-
-    /* MODAL — full width on mobile */
-    .modal { width: 96%; padding: 18px; }
-    .modal-actions { flex-direction: column; }
-    .modal-actions .btn { width: 100%; text-align: center; }
-
-    /* SECTION HEADER — stack on mobile */
-    .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-  }
-
-  /* ===== SYNC BAR MOBILE ===== */
-  @media (max-width: 600px) {
-    #sync-bar {
-      padding: 8px 12px;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    /* Status row — compact */
-    #sync-bar > div:first-child {
-      font-size: 9px;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    /* Buttons row — 2 per row grid */
-    #sync-bar > div:last-child {
-      display: grid !important;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      width: 100%;
-    }
-
-    #sync-bar .btn {
-      font-size: 9px;
-      padding: 8px 6px;
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 100%;
-    }
-
-    /* Connect Drive button — full width span */
-    #gdrive-connect-btn {
-      grid-column: 1 / -1;
-    }
-  }
-
-  /* ===== SALES & EXPENSE ENTRY ROWS MOBILE ===== */
-  @media (max-width: 600px) {
-    /* Hide desktop column headers for inline rows */
-    .sale-row-headers,
-    .expense-row-headers {
-      display: none !important;
-    }
-
-    /* Each sale/expense row becomes a card */
-    #sales-rows .sale-row,
-    #expense-rows .expense-row {
-      display: flex !important;
-      flex-direction: column !important;
-      background: rgba(10,22,40,0.6);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 8px;
-      gap: 8px;
-    }
-
-    #sales-rows .sale-row > *,
-    #expense-rows .expense-row > * {
-      width: 100% !important;
-      grid-column: unset !important;
-    }
-
-    /* Delete button — right aligned */
-    #sales-rows .sale-row .btn-danger,
-    #expense-rows .expense-row .btn-danger {
-      width: auto !important;
-      align-self: flex-end;
-    }
-  }
-
-  /* ===== LOCK SCREEN MOBILE ===== */
-  @media (max-width: 600px) {
-    #lock-screen > div:nth-child(2) {
-      width: 90% !important;
-      padding: 24px 20px !important;
-    }
-    #lock-screen > div:first-child div:nth-child(2) {
-      font-size: 20px !important;
-      letter-spacing: 2px !important;
-    }
-  }
-
-  /* ===== SAFE AREA for notch/home bar on Android ===== */
-  @supports (padding-bottom: env(safe-area-inset-bottom)) {
-    body {
-      padding-bottom: env(safe-area-inset-bottom);
-    }
-  }
-
-  /* ===== BOTTOM NAVIGATION (MOBILE ONLY) ===== */
-  .bottom-nav {
-    display: none;
-  }
-
-  @media (max-width: 600px) {
-    /* Hide top nav tabs on mobile — bottom nav replaces them */
-    .nav { display: none; }
-
-    /* Space at page bottom so content isn't hidden behind the bar */
-    body { padding-bottom: 76px; }
-
-    .bottom-nav {
-      display: flex;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 62px;
-      background: linear-gradient(180deg, var(--deep) 0%, var(--navy) 100%);
-      border-top: 2px solid var(--gold);
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
-      z-index: 998;
-      padding-bottom: env(safe-area-inset-bottom, 0);
-    }
-
-    .bnav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      background: transparent;
-      border: none;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 6px 2px;
-      transition: all 0.2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .bnav-icon { font-size: 20px; line-height: 1; }
-
-    .bnav-label {
-      font-family: 'Cinzel', serif;
-      font-size: 8.5px;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-    }
-
-    .bnav-item.active {
-      color: var(--gold);
-    }
-
-    .bnav-item.active .bnav-icon {
-      transform: translateY(-2px);
-      filter: drop-shadow(0 0 6px rgba(201,168,76,0.6));
-    }
-
-    /* MORE MENU POPUP */
-    .more-menu {
-      display: none;
-      position: fixed;
-      bottom: 70px;
-      right: 8px;
-      background: var(--deep);
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
-      z-index: 999;
-      overflow: hidden;
-      min-width: 190px;
-      animation: moreMenuIn 0.18s ease;
-    }
-
-    .more-menu.open { display: block; }
-
-    @keyframes moreMenuIn {
-      from { transform: translateY(10px); opacity: 0; }
-      to   { transform: translateY(0); opacity: 1; }
-    }
-
-    .more-menu-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-      padding: 13px 16px;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-      color: var(--text);
-      font-family: 'Cinzel', serif;
-      font-size: 11px;
-      letter-spacing: 1px;
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .more-menu-item:last-child { border-bottom: none; }
-    .more-menu-item:active { background: rgba(201,168,76,0.1); }
-
-    /* Backdrop to close more menu */
-    .more-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 997;
-      background: transparent;
-    }
-    .more-backdrop.open { display: block; }
+    .header-title { font-size: 16px; }
+    .page { padding: 16px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* MODAL */
@@ -867,7 +590,7 @@
         <span style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:1.5px;color:#2ecc71;">SALES ITEMS</span>
         <button class="btn btn-sm" style="background:rgba(26,122,74,0.25);color:#2ecc71;border:1px solid rgba(26,122,74,0.5)" onclick="addSaleRow()">+ ADD SALE</button>
       </div>
-      <div class="sale-row-headers" style="display:grid;grid-template-columns:1.2fr 1fr 1.1fr 75px 90px 100px auto;gap:6px;margin-bottom:4px;padding:0 2px;">
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1.1fr 75px 90px 100px auto;gap:6px;margin-bottom:4px;padding:0 2px;">
         <span style="font-size:10px;color:var(--muted);letter-spacing:0.5px;">FISH</span>
         <span style="font-size:10px;color:var(--muted);">NOTES</span>
         <span style="font-size:10px;color:var(--muted);">SUPPLIER / TYPE</span>
@@ -888,7 +611,7 @@
         <span style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:1.5px;color:#e74c3c;">EXPENSE ITEMS</span>
         <button class="btn btn-sm" style="background:rgba(192,57,43,0.25);color:#e74c3c;border:1px solid rgba(192,57,43,0.5)" onclick="addExpenseRow()">+ ADD EXPENSE</button>
       </div>
-      <div class="expense-row-headers" style="display:grid;grid-template-columns:120px 1fr 70px 90px 1fr 110px auto;gap:5px;margin-bottom:4px;padding:0 2px;">
+      <div style="display:grid;grid-template-columns:120px 1fr 70px 90px 1fr 110px auto;gap:5px;margin-bottom:4px;padding:0 2px;">
         <span style="font-size:10px;color:var(--muted);">CATEGORY</span>
         <span style="font-size:10px;color:var(--muted);">NOTES</span>
         <span style="font-size:10px;color:#7ecfed;">QTY</span>
@@ -1695,6 +1418,7 @@
         <select id="tt-provider" style="padding:10px 12px;background:rgba(10,22,40,0.8);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:14px;width:100%;">
           <option value="Kakade">Kakade</option>
           <option value="AAT">AAT</option>
+          <option value="Mayuresh">Mayuresh</option>
         </select>
       </div>
       <div class="form-group">
@@ -1728,6 +1452,7 @@
         <select id="tt-pay-provider" style="padding:10px 12px;background:rgba(10,22,40,0.8);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:14px;width:100%;">
           <option value="Kakade">Kakade</option>
           <option value="AAT">AAT</option>
+          <option value="Mayuresh">Mayuresh</option>
         </select>
       </div>
       <div class="form-group">
@@ -1756,6 +1481,7 @@
           <option value="">Both Providers</option>
           <option value="Kakade">Kakade</option>
           <option value="AAT">AAT</option>
+          <option value="Mayuresh">Mayuresh</option>
         </select>
       </div>
       <div class="form-group">
@@ -2018,7 +1744,7 @@
 const SHAREHOLDERS = [
   'Azim','Taasir','Maqsood','Ittifaque','Zubair','Sufiyan',
   'IrfanW','IrfanS','Shafi','Riyaz','Salim','Maqbool','Maazin',
-  'Sagir','Altamash','Nazim','Sarfaraz','Munim','Tandel 1','Tandel 2','Owner',
+  'Sagir','Parvez','Nazim','Sarfaraz','Munim','Affan','Tandel 1','Tandel 2','Owner',
   'Al Muhammad Boat','Al Muhammad Boat Engine',
   'Al Bahar Boat','Al Bahar Boat Engine',
   'Maryam Boat','Maryam Boat Engine',
@@ -2083,14 +1809,6 @@ function showPage(n) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('page' + n).classList.add('active');
   document.querySelectorAll('.nav-btn')[n-1].classList.add('active');
-
-  // --- Bottom nav sync (mobile) ---
-  document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
-  const bnavMap = {1:'bnav-1', 2:'bnav-2', 3:'bnav-3', 4:'bnav-4', 5:'bnav-more', 6:'bnav-more', 7:'bnav-more'};
-  const bnavEl = document.getElementById(bnavMap[n]);
-  if (bnavEl) bnavEl.classList.add('active');
-  closeMoreMenu();
-  window.scrollTo({top: 0, behavior: 'smooth'});
   if (n === 1) renderP1Table();
   if (n === 2) renderP2Table();
   if (n === 3) renderSavedPeriods();
@@ -2143,15 +1861,10 @@ function makeItemRow(containerId, type) {
   const color = type === 'sale' ? '#2ecc71' : '#e74c3c';
   const div = document.createElement('div');
   div.dataset.rowid = rowId;
-  const isMobile = window.innerWidth <= 600;
 
   if (type === 'sale') {
     // Rich sale row: fish | notes | supplier | qty | rate | amount | delete
-    if (isMobile) {
-      div.style.cssText = 'display:flex;flex-direction:column;gap:7px;margin-bottom:10px;padding:10px;background:rgba(10,22,40,0.6);border:1px solid rgba(26,122,74,0.3);border-radius:8px;';
-    } else {
-      div.style.cssText = 'display:grid;grid-template-columns:1.2fr 1fr 1.1fr 75px 90px 100px auto;gap:6px;margin-bottom:8px;align-items:center;';
-    }
+    div.style.cssText = 'display:grid;grid-template-columns:1.2fr 1fr 1.1fr 75px 90px 100px auto;gap:6px;margin-bottom:8px;align-items:center;';
     div.innerHTML =
       '<select data-field="fishname" onchange="updatePreview()"' +
       ' style="background:rgba(10,22,40,0.9);border:1px solid rgba(26,122,74,0.4);border-radius:6px;padding:8px 8px;color:var(--white);font-size:13px;width:100%">' +
@@ -2183,11 +1896,8 @@ function makeItemRow(containerId, type) {
     const expCatSelect = '<option value="">— Select Category —</option>' + expCatOpts;
     const expSupOpts = ['','A Gift','MGM','Noori Fish','Mansoori','AFF','Farook','Chawan']
       .map(s => '<option value="' + s + '">' + (s||'— No Supplier —') + '</option>').join('');
-    const expGridStyle = isMobile
-      ? 'display:flex;flex-direction:column;gap:7px;padding:10px;background:rgba(10,22,40,0.6);border:1px solid rgba(192,57,43,0.3);border-radius:8px;'
-      : 'display:grid;grid-template-columns:130px 1fr 70px 80px 1fr 110px auto;gap:5px;align-items:center;';
     div.innerHTML =
-      '<div style="' + expGridStyle + '">' +
+      '<div style="display:grid;grid-template-columns:130px 1fr 70px 80px 1fr 110px auto;gap:5px;align-items:center;">' +
       '<select data-field="expcat" onchange="updateExpCatLabel(this);updatePreview();"' +
       ' style="background:rgba(10,22,40,0.9);border:1px solid rgba(192,57,43,0.4);border-radius:6px;padding:8px 6px;color:#e74c3c;font-size:13px;width:100%">' +
       expCatSelect + '</select>' +
@@ -2211,7 +1921,7 @@ function makeItemRow(containerId, type) {
       '</div>' +
       '<div class="tractor-extra" style="display:none;grid-template-columns:1fr 1fr 140px;gap:6px;margin-top:6px;padding:8px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.25);border-radius:6px;">' +
       '<select data-field="tractorprovider" style="background:rgba(10,22,40,0.9);border:1px solid rgba(201,168,76,0.4);border-radius:6px;padding:8px;color:#c9a84c;font-size:13px;font-weight:700;width:100%">' +
-      '<option value="Kakade">\ud83d\ude9c Kakade</option><option value="AAT">\ud83d\ude9c AAT</option></select>' +
+      '<option value="Kakade">\ud83d\ude9c Kakade</option><option value="AAT">\ud83d\ude9c AAT</option><option value="Mayuresh">\ud83d\ude9c Mayuresh</option></select>' +
       '<input type="number" data-field="tractortrips" value="2" min="1" placeholder="No. of Trips"' +
       ' style="background:rgba(10,22,40,0.8);border:1px solid rgba(201,168,76,0.4);border-radius:6px;padding:8px;color:#c9a84c;font-size:15px;font-weight:700;width:100%"' +
       ' oninput="tractorAutoCalc(this)">' +
@@ -2347,7 +2057,8 @@ function makeEditItemRow(containerId, item, amount, type) {
       '<div class="tractor-extra" style="display:' + (isTractor?'grid':'none') + ';grid-template-columns:1fr 1fr 140px;gap:6px;margin-top:5px;padding:7px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.25);border-radius:6px;">' +
       '<select data-field="tractorprovider" style="background:rgba(10,22,40,0.9);border:1px solid rgba(201,168,76,0.4);border-radius:6px;padding:7px;color:#c9a84c;font-size:13px;font-weight:700;width:100%">' +
       '<option value="Kakade"' + (tractorProv==='Kakade'?' selected':'') + '>\ud83d\ude9c Kakade</option>' +
-      '<option value="AAT"' + (tractorProv==='AAT'?' selected':'') + '>\ud83d\ude9c AAT</option></select>' +
+      '<option value="AAT"' + (tractorProv==='AAT'?' selected':'') + '>\ud83d\ude9c AAT</option>' +
+      '<option value="Mayuresh"' + (tractorProv==='Mayuresh'?' selected':'') + '>\ud83d\ude9c Mayuresh</option></select>' +
       '<input type="number" data-field="tractortrips" value="' + tractorTripsV + '" min="1" placeholder="Trips"' +
       ' style="background:rgba(10,22,40,0.8);border:1px solid rgba(201,168,76,0.4);border-radius:6px;padding:7px;color:#c9a84c;font-size:14px;font-weight:700;width:100%"' +
       ' oninput="tractorAutoCalc(this)">' +
@@ -5055,7 +4766,7 @@ function renderTractorSummary() {
   const container = document.getElementById('tt-summary-cards');
   if (!container) return;
 
-  const providers = ['Kakade', 'AAT'];
+  const providers = ['Kakade', 'AAT', 'Mayuresh'];
   let html = '';
 
   providers.forEach(function(prov) {
@@ -5911,58 +5622,6 @@ function cycleDayTheme() {
     setDriveStatus(false, 'Session expired — reconnect');
   });
 })();
-</script>
-
-<!-- ===== BOTTOM NAVIGATION (MOBILE ONLY) ===== -->
-<div class="more-backdrop" id="more-backdrop" onclick="closeMoreMenu()"></div>
-
-<div class="more-menu" id="more-menu">
-  <button class="more-menu-item" onclick="showPage(5)">🐟 <span>Fish Sales &amp; Suppliers</span></button>
-  <button class="more-menu-item" onclick="showPage(6)">📒 <span>Credit Tracking</span></button>
-  <button class="more-menu-item" onclick="showPage(7)">🚜 <span>Tractor Trips</span></button>
-</div>
-
-<nav class="bottom-nav">
-  <button class="bnav-item active" id="bnav-1" onclick="showPage(1)">
-    <span class="bnav-icon">⚓</span>
-    <span class="bnav-label">Daily</span>
-  </button>
-  <button class="bnav-item" id="bnav-2" onclick="showPage(2)">
-    <span class="bnav-icon">👥</span>
-    <span class="bnav-label">Crew</span>
-  </button>
-  <button class="bnav-item" id="bnav-3" onclick="showPage(3)">
-    <span class="bnav-icon">📊</span>
-    <span class="bnav-label">Shares</span>
-  </button>
-  <button class="bnav-item" id="bnav-4" onclick="showPage(4)">
-    <span class="bnav-icon">💰</span>
-    <span class="bnav-label">Money</span>
-  </button>
-  <button class="bnav-item" id="bnav-more" onclick="toggleMoreMenu(event)">
-    <span class="bnav-icon">⋯</span>
-    <span class="bnav-label">More</span>
-  </button>
-</nav>
-
-<script>
-// ===== BOTTOM NAV MORE MENU =====
-function toggleMoreMenu(e) {
-  if (e) e.stopPropagation();
-  document.getElementById('more-menu').classList.toggle('open');
-  document.getElementById('more-backdrop').classList.toggle('open');
-}
-function closeMoreMenu() {
-  var m = document.getElementById('more-menu');
-  var b = document.getElementById('more-backdrop');
-  if (m) m.classList.remove('open');
-  if (b) b.classList.remove('open');
-}
-
-// ===== PWA SERVICE WORKER =====
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/Al-Ahmed-Fishing-Boat/sw.js');
-}
 </script>
 </body>
 </html>
